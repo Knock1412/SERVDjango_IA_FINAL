@@ -18,8 +18,9 @@ from ia_backend.services.cache_manager import save_json
 from ia_backend.services.backup_service import save_global_summary
 from ia_backend.services.job_logger import log_job_history
 
-# Seuil unique pour les blocs (le global n'est plus bloquant)
-BLOCK_THRESHOLD = 0.75
+# Seuils dynamiques
+BLOCK_THRESHOLD_INITIAL = 0.7
+BLOCK_THRESHOLD_SECONDARY = 0.65
 
 job_queue = queue.PriorityQueue()
 JOB_STATUS = {}
@@ -55,9 +56,8 @@ def process_job(job: Job):
         save_txt(full_text_path, full_pdf_text)
 
         total_pages = extract_blocks_from_pdf(job.pdf_path, return_pages_only=True)
-        chunk_size = 1 if total_pages < 10 else 3
-        mode = "page_par_page" if chunk_size == 1 else "bloc_par_3_pages"
-        print(f"🧩 Mode : {mode} | Total pages : {total_pages}")
+        chunk_size = 1  # Toujours 1 page fixe désormais
+        print(f"🧩 Mode : page_par_page | Total pages : {total_pages}")
 
         blocks = extract_blocks_from_pdf(job.pdf_path, chunk_size=chunk_size)
         summaries = []
@@ -65,37 +65,58 @@ def process_job(job: Job):
         for idx, block_indexes in enumerate(blocks):
             print(f"⏳ Bloc {idx + 1} en cours...")
             text = extract_text_from_block(block_indexes, job.pdf_path)
-            char_count = len(text.strip()) if text else 0
-
-            if char_count > 8000:
-                print(f"✂️ Bloc {idx + 1} trop long ({char_count}) → tronqué à 8000")
-                text = text[:8000]
-
             if not text.strip():
                 text = "(Bloc vide ou inexploitable.)"
 
-            attempts = 0
+            if len(text) > 7000:
+                print(f"✂️ Bloc {idx+1} pré-tronqué à 7000 avant IA (brut={len(text)})")
+                text = text[:7000]
+
             best_score = 0
             best_summary = ""
+            attempt = 0
 
-            while True:
+            # === Première boucle avec seuil 0.7 (max 5 tentatives)
+            while attempt < 5:
+                attempt += 1
                 summary, model = summarize_block(text)
                 score = evaluate_summary_score(text, summary)
-                attempts += 1
-
-                print(f"⚙️ Tentative bloc #{idx+1} - Essai {attempts} - Score = {round(score,3)} / Meilleur = {round(best_score,3)}")
+                print(f"⚙️ Bloc #{idx+1} Essai {attempt} - Score = {round(score,3)} - Meilleur = {round(best_score,3)}")
 
                 if score > best_score:
                     best_score = score
                     best_summary = summary
 
-                if best_score >= BLOCK_THRESHOLD:
-                    print(f"✅ Bloc {idx + 1} validé avec score {round(best_score,3)} après {attempts} tentatives")
+                if best_score >= BLOCK_THRESHOLD_INITIAL:
+                    print(f"✅ Bloc {idx+1} validé avec score {round(best_score,3)} après {attempt} tentatives")
                     break
                 else:
-                    print(f"🔁 Reprocessing bloc {idx+1}...")
+                    print("🔁 Reprocessing...")
 
-            json_dir = f"cache_json/save_summaryglobal/{job.entreprise}/save_summaryblock"
+            # Si toujours pas validé, on passe au seuil relâché 0.65
+            if best_score < BLOCK_THRESHOLD_INITIAL:
+                print(f"⚠️ Passage seuil secondaire pour bloc {idx+1}")
+
+                if best_score >= BLOCK_THRESHOLD_SECONDARY:
+                    print(f"✅ Bloc {idx+1} validé immédiatement au score secondaire {round(best_score,3)}")
+                else:
+                    secondary_attempt = 0
+                    while secondary_attempt < 7:
+                        secondary_attempt += 1
+                        summary, model = summarize_block(text)
+                        score = evaluate_summary_score(text, summary)
+                        print(f"⚙️ Bloc #{idx+1} Second Essai {secondary_attempt} - Score = {round(score,3)} - Meilleur = {round(best_score,3)}")
+
+                        if score > best_score:
+                            best_score = score
+                            best_summary = summary
+
+                        if best_score >= BLOCK_THRESHOLD_SECONDARY:
+                            print(f"✅ Bloc {idx+1} validé après seuil secondaire avec score {round(best_score,3)}")
+                            break
+
+            # Enregistrement final du bloc
+            json_dir = f"cache_json/save_summaryblocks/{job.entreprise}/{job.folder_name}"
             save_json(json_dir, idx, {
                 "bloc": idx + 1,
                 "summary": best_summary,
@@ -103,19 +124,16 @@ def process_job(job: Job):
                 "score": best_score
             })
 
-            txt_dir = f"temp_cache/{job.folder_name}_blocks"
-            save_txt(f"{txt_dir}/block_{idx+1}.txt", text)
-
             summaries.append((idx + 1, best_summary))
 
         summaries.sort()
         joined = [s for _, s in summaries]
         num_predict = determine_predict_length(len(joined))
-        print(f"🔍 num_predict global = {num_predict}")
+        print(f"🔍 Génération résumé global avec num_predict = {num_predict}")
 
         final_summary, model_used = summarize_global(joined, num_predict=num_predict)
         global_score = evaluate_summary_score(full_pdf_text, final_summary, partial_summaries=joined)
-        print(f"📊 Résumé global généré (score info = {round(global_score, 3)})")
+        print(f"📊 Score résumé global (info only) = {round(global_score, 3)}")
 
         save_global_summary(job.entreprise, job.folder_name, final_summary)
         log_job_history(job.job_id, job.entreprise, job.pdf_url, "terminé", model_used, start_total)
@@ -123,7 +141,7 @@ def process_job(job: Job):
         JOB_STATUS[job.job_id] = "terminé"
         JOB_RESULTS[job.job_id] = {
             "summary": final_summary,
-            "mode": mode
+            "mode": "page_par_page"
         }
 
     except Exception as e:
