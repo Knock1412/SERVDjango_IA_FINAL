@@ -1,0 +1,7 @@
+{
+  "bloc": 10,
+  "summary": "1. Existence de nombreux logiciels antivirus avec des performances variables.\n2. Un virus est une suite précise d'instructions et sa caractérisation par une série d'octets (sa signature).\n3. L'antivirus recherche dans les secteurs de démarrage et les fichiers exécutables toutes les signatures connues, si le test est positif il déclenche un traitement approprié.\n4. Traitement de virus consiste à retrouver les paramètres originaux du virus et les rétablir en annulant le lancement systématique du programme parasite, ou effacer le fichier contaminé ou reformater le support.\n5. Il est recommandé d'avoir une disquette DOS propre cachée, de redémarrer le système avec cette disquette et d'utiliser le logiciel antivirus sur une disquette protégée.\n6. Lancement de logiciel antivirus sur le disque dur (risque de polluer ce programme) pendant que le virus est actif, avec un risque que le virus détruit ne se réinstalle pas aussitôt.\n7. L'éradication d'un virus connu n'est pas un problème technique insurmontable, mais la phase d'identification des nouveaux virus est délicate.\n8. Les antivirus efficaces doivent détecter les nouveaux virus pour être produits. Il existe un réseau d'utilisateurs qui s'appuie principalement sur le réseau de l'EPI (agence française de lutte contre le piratage informatique).",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7197,
+  "translated": false
+}

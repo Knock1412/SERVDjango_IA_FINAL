@@ -54,5 +54,29 @@
     "model_global": "mistral:instruct",
     "created_at": "2025-06-03T19:13:59.088376",
     "duration": 534.23
+  },
+  {
+    "job_id": "da14697b-8ffa-4f91-8ffd-8265e086f227",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T21:55:46.646798",
+    "duration": 351.37
+  },
+  {
+    "job_id": "aa92e7cf-4c41-4459-b55e-d3cc9573202c",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T22:41:23.341315",
+    "duration": 281.98
+  },
+  {
+    "job_id": "465e1478-ba46-4529-9009-23112678cf9e",
+    "pdf_url": "https://hal.science/hal-02440708v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T23:09:15.542251",
+    "duration": 1409.04
   }
 ]

@@ -1,0 +1,7 @@
+{
+  "bloc": 11,
+  "summary": "1. Virus circulent largement dans les messageries et revues spécialisées en informatique.\n2. Les programmes de virus deviennent de plus en plus performants, ce qui augmente les chances qu'ils échappent à la détection.\n3. Les auteurs de virus ont déjà mis en œuvre des camouflages efficaces, comme le changement de signature et la restauration temporaire de données erronées.\n4. Pour éviter la détection de signature, on découpe un programme en petites procédures courtes qui sont appelées aléatoirement à chaque reproduction du virus.\n5. Les algorithmes de compactage deviennent populaires pour masquer leur présence dans un fichier infecté.\n6. Un virus peut changer d'algorithme à chaque installation, ce qui change sa signature.\n7. L'avenir n'est pas rose, les programmes boucliers ne sont pas infaillibles et les plus sûrs détectent les tentatives d'installation.\n8. Certaines sociétés proposent une \"maintenance antivirus\" pour protéger contre les virus inconnus en mettant un bouclier sur la machine, qui est régulièrement mis à jour.\n9. Les milieux scolaires sont particulièrement vulnérables car le nombre d'utilisateurs est important par rapport au nombre de postes et l'utilisation en libre service favorise la circulation des disquettes et l'implantation des virus.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7396,
+  "translated": false
+}

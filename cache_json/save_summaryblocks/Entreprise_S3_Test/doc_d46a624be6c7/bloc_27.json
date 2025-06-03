@@ -1,0 +1,7 @@
+{
+  "bloc": 27,
+  "summary": "1. Les marchés financiers permettent de prendre des positions en utilisant des produits dérivés et le sous-jacent, ceci pour espérer un profit futur.\n2. La spéculation signifie, d'une part, \"prendre une position\" en achetant et en vendant du sous-jacent ou des produits à terme dans l'espoir d'obtenir un bénéfice. Ainsi, acquérir un call est une position spéculative à la hausse car il permet de gagner si le cours final est supérieur à sa valeur d'exercice.\n3. Les marchés financiers organisés ne peuvent pas empêcher les spéculations profitables, car ce sont les spéculateurs qui contribuent à modifier leur fonctionnement.\n4. Des équipes spécialisées dans la recherche de défauts potentiels du marché pour en tirer parti existent dans le monde entier. Elles utilisent l'analyse statistique puissante de l'informatique contemporaine pour traquer les comportements inconscients des traders et contribuer à donner au spot l'allure qu'il doit avoir selon la théorie de l'arbitrage.\n5. L'existence de ces équipes spécialisées rend le marché financier difficile à analyser, car il ne semble pas avoir de tendance claire ni de possibilité de spéculation.",
+  "source_pdf": "https://hal.science/hal-02440708v1/document",
+  "score": 0.7101,
+  "translated": false
+}

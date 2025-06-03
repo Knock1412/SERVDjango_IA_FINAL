@@ -1,0 +1,2334 @@
+FINANCE	ET	"BUSINESS	AS	USUAL"	‡	
+
+Flou du signal-prix, crises d'imminence constante, et préconisation de Solow 
+
+Nicolas Bouleau 
+
+Introduction 
+I/ Ressources épuisables et signal-prix 
+A) L'idée d'intelligence disséminée, article fondamental de Friedrich Hayek 
+B) Le raisonnement économique pour les ressources épuisables 
+
+a) L'approche classique de Harold Hotelling 
+b) Perfectionnements : prise en compte de l'incertitude 
+c) Denrée cotée sur les marchés financiers : conséquences de la théorie de l'arbitrage 
+
+C) Autour du concept central de martingale positive tendant vers zéro. 
+
+a) La famille exponentielle 
+b) Cas d'une ressource épuisable 
+
+D) Discussion conclusive de la première partie 
+
+a) Comment fonctionne la coordination par les prix en présence de volatilité 
+b) La mise en place historique des marchés dérivés organisés n'a-t-elle pas été accompagnée d'un malentendu ? 
+
+Les années d'après guerre et les théorèmes d'équilibre dans l'incertain. 
+La révolution Black-Scholes. 
+On a sous-estimé l'importance de la volatilité. 
+
+II/ Crises d'imminence constante 
+A) Le catastrophisme 
+B) La catastrophe pensée économiquement 
+
+a) Procrastination et homothétie 
+b) Psychologie du risque de défaut 
+
+C) Conclusion de la deuxième partie : réformer l'économie du crédit ? 
+III/ Conclusion générale : préconisations 
+A) Une taxe peut-elle être un outil pour lutter contre la volatilité ? 
+B) Nécessité d'une information extra-financière 
+
+a) Préconisation de Solow 
+b) Pourquoi une information péri-économique ? 
+c) Indicateurs. Solutions-exemples pour la sortie d'une ressource. 
+Epilogue 
+
+Annexes 
+A-1. Qu'est-ce que la volatilité ? 
+A-2. L'apparent paradoxe de la spéculabilité 
+A-3. Qu'est-ce que spéculer sur les marchés financiers organisés ? 
+A-4. Temps continu vs temps discret. 
+Notes 
+Références 
+
+Introduction	
+
+Cette  étude  dégage  certaines  caractéristiques  de  la  finance  contemporaine  qui  ont  tendance  à 
+maintenir les agents économiques dans une vision du progrès et de la croissance selon les formes 
+traditionnelles,  consommatrices  d'énergie  et  de  ressources  épuisables,  peu  attentives  à 
+l'environnement.  
+
+Inutile  de  rappeler  ici  combien  la  transition  écologique  est  impérative.  Les  dommages  à 
+l'environnement  sont  de  plus  en  plus  évidents  et  dessinent  pour  l'avenir  de  graves  menaces.  La 
+population  totale  s'accroît  de  l'équivalent  de  la  ville  de  Montpellier  chaque  jour,  celle  des 
+mégapoles accélère. La biodiversité décline à un rythme jamais atteint dans l’histoire humaine. Et 
+malgré cela, les rejets de gaz à effet de serre continuent ce qui acidifie les océans déjà menacés 
+
+‡ Etude publiée par l'Institut Louis Bachelier sept. 2017 avec une présentation de J.-P. Ponssard et G. 
+Giraud. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+																																																								
+par  la  surpêche,  les  accidents  technologiques  se  succèdent  et  les  espaces  des  écosystèmes 
+rétrécissent.  
+
+Ainsi,  comprendre  le  phénomène  du  déni  devient  une  question  pressante.  Au  delà  de 
+causes  psychologiques  nombreuses  et  diverses,  individuelles  et  collectives,  deux  facteurs  du 
+business as usual semblent intrinsèquement liés à l'organisation de la finance de marché et avoir 
+une grande influence sur les décisions et les comportements : d'une part le brouillard produit par 
+la  volatilité,  d'autre  part  le  schéma  psychologique  de  base  de  l'économie  du  crédit.  Nous  les 
+évoquons successivement. 
+
+Nous montrons que la thèse des manuels scolaires selon laquelle la rareté d'une ressource, 
+en  augmentant  son  prix,  incite  nécessairement  les  entreprises  utilisatrices  à  rechercher  des 
+substituts,  —  thèse  formulée  par  les  Classiques  notamment  par  Auguste  Walras  et  précisée  par 
+Friedrich Hayek dans le cadre de sa théorie de la décision décentralisée — a perdu l'essentiel de 
+sa force opérationnelle aujourd'hui à cause de l'agitation des marchés financiers. 
+
+Après un rappel des résultats classiques de Hotelling sur le prix des ressources épuisables, 
+nous discutons la prise en compte des incertitudes dans les travaux plus récents.  L'organisation 
+des  marchés  financiers  munis  de  leurs  produits  à  terme  donne  aujourd'hui  une  importance 
+fondamentale  à  la  théorie  mathématique  de  l'arbitrage.  Celle-ci  est  en  effet  une  description  des 
+marchés financiers d'autant plus pertinente concrètement que la spéculation est plus perfectionnée. 
+Elle  a  justifié  un  changement  de  paradigme  épistémologique  par  la  couverture  des  produits 
+dérivés par suivi de marché : le rôle de la probabilité risque neutre et la signification du théorème 
+de  Girsanov  font  que  les  prix  des  options  n'indiquent  pas  les  tendances.  Celles-ci  doivent  être 
+considérées comme subjectives, en tenir compte revient à prendre des risques là où l'on peut ne 
+pas en prendre.  
+
+Il y a une sorte de lutte entre la volatilité et la tendance qui se voit particulièrement bien 
+sur  le  modèle  exponentiel.  Au  delà  d'un  certain  seuil,  la  volatilité  est  capable  de  rabattre  une 
+dynamique de croissance relative constante vers zéro. Le concept de martingale positive tendant 
+vers zéro prend ainsi une place centrale dans la représentation du prix des ressources épuisables. 
+Nous discuterons l'interprétation économique qui peut en être donnée. 
+
+L'effacement  du  signal-prix  se  répercute  dans  toute  l'économie  de  façon  top down.  Ceci 
+interpelle  les  bases  théoriques  de  la  mise  en  place  des  marchés  financiers.  Il  semble  que  la 
+rationalité  des  marchés  contingents  pensés  avec  un  nombre  fini  de  biens  et  à  deux  dates,  cadre 
+des  théorèmes  de  Arrow,  Debreu  et  Radner,  et  celle  de  la  théorie  de  l'arbitrage  des  marchés 
+continus ne coïncident pas : sans être incompatibles elles ne mettent pas en évidence les mêmes 
+phénomènes.  Le  passage  du  temps  discret  au  temps  continu  fait  apparaître  un  rôle  nouveau  de 
+l'agitation qui se répercute sur la variation totale des processus considérés. Cette phénoménologie 
+nouvelle, d'une ampleur insoupçonnée, apparaît avec la mise en place des marchés dérivés dans 
+les années 1980.  
+
+Le problème dont nous parlons n'est pas seulement théorique, il est ancré dans la pratique 
+elle-même  des  marchés  financiers  et  on  peut  difficilement  croire  qu'il  puisse  être  résolu 
+seulement par des dispositifs techniques plus ou moins astucieux. 
+
+Le  second  obstacle  à  la  transition  environnementale  est  plus  psychologique  et  concerne 
+aussi bien les entreprises que les ménages. Il résulte de l'apprentissage par les agents de la forme 
+la plus simple de représentation mathématique du risque de défaut. Cet apprentissage qui place au 
+premier  plan  le  schéma  d'un  taux  de  rendement  fonction  du  paramètre  d'une  variable  aléatoire 
+exponentielle,  est  un  schéma  de  pensée  rudimentaire  mais  important  parce  que  premier  :  il  est 
+aussi bien le discours de la banque à l'épargnant "moins le placement est risqué moins fort est le 
+rendement" que la première signification des notes attribuées par les agences de notations. 
+
+Or ce schéma de base a des propriétés très particulières en matière de risque : il induit à 
+penser que le fait que la catastrophe — la faillite, l'accident, le dommage naturel — ne s'est pas 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+produite jusqu'à maintenant ne change rien quant au temps qu'il faut encore attendre son échéance 
+future. 
+
+En comparant cette "philosophie" à d'autres approches sociologiques des risques, on voit 
+qu'elle  incite  à  considérer  que  les  alertes  ne  modifient  en  rien  les  positions  décisionnelles 
+financières.  Si  on  place  mentalement  la  planète  dans  la  théorie  des  pannes  des  dispositifs 
+matériels,  cela  revient  à  penser  l'environnement  comme  un  phénomène  sans vieillissement.  Ce 
+qui est une autre façon de dire que la logique économique du crédit ne voit pas globalement le 
+long terme.  
+
+Devant ce diagnostic nous examinons les pistes qui viennent à l'esprit et en premier lieu 
+l'idée  de  taxe  sur  les  transactions  financières.  Celle-ci  est  intellectuellement  très  "naturelle" 
+puisqu'elle revient à faire payer les spéculateurs lors de leurs spéculations. Indépendamment de la 
+question  politique  de  l'usage  des  ressources  ainsi  créées  et  des  complications  de  mise  en  place 
+notamment pour la gestion des produits dérivés, il n'y a pas d'argument crédible que cela puisse 
+avoir un effet sur la volatilité susceptible de faire réapparaître le signal-prix, ceci même avec des 
+formes  non  standard  de  taxe.  De  plus,  l'action  de  spéculer  est  en  fait  diffuse  dans  l'activité 
+économique et ne se limite pas aux transactions bancaires sur les marchés ou de gré à gré. 
+
+Curieusement,  dès  1974,  deux  ans  après  le  premier  rapport  du  Club  de  Rome,  Robert 
+Solow  dans  une  célèbre  conférence  qui  portait  sur  la  rationalité  économique  vis-à-vis  des 
+ressources  non  renouvelables,  concluait  son  analyse  par  cette  affirmation  –  importante  dans  la 
+bouche d'un économiste qu'on ne peut certainement pas qualifier d'hétérodoxe – qu'en matière de 
+ressources  non  renouvelables  il  n'y  avait  pas  de  solution  strictement  interne  à  la  logique  de 
+marché et qu'il fallait impérativement faire opérer une instance collective extra-économique pour 
+fournir l'information que ne donnaient pas les marchés sur le long terme.1  
+
+Ceci se passait à peu près en même temps que les articles fondateurs de Arrow, de Radner 
+et  de  Debreu  mais  avant  qu'on  organise  les  marchés  sur  toutes  les  places  financières  en  tenant 
+compte  de  la  révolution  que  fut  l'article  de  Black-Scholes.  Nous  voyons  que  le  problème  de 
+l'effacement  du  signal-prix  sur  les  marchés  financiers  à  cause  de  la  volatilité  vient  absolument 
+aggraver  le  diagnostic  de  Solow  et  donner  une  importance  renouvelée  à  la  solution  extra-
+économique qu'il préconisait. Nous évoquerons comment la rendre opératoire.  
+
+Remarque méthodologique.  Le  Sénat  français  vient  de  rendre  public  un  Rapport d'information2 sur  la 
+finance, très critique sur les marchés financiers et leur rôle dans l'économie. Ce texte est assez typique. Sur 
+la  base  d'observations  tout  à  fait  justes  sur  les  crises  et  les  difficultés  de  toutes  sortes  de  l'économie 
+mondiale et française en particulier, il fait remonter les critiques vers les marchés financiers en collectant 
+diverses citations et en reprenant des analyses qui projettent sur le fonctionnement des marchés des visions 
+schématiques. Ceci crée une situation chargée d'ambiguïtés où se mêlent d'excellentes remarques de nature 
+politique et de faibles arguments techniques. Cette façon de vulgariser risque de conforter chez le public 
+des visions radicales qui ne pourront être entendues par les spécialistes.  
+
+La finance est maintenant un domaine de haute technicité. Est-ce qu'on écouterait une critique de 
+la  mécanique  quantique  fondée  sur  une  intuition  de  "bon  sens"  ?  Dans  l'étude  qui  suit  nous  procédons 
+exactement  dans  l'autre  direction.  En  nous  appuyant  sur  la  finance  pensée  comme  discipline  de  pointe 
+avec  toute  sa  technicité,  nous  dégageons  des  conséquences  sur  les  limites  des  ambitions  économiques 
+qu'on peut lui accorder. 
+
+I/ Ressources épuisables et signal-prix 
+
+La  question  des  ressources  non  renouvelables  apparaît  aujourd'hui  comme  une  énigme.  En 
+témoigne  une  immense  littérature  économique  aux  points  de  vue  très  dispersés.  La  difficulté 
+centrale tourne autour de l'absence d'information financière en matière de rareté, assez claire pour 
+agir.  On  a  l'impression  d'une  sorte  de  brouhaha  de  la  science  économique  sur  la  gestion  des 
+stocks de métaux, d'énergie fossile et autres matières premières limitées. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Les  économistes  classiques,  sans  mathématiques  et  par  pure  spéculation  philosophique, 
+avaient  déjà  clairement  établi  le  rôle  de  la  rareté  et  des  besoins  ainsi  que  le  sens  de  leurs 
+influences  dans  l'établissement  des  prix  des  denrées,  même  si  les  définitions  exactes  de  ces 
+notions faisaient l'objet de controverses (A. Smith, D. Ricardo, J.-B. Say, Auguste Walras, etc.). 
+C'est  cependant  avec  les  néoclassiques,  et  en  particulier  A.  Cournot,  J.  Dupuit  et  Léon  Walras 
+que  des  équations  furent  proposées  qui  s'inspiraient  largement  de  la  mécanique  et  plus 
+particulièrement  des  équilibres  de  la  statique  ainsi  que  L.  Walras  et  St.  Jevons  le  disent 
+explicitement.3 Le  rôle  du  temps  quant  à  lui  et  la  représentation  des  chemins  vers  l'éventuel 
+équilibre sont beaucoup plus délicats, l'idée des "tâtonnements" de L. Walras ne sera approfondie 
+et  précisée  qu'au  20ème  siècle  et  reste  encore  discutée  dans  le  cadre  de  l'économie  de  "second 
+rang". 
+
+Le  20ème  siècle  est  aussi  celui  où  le  libéralisme  des  Smith,  des  Say,  des  Walras  est 
+fortement  remis  en  cause  comme  vision  du  bien-être  collectif,  non  seulement  sous  l'angle 
+politique mais par certains économistes. Dès 1931 Harold Hotelling, dans le fameux article sur 
+les  ressources  non  renouvelables,  sur  lequel  nous  allons  revenir,  se  place  du  point  de  vue  des 
+générations futures : 
+
+Le  constat  de  la  disparition  mondiale  des  ressources  en  minéraux,  forêts  et  autres 
+biens épuisables a suscité des demandes pour réguler leur exploitation. Le sentiment 
+que  ces  denrées  sont  actuellement  trop  bon  marché  pour  le  bien  des  générations 
+futures,  qu'elles  sont  exploitées  égoïstement  à  un  rythme  trop  rapide,  et  qu'en 
+conséquence de leur prix trop bas elles sont produites et consommées avec gaspillage 
+a fait naître le mouvement de protection des réserves naturelles.4 
+
+Puis, en pleine opposition des deux blocs, Friedrich Hayek en 1945, sent la nécessité de prendre 
+la  défense  du  libéralisme,  et  le  fait  par  un  argument  très  fort,  fondé  précisément  sur  la  façon 
+d'appréhender les changements dans le fonctionnement de l'économie. 
+
+A) L'idée d'intelligence disséminée, article fondamental de Friedrich Hayek 
+Dans  un  remarquable  article,  justement  célèbre,  Friedrich  Hayek  critique  l'idée  même  de 
+planification  centralisée :  "Le  problème  économique  de  la  société  n'est  pas  simplement  la 
+question de savoir comment répartir les  ressources 'données', si par 'données' on entend données 
+à un esprit unique qui résout délibérément le problème posé par ces 'données'. Il s'agit plutôt du 
+problème  de  savoir  comment  s'assurer  de  la  meilleure  utilisation  des  ressources  connues  à  l'un 
+quelconque  des  membres  de  la  société,  à  des  fins  dont  ces  membres  particuliers  connaissent 
+l'importance relative. Ou pour le dire brièvement, c'est un problème d'utilisation de connaissances 
+qui ne sont données à personne en totalité."5 
+
+Il  souligne  que  les  décisions  économiques  interviennent  lorsqu'il  y  a  à  gérer  des 
+changements  "Il  vaut  la  peine,  peut-être,  de  souligner  que  les  problèmes  économiques  arrivent 
+toujours et uniquement comme conséquence d'un changement" et il insiste sur le fait que le talent 
+de l'industriel est précisément de savoir se comporter lors de changements. "Dans une industrie 
+concurrentielle  en  tout  cas  —  et  une  telle  industrie  peut  déjà  servir  de  test  —  la  tâche  de 
+maintenir les coûts contre les hausses nécessite une lutte permanente, absorbant une grande part 
+de l'énergie de l'entrepreneur" et ce sont les circonstances locales et facteurs idiosyncratiques qui 
+font que ces savoirs locaux ne peuvent être résumés par des statistiques générales (p524). 
+
+"Si  nous  nous  accordons  sur  le  fait  que  le  problème  économique  de  la  société  est 
+principalement  une  adaptation  rapide  aux  changements  dans  les  circonstances  particulières  de 
+temps et de lieu, il semble donc que les décisions finales doivent être laissées aux gens qui sont 
+familiers  avec  ces  circonstances,  qui  connaissent  directement  les  changements  pertinents  et  les 
+ressources  immédiatement  disponibles  pour  y  répondre."  Pour  cela  le  manager,  en  plus  des 
+savoirs  locaux  qu'il  a  par  lui-même,  a  besoin  de  raccorder  ses  décisions  au  contexte,  d'une 
+connexion avec l'extérieur et c'est ce qui lui est fourni par le système des prix.  
+
+ 
+ 
+ 
+ 
+ 
+L'organisation économique pour être efficace, au sens de pouvoir faire fonctionner toutes 
+les ressources de connaissance, doit être fondée sur un système de prix. Plus précisément si nous 
+analysons  l'argumentation,  ce  sont  les  changements  de  prix  qui  sont  les  signaux  absolument 
+précieux  dans  cette  coordination.  "Supposons  que  quelque  part  dans  le  monde  une  nouvelle 
+opportunité d'utilisation de certaines matières premières, par exemple l'étain, soit apparue, ou que 
+l'une des sources d'approvisionnement de l'étain ait été éliminée. Il est sans importance pour notre 
+propos — et c'est très significatif que ce soit sans importance — que ce soit l'une ou l'autre de ces 
+deux causes qui a rendu l'étain plus rare. Tout ce que les utilisateurs d'étain ont besoin de savoir, 
+c'est qu'une partie de l'étain qu'ils avaient l'habitude d'utiliser a désormais un emploi plus rentable 
+ailleurs, et qu'en conséquence ils doivent économiser l'étain." La variation du prix de l'étain va se 
+propager chez tous les utilisateurs et aussi sur les produits de substitution de l'étain.  
+
+l'enregistrement  des  changements,  ou  un 
+
+"C'est  plus  qu'une  métaphore  de  décrire  le  système  de  prix  comme  une  sorte  de 
+machinerie  pour 
+système  de 
+télécommunication qui permet aux producteurs individuels de regarder simplement le 
+mouvement de quelques indicateurs, comme un ingénieur peut regarder les aiguilles 
+de  quelques  cadrans,  afin  d'adapter  leurs  actions  aux  changements  dont  ils  ne 
+peuvent jamais savoir que ce que reflète le mouvement des prix." 
+
+La force de cet article réside dans le rôle accordé à l'intelligence et aux savoirs spécifiques des 
+acteurs dans leur comportement économique, il est le plus beau plaidoyer pour l'importance du 
+signal-prix. 
+
+Le  bien  fondé  de  cette  analyse  fut  démontré,  a  contrario,  par  les  difficultés  qu'ont 
+
+rencontrées les divers ministères de l'administration soviétique pour se coordonner entre eux. 
+
+Cette  rationalité  fondée  sur  l'importance  du  signal-prix  étant  rappelée,  voyons  comment 
+
+l'économie néoclassique traite des ressources non renouvelables. 
+
+B) Le raisonnement économique pour les ressources épuisables 
+Si le propriétaire d'une carrière de minerai ayant suffisamment d'influence sur le marché, freine 
+sa production, il contribue à faire monter les prix et donne de ce fait plus de valeur à ses réserves 
+non encore exploitées. Seulement cette plus value est pour lui repoussée dans l'avenir et il n'est 
+pas  certain  qu'il  n'aurait  pas  mieux  fait  de  vendre  davantage  et  de  placer  son  profit  au  taux  de 
+rendement  en  vigueur.  C'est  cette  dialectique  que  Hotelling  traite  mathématiquement  dans  un 
+article fondateur. Puis les travaux plus récents se sont attachés à affaiblir les hypothèses. 
+
+a) L'approche classique de Harold Hotelling 
+Harold Hotelling considère une denrée irremplaçable c'est-à-dire sans 
+produit de substitution et suppose que chaque exploitant maximise la 
+valeur actualisée de tout son profit futur, l'actualisation se faisant à un 
+taux  constant,  fixe.  Il  traite  alors  la  question  sous  deux  hypothèses 
+économiques successivement.6  
+
+Il  considère  d'abord  le  cas  de  "libre  compétition"  entre 
+producteurs où la concurrence entre les producteurs dans le marché de 
+la denrée fait que le profit des consommateurs (ou "l'utilité totale" ou 
+la  "valeur  sociale  de  la  ressource"  encore  appelée  gross  consumer 
+surplus)  est  maximal.  Si  la  fonction  de  demande  est  p(q),  la  quantité  maximisée  est 
+!
+. Dans ce cas le prix obtenu croît exponentiellement avec le temps suivant 
+!
+un exposant qui est le taux d'intérêt supposé fixe. C'est ce que l'on appelle la "loi de Hotelling" ou 
+"golden rule". 
+
+𝑝 𝜆 𝑑𝜆 𝑑𝑡
+
+𝑒!!"
+
+!
+!
+
+D'autre  part  il  étudie  le  cas  d'un  monopole.  Là  le  producteur  maximise  son  profit.  La 
+  Le prix optimal est alors conséquence de la courbe 
+
+𝑒!!"𝑞𝑝 𝑞 𝑑𝑞𝑑𝑡.
+
+quantité à maximiser est  
+de demande.  
+
+!
+!
+
+ 
+ 
+ 
+ 
+ 
+ 
+Dans chacune de ces deux hypothèses Hotelling traite également le cas où la fonction prix 
+p(q,x,t) dépend de la quantité produite, de la production cumulée jusqu'à l'instant présent x et du 
+temps. 
+
+Le  raisonnement  est  une  belle  application  du  calcul  des  variations  tel  que  Euler  en 
+découvrit  les  bases  essentielles  à  la  fin  du  XVIIIe  siècle.  Son  élégance  contribue  au  prestige 
+épistémologique de cette modélisation7. Des changements mineurs étendraient le raisonnement au 
+cas  d'un  taux  déterministe  variable,  et  de  nombreux  auteurs  ont  perfectionné  le  raisonnement  à 
+diverses situations plus complexes. 
+
+Remarque 1. 
+Dans le cas de la concurrence parfaite, selon l'approche de Hotelling, la golden rule revient à dire 
+qu'on  ne  voit  pas  sur  le  prix  la  rareté  croissante  de  la  ressource.  Hotelling,  ainsi  que  d'autres 
+auteurs, souligne le problème d'équité intergénérationnelle que pose cette consommation rapide. 
+Notons que ce régime ne saurait se terminer comme ça, à un instant t. Une zone de turbulence 
+intervient  nécessairement  lorsqu'on  approche  de  l'épuisement  de  la  ressource  où  les  conditions 
+d'offre et de demande se modifient. De toute façon ce cas idéal n'est jamais parfaitement réalisé. 
+Dans les autres cas qui correspondent mieux à la réalité (monopole ou oligopole) le signal-prix 
+garde son efficacité pour les utilisateurs. Les courbes de Hotelling sont déterministes et régulières. 
+L'idéal de la coordination par les prix défendu par Hayek est apparemment possible. 
+
+A ce stade — après ces contributions de Hotelling et de Hayek, disons durant les années 
+d'après  guerre  1950-60  —  la  question  se  pose  donc  de  la  façon  suivante :  le  signal-prix  est 
+essentiel pour le bon fonctionnement de l'économie, est-ce que l'on se trouve pour le pétrole, pour 
+chaque  minerai,  dans  la  situation  où  la  rareté  se  voit  par  l'évolution  du  prix  ou  bien  dans  la 
+situation  de  la  golden rule  où  la  rareté  de  la  ressource  n'est  pas  visible,  ce  dernier  cas  posant 
+plusieurs problèmes, a) pour les changements des entreprises vers des biens ou des procédés de 
+substitution,  b) parce qu'un tel régime ne peut se terminer en douceur. 
+
+Cependant la généralisation des marchés financiers organisés avec leurs produits à terme, 
+
+qui est la rupture des années 1970, va modifier le paysage. 
+
+Remarque 2. 
+Dans ce cas de libre concurrence, Hotelling n'indique pas par quel mécanisme le prix peut balayer 
+la  totalité  de  son  intervalle  de  variation  sous  la  courbe  p(q)  pour  faire  en  sorte  que  les 
+consommateurs  prêts  à  payer  plus  cher  soient  séparés  des  autres.  Dit  autrement,  comment  est 
+connue  la  fonction  p(q) ?  Cette  façon  de  prendre  le  problème  est  différente  de  ce  qui  se  passe 
+actuellement sur les marchés organisés où un seul prix instantané est disponible pour tous. 
+
+Remarque 3. 
+Quoique  la  méthodologie  mathématique 
+de  Hotelling  soit  assez  élaborée,  cette 
+modélisation  est  évidemment  radicale-
+ment  plus  simple  que  ce  que  nous 
+observons aujourd'hui sur le cours du brut 
+ou  des  métaux.  D'une  part  parce  que  le 
+producteur  peut  vendre  à  terme,  d'autre 
+part  parce  que  le  taux  dépend  de  la  date 
+de  début  et  de  fin  de  période  et  se 
+présente  donc  comme  une  surface  r(s,t), 
+mais  surtout  parce  que  cette  surface  est 
+aléatoire (yield curve et term structure).  
+
+Plus  généralement,  l'avenir  est,  pour  les  agents,  plein  d'incertitudes  ce  qui  modifie  le 
+raisonnement, et le complexifie, notamment, comme souvent, à cause de la divergence entre les 
+raisonnements presque sûrs et en espérance dans les phénomènes non linéaires.  
+
+ 
+  
+ 
+ 
+ 
+ 
+ b) Perfectionnements : prise en compte de l'incertitude 
+En  appliquant  le  calcul  des  variations  pour  optimiser  des  fonctionnelles  sur  toute  la  durée  de 
+l'exploitation et sur toute la quantité extraite, Hotelling — compte tenu de ce que nous venons de 
+dire sur les taux — suppose un modélisateur qui simplifie la réalité plus que ne peuvent le faire 
+les agents, et en particulier l'exploitant qui ignore le volume exact de la ressource dont il dispose. 
+Il est donc naturel d'étendre la modélisation à un cadre probabiliste. Ceci peut se faire de multiple 
+façons :  par  une  optimisation  du  type  Hamilton-Jacobi-Bellman,  par  des  raisonnements 
+infinitésimaux où intervient la différentielle d'Ito, voire en ayant recours au calcul des variations 
+stochastiques, etc. 
+
+Quoi qu'il en soit, on se trouve avec beaucoup plus d'objets mathématiques (paramètres, 
+lois de probabilités) à caler comme hypothèse que n'en avait Hotelling. Ce choix est si vaste que 
+se pose vraiment un problème de sensibilité théorie-calibration dans les deux sens : a) il est très 
+difficile de connaître ce que des changements dans les lois des processus aléatoires entraînent sur 
+les quantités calculées sauf à prendre un cadre mathématique très spécifique8 b) quand bien même 
+les  observations  disponibles  sont  compatibles  avec  la  modélisation  faite  qu'on  a  fortement  le 
+sentiment que d'autres modèles pourraient les épouser aussi bien. 
+
+D'autant  plus  que,  pour  ce  qui  est  des  matières  premières  tirées  du  sol,  les  incertitudes 
+sont  si  grandes  —  et  les  connaissances  si  mal  réparties  entre  les  agents  —  qu'aucune  loi  de 
+probabilité  n'a  la  moindre  justification  solide.  La  démarche  de  la  plupart  des  auteurs  consiste 
+néanmoins  à  construire  un  modèle  probabiliste  qui  reprend  la  charpente  de  l'argumentation  de 
+Hotelling pour tenter d'expliquer pourquoi les cours observés ne suivent pas la golden rule.  
+
+Après le premier choc pétrolier des modèles plus fins ont été développés tenant compte de 
+stratégies  de  cartel.  Sur  la  question  de  savoir  si  les  produits  dérivés,  et  plus  généralement  la 
+spéculation,  augmentent  ou  diminuent  la  volatilité  du  prix,  les  avis  sont,  depuis  longtemps 
+partagés.9 Le rapport de Margaret Slade pour la Banque Mondiale publié l'année du Sommet de la 
+Terre de Rio marque une étape dans la prise de conscience de difficultés d'un registre nouveau en 
+économie (Slade 1992). L'objectif de sa réflexion est énoncé comme un avertissement pointant un 
+grave problème : "vérifier si les marchés réels donnent un signal approprié de la rareté et si les 
+conditions  nécessaires  d'une  allocation  de  ressources  efficace  sont  rencontrées  en  pratique."10 
+Pour  cela  comparer  un  indice  des  industries  extractives  et  l'indice  pour  l'industrie  en  général. 
+Discutant  les  indicateurs  de  rareté,  et  en  premier  lieu  le  prix  relatif  de  la  ressource  et  son 
+évolution, théoriquement et dans les faits observés, elle conclut à l'absence de tendance claire.11 
+Elle  note  que  sur  un  siècle  le  prix  de  la  plupart  des  matières  première  décroit  et  qu'il  y  a  donc 
+nécessité de revoir le modèle économique de base et en particulier le modèle de Hotelling, mal 
+confirmé  expérimentalement.  Elle  souligne  qu'en  vérité  l'état  du  stock  n'est  pas  bien  connu  a 
+priori, les prix peuvent baisser par les perfectionnements de la prospection et de l'exploitation, et 
+par  des  substituts  nouveaux  à  ces  matières  premières.  Mais  surtout  elle  montre  qu'il  est 
+indispensable d'introduire l'incertitude et de penser le problème en termes stochastiques, le prix 
+actualisé  étant  représenté  par  une  martingale  ainsi  qu'avancé  par  Deshmukh  et  Pliska  (1985)12. 
+Dès  1979  V.  K.  Smith,  par  une  étude  de  la  stabilité  d'estimateurs  de  la  relation  prix-tendance, 
+avait  conclu  que  les  données  étaient  trop  volatiles  pour  porter  des  conclusions  définitives.13 M. 
+Slade  (1991)  avait  constaté  que  la  volatilité  a  été  en  augmentant  et  voit  "little  evidence  of  a 
+sustained trend".14 Elle étudie trois cas : le cas Hotelling classique (taux positif, volatilité nulle), 
+le cas Hotelling stochastique où l'espérance du prix actualisé suit le taux (taux positif et volatilité 
+positive),  et  le  cas  d'un  marché  efficient  le  prix  étant  une  martingale  (taux  nul  et  volatilité 
+positive).  Elle  conclut  que  ce  dernier  cas  est  le  mieux  vérifié  par  l'expérience  sans  pouvoir 
+réellement apporter une validation quantitative.15 
+
+A  partir  de  ce  point  d'étape  de  M.  Slade  de  1992  la  littérature  sur  les  ressources  non 
+renouvelables  et  sur  le  pétrole  devient  très  abondante  et  dispersée,  au  point  que  toutes  les 
+trajectoires passées peuvent trouver des rationalisation ex post. Les économistes tendent à les voir 
+
+ 
+ 
+ 
+ 
+comme  des  histoires  élémentaires  complémentaires  pour  parler  du  monde.  La  question  de 
+l'efficacité globale de ces histoires élémentaires complémentaires reste ouverte. 
+
+Aussi  mettrons  nous 
+
+l'accent  sur  une  autre  approche  qui  donne  un  éclairage 
+épistémologique  plus  clair  sur  les  limites  de  l'information  donnée  par  les  marchés  aux  acteurs 
+économiques.  Elle  est  fondée  sur  l'idée  que  la  théorie  mathématique  de  l'arbitrage  est  une 
+description  des  marchés  financiers  organisés  d'autant  meilleure  que  la  spéculation  est  plus 
+perfectionnée.  Cette  théorie  est  conçue  et  logiquement  structurée  pour  cela,  en  ce  sens  qu'elle 
+donne  le  type  asymptotique  de  situation  vers  lequel  tend  le  marché  par  le  jeu  des  processus 
+successifs  de  découverte  d'un  arbitrage  profitable  suivi  de  son  effacement  par  divulgation. 
+Aujourd'hui,  avec  l'intelligence  artificielle  et  les  big  data,  la  spéculation  peut  traiter  à  la  fois  la 
+haute fréquence et les interprétations sur le moyen et long terme (Wang Zheng 2014)16 . Ainsi la 
+théorie de l'arbitrage est devenue une excellente description des marchés et ses conséquences ne 
+doivent plus être considérées comme purement théoriques, au contraire elles indiquent de mieux 
+en mieux les limites épistémiques de la notion de marché organisé. Admettant que le prix d'une 
+denrée non renouvelable est une semi-martingale à laquelle s'applique la théorie stochastique de 
+l'arbitrage17,  nous  pouvons,  sans  chercher  de  résultats  quantitatifs,  tirer  des  conséquences  de  ce 
+que la volatilité du prix reflète l'incertitude qui s'exprime aussi par le coût des options. 
+
+c) Denrée cotée sur les marchés financiers : conséquences de la théorie de l'arbitrage 
+Beaucoup d'auteurs tentent de dégager une tendance sur le cours du prix d'une denrée épuisable et 
+cherchent à la justifier par une rationalité explicative. Ceci les conduit à raisonner par période et à 
+envisager  une  tendance  aléatoire  (stochastic  trend)  en  tant  que  processus  plus  régulier  que  le 
+cours spot lui-même.18 
+
+Cette  optique  peut  être  critiquée  à  plusieurs  titres :  Primo  sa  méthodologie  reste 
+scientifiquement  peu  convaincante  ne  serait-ce  que  par  la  difficulté  de  déterminer  un  processus 
+aléatoire  à  partir  d'une  seule  de  ses  trajectoires  sur  une  période  de  temps  limitée.  Secundo  elle 
+raisonne comme si le cours était objectivement un processus à variation finie auquel la volatilité 
+superposait une agitation de type martingale et que l'analyse des faits économiques significatifs 
+pouvait  permettre  de  dégager  une  rationalité  explicative  des  mouvements  de  ce  processus  à 
+variation  finie  sous-jacent.  Mais  si  cette  démarche  pouvait  fournir  autre  chose  que  des 
+commentaires interprétatifs du passé, et renseigner sur la tendance actuelle du marché – de façon 
+objective  –  cette  tendance  serait  immédiatement  prise  en  compte  et  disparaîtrait  des  écrans.  De 
+sorte qu'une telle tendance ne peut être que subjective. Or la théorie de l'arbitrage nous dit que 
+prendre  en  compte  une  tendance  fait  prendre  des  risques  là  où  il  était  possible  de  ne  pas  en 
+prendre. Ces auteurs s'éloignent donc d'un objectif scientifique. 
+
+C) Autour du concept central de martingale positive tendant vers zéro. 
+
+Pour toute évolution (croissance, décroissance, convergence) il y a lieu de préciser si on raisonne 
+en loi, en moyenne, ou trajectoire par trajectoire. 
+
+Les raisonnements "en loi" et "en moyenne" (moyenne quadratique ou dans les espaces de 
+p-ième  puissance  sommable)  ainsi  que  les  arguments  "en  probabilité",  font  intervenir  les 
+compensations  que  le  calcul  des  probabilités  permet  de  faire  entre  les  événements  où  il  y  a 
+augmentation  et  ceux  où  il  y  a  diminution.  Les  évolutions  ainsi  décrites  sont  en  général  assez 
+régulières  parce  que  les  causes  qui  attribuent  certaines  probabilités  à  certains  phénomènes  ont 
+souvent une certaine permanence. 
+
+Mais  on  est  aussi  intéressé  à  ce  qui  va  se  passer  pour  chaque  trajectoire  que  le  hasard 
+dessine, car c'est une de ces trajectoires qui va se produire effectivement. Et le comportement des 
+trajectoires  peut  être  très  différent  de  ce  que  la  dynamique  donne  comme  image  lorsqu'elle  est 
+appréhendée en loi ou en moyenne. 
+
+Ce qui se passe sur les marchés financiers montre comment l'incertitude et l'ignorance des 
+agents sur ce qui va se passer dans l'avenir se traduit par de l'agitation de la grandeur sur laquelle 
+
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ils  agissent.  Lorsque  l'évolution  d'une  devise  ou  d'une  action  est  incertaine  —  et  que  donc  les 
+agents économiques ne sont pas d'accord sur son évolution vraisemblable — la grandeur ne prend 
+pas une trajectoire intermédiaire qui représenterait une sorte de barycentre des avis, elle s'agite, et 
+s'agite d'autant plus que l'incertitude est grande. Cette agitation, la volatilité, peut être considérée 
+comme  la  mesure  la  plus  objective  de  l'incertitude  qui  affecte  le  prix  instantané  de  la  grandeur 
+économique concernée. 
+
+a) La famille exponentielle 
+L'économie  pense  souvent  comme  un  régime  stationnaire  les  phénomènes  à  croissance  relative 
+constante et c'est cette vision qui fut critiquée par le Club de Rome dans les années 1970. Ce sont 
+des  grandeurs  dont 
+actuellement atteinte avec un coefficient positif.  
+
+la  vitesse  est  proportionnelle  à 
+
+la  valeur 
+
+dX = AX dt 
+Dans  le  cas  de  plusieurs  grandeurs  cela  s'écrit  matriciellement  et  fait 
+intervenir les signes des valeurs propres permettant de dire quelles sont 
+les  combinaisons  linéaires  qui  vont  s'évanouir  et  celles  qui  vont 
+exploser.  Cette  croissance  exponentielle  ne  peut  durer  et  se  trouvera 
+nécessairement contrecarrée par un phénomène dont le rôle de frein va 
+s'amplifier 
+terme 
+supplémentaire dans l'équation conduisant dans le cas le plus simple à 
+une équation logistique ou apparentée, engendrant une saturation et dans le cas des modèles du 
+Club de Rome un phénomène d'effondrement (collapse). 
+
+progressivement.  D'où 
+
+l'apparition 
+
+d'un 
+
+Un point phénoménologique fondamental est que ceci est complètement modifié dans le 
+cas  où  la  grandeur  présente  de  l'aléa.  Si  une  grandeur  suivant  une  dynamique  exponentielle  est 
+soumise à un aléa constant relativement à la grandeur, deux cas peuvent se produire.  
+
+dX = AX dt +σX dB 
+Si  l'aléa  est  faible  l'allure  générale  de  la  trajectoire  sera  ce  qu'on 
+attend :  elle  va  suivre  la  courbe  exponentielle  avec  des  fluctuations 
+vers  le  haut  et  vers  le  bas  qui  vont  aller  en  s'amplifiant,  c'est  le  cas 
+illustré par la figure 2. Mais si l'aléa dépasse un certain seuil, σ2>2A, 
+le  comportement  des  trajectoires  est  différent  de  ce  qu'on  attend 
+intuitivement :  elles  finiront  toutes  après  des  oscillations  par  tendre 
+vers zéro, c'est le cas de la figure 3.19 
+
+Le phénomène de convergence vers zéro est bien connu dans le 
+cas  des  martingales  qui  sont  des  processus  d'espérance  mathématique  constante.  Il  existe  des 
+martingales positives dont toutes les trajectoires tendent vers zéro. L'exemple le plus simple est 
+celui de l'exponentielle brownienne. 
+
+!
+!
+Dans ce cas l'étude du phénomène "en loi" ou "en moyenne quadratique" ne donne pas ce qui va 
+se passer en vérité. Et de tels cas sont extrêmement courants dans les grandeurs économiques.20 
+Ceci est très général, on peut énoncer  
+
+𝑒!!!!
+
+!! ! 
+
+Proposition.  Soit une semi-martingale positive solution de dXt=XtσtdBt + Xtatdt où les processus 
+σt
+
+2 et at sont intégrables de sorte que  
+
+!
+
+𝑋! = 𝑋!exp [ 𝜎!d𝐵!
+
+!
+
+− !
+!
+
+!
+
+!
+
+!
+
+!
+𝜎!
+
+d𝑠 + 𝑎!
+
+d𝑠] 
+
+!
+
+!!
+𝜎!
+!
+
+alors si 
+processus Xt tend vers zéro presque surement lorsque t augmente indéfiniment. 
+
+𝑑𝑠 < +∞ presque sûrement et si il existe α > 0 tel que 𝜎!
+
+! > 2𝑎! + 𝛼, le 
+
+ 
+ 
+Ce  résultat  découle  d'une  généralisation  de  la  loi  des  grands  nombres  (cf.  par  exemple 
+
+Nguyen-Pham 1982).  
+
+Le point concrètement le plus significatif de cette phénoménologie, est 
+que dans le cas où il y a de l'aléa, et que celui-ci dépasse le seuil dont 
+nous avons parlé (σ2  > 2A), il est impossible au vu de la trajectoire de 
+mesurer  ce  qu'aurait  été  celle-ci  sans  l'aléa.  Autrement  dit  la 
+dynamique  exponentielle  ne  se  voit  pas  sur  ce  qui  est  objectivement 
+observable.  Donc  une  observation  telle  que  celle  de  la  figure  4  ne 
+permet  pas  de  déceler  une  éventuelle  dynamique  exponentielle  sous-
+jacente.  La  méthode  du  maximum  de  vraisemblance  appliquée  grâce  au 
+
+Figure	4 
+
+théorème de Girsanov ne fournit rien de précis.  
+
+b) Cas d'une ressource épuisable 
+Trois phases peuvent être interprétées :  
+
+1.  Durant  une  première  période  on  a  une 
+évolution  suivant  une  dynamique  de  croissance 
+relative constante perturbée par une faible volatilité, 
+les  découvertes  et  les  tarissements  de  gisement  se 
+compensent  plus  ou  moins  en  ajoutant  des  à-coups 
+qui  augmentent  la  volatilité  spéculative  ordinaire. 
+Evidemment  cette  première  phase  peut  présenter  des  variations  macroscopiques  dues  à  des 
+événements particuliers de la relation producteurs-consommateurs tels que la nouvelle politique 
+de l'Opep en 1973 ou la crise des subprimes en 2008.  
+
+2.  Puis  progressivement  les  incertitudes  augmentent.  Les  découvertes  éventuelles  ainsi 
+que les méthodes d'exploitations reposent sur des technologies hypothétiques, la prospection de 
+gisements  nouveaux  créent  des  incertitudes  sur  les  droits  de  propriété,  les  annonces  de 
+potentialités technologiques non encore confirmées, les échecs d'autres, instaurent une phase de 
+surinterprétation  aux  aguets  qui  augmente  la  volatilité  des  cours  ainsi  que  les  amplitudes  de 
+variation. Pour certains consommateurs, le besoin désespéré de s'approvisionner pour continuer à 
+utiliser  des  installations  existantes  crée  une  demande  accrue  pendant  qu'au  contraire  les  agents 
+économiques non captifs de cette ressource s'échappent de ce marché.  
+
+Plus  la  prospection  est  difficile  plus  la  part  des  prix  traduisant  les  incertitudes  est 
+importante  dans  l'évaluation  des  coûts  de  prospection  et  d'exploitation  eux-mêmes,  ce  qui 
+engendre une volatilité auto-réalisatrice.21 
+
+3. La fin du processus peut prendre diverses formes suivant les circonstances et le type de 
+ressource. Plaçons nous dans le cas d'une ressource énergétique. Le régime de forte volatilité a la 
+propriété  de  ne  pas  annoncer  sa  date  terminale,  la  fin  est  toujours  une  crise.  L'amplitude  de 
+l'agitation peut rendre difficile le rôle des organismes de marché et la cotation peut cesser comme 
+cela  s'est  produit  sur  le  Chicago  Climate  Exchange.  L'évaluation  des  risques  évolue,  la 
+multiplication  des  valeurs  échouées  (stranded  assets)  telles  que  les  pavillons  de  lointaine 
+banlieue,  les  industries  fortement  consommatrices  d'énergie  (cimenteries,  céramiques),  font  que 
+la transition est perçue comme irréversible et un basculement s'opère. A la longue, la ressource 
+ayant perdu ses usages classiques la demande s'en détourne vers toutes les denrées de substitution 
+exception faite de certains usages très spécifiques. C'est la phase d'effondrement.22 
+
+Remarque 4. 
+Dans  les  phases  1  et  2  la  volatilité  augmente.  Nous  nous  trouvons  dans  cette  situation  pour 
+beaucoup  de  ressources  épuisables.  C'est  un  des  cas  où  des  moyennes  faites  sur  l'historique  du 
+cours peuvent donner l'impression qu'une tendance est révélée par la trajectoire passée, sans que 
+pour autant elle soit claire sur la trajectoire future. On a l'impression que la théorie de l'arbitrage 
+
+ 
+ 
+ 
+ 
+ 
+était  fausse  lorsqu'on  regarde  vers  le  passé,  on  croit  qu'on  aurait  pu  spéculer  sans  risque  avec 
+profit, mais on est incapable de le faire pour l'avenir, ce qui est la question pertinente. 
+
+Remarque 5. 
+Dans  la  période  de  forte  volatilité,  aucune  tendance  n'est  décelable  ainsi  que  nous  l'avons 
+expliqué  ci-dessus,  la  rareté  n'est  pas  perceptible  sur  le  prix.  Néanmoins  toutes  les  parties 
+prenantes savent que la denrée est épuisable. C'est ce qui se passe actuellement pour le pétrole. 
+Une indication vague que les marchés fournissent quant à la rareté est l'augmentation de volatilité. 
+Il n'est pas clair cependant que celle-ci puisse être lue avec précision sur le prix des dérivés car 
+ceux-ci sont aussi très agités. 
+
+Remarque 6. 
+Pour  les  ordres  de  grandeurs,  la  volatilité  a  été  beaucoup  plus  haute  à  partir  des  années  1970 
+(Gerlach  et  al.)23.  Les  années  1970  sont  à  la  fois  celles  de  la  mise  en  place  internationale  des 
+marchés  dérivés,  celles  du  premier  rapport  du  Club  de  Rome  alertant  sur  l'épuisement  des 
+ressources  fossiles  et  le  début  d'une  forte  volatilité.  Coïncidence  n'est  pas  causalité.  On  peut 
+simplement dire que les produits dérivés n'ont pas empêché cette forte volatilité. Aujourd'hui une 
+volatilité  de  25%  à  30%  n'est  pas  exceptionnelle24.  En  ce  qui  concerne  le  pétrole,  d'après  une 
+étude d'août 2013 de Total25, la volatilité moyenne du prix du Brent était de 30% sur la période 
+1998-2007 avant l'envolée du prix préalable à la crise des subprimes et le pic de mi-2008. Dans la 
+période  récente  on  note  une  augmentation  lente  des  échanges  de  contrats  à  terme  sur  le  brut 
+jusqu'à  2005  suivie  d'une  véritable  explosion  qui  les  porte  à  un  niveau  quatre  fois  supérieur  en 
+quelques années. Le gaz quant à lui a des pics de volatilité qui ne correspondent pas à ceux du 
+pétrole, et sa volatilité est plus grande : de l'ordre de 50% pour le Henry Hub et le NBP sur la 
+période 2000-2013. 
+
+Remarque 7.  Bulles de volatilité 
+Le concept de bulle, en tant que solution économique fondée sur une condition aux limites future 
+erronée,  n’a  vraiment  d’objectivité  que  ex-post.  Néanmoins  elle  éclaire  sur  certains 
+comportements qui peuvent influencer le marché.26  
+
+La volatilité constatée sur le cours engendre de la perplexité et attise la volatilité (phase 2).  
+L'existence de "bulles de volatilité" a été étudiée techniquement par P. J. Schönbucher.27 Je pense 
+que se surajoute à ces technicités des "bulles sémantiques" qui augmentent l'incertitude : lorsque 
+la  volatilité  devient  significative  le  lien  du  cours  spot  avec  ce  qui  se  passe  en  matière  de 
+production et d'échanges de pétrole devient flou, le sens du mot Brent se met à flotter. La réalité 
+de marché porte sur ce que les banques ont de Brent et non plus sur ce qui se passe pour le prix 
+de cargaisons et de leurs assurances. 
+
+D) Discussion conclusive de la première partie 
+Nous avons vu que la rationalité qui s'attache aux marchés spéculatifs de ne pouvoir permettre un 
+profit  sans  risque  implique  de  facto  une  agitation  qui  est  la  seule  solution  à  l'existence  d'un 
+marché où la spéculation empêche que les tendances soient objectivement connaissables. Et nous 
+avons décrit des situations de ressources épuisables où l'inquiétude génère de telles volatilités que 
+des effondrements peuvent se produire.  
+
+Néanmoins il est encore enseigné dans les manuels que "les prix sont de loin les signaux 
+les  plus  importants  dans  une  économie  de  marché,  dans  la  mesure  où  ils  transmettent  des 
+informations essentielles sur les coûts et les dispositions à payer des autres personnes"28. Toute la 
+question  est  de  savoir  s'il  s'agit  d'une  vérité  observée  ou  du  désir  d'une  économie  idéale  ? 
+Souvenons-nous de la phrase de Léon Walras :"M. P[areto] croit que le but de la science est de se 
+rapprocher de plus en plus de la réalité par des approximations successives. Et moi je crois que le 
+but final de la science est de rapprocher la réalité d’un certain idéal ; et c’est pourquoi je formule 
+cet idéal."29 
+
+Revenons, dans ces conditions, à l'intelligence distribuée par les prix chère à Hayek. 
+
+ 
+ 
+ 
+ 
+a) Comment fonctionne la coordination par les prix en présence de volatilité 
+Le plaidoyer de Hayek contre la planification centralisée, que nous avons rappelé plus haut, est 
+fondé  sur  la  thèse  que  les  agents,  industriels,  commerçants,  consommateurs,  ont  une  bonne 
+connaissance du milieu dans lequel ils opèrent et que ce savoir pratique ne peut être synthétisé 
+par  une  intelligence  supérieure  et  globale.  En  revanche  il  leur  suffit  de  disposer  des  prix  et  de 
+leurs tendances pour que les adaptations aux changements qu'ils décident soient pertinentes. 
+
+Il  y  a  dans  cette  conception  l'idée  d'une  cohérence  par  simple  contagion  par  les 
+transactions  de  proche  en  proche  dont  la  spontanéité  n'est  pas  complètement  évidente.  Si  les 
+interactions  des  agents  sont  locales  ou  selon  de  longues  chaines  de  procédés  d'élaboration 
+technique,  les  fluctuations  initiées  par  une  anticipation  peuvent  être  amplifiées,  et  donner  un 
+régime  périodique  ou  chaotique,  éventuellement  instable.  De  façon  similaire,  la  tendance  des 
+entreprises  à  fusionner  pour  éviter  les  coûts  de  transaction  est  limitée  par  les  difficultés  de 
+coordination internes à l'entreprise.  
+
+Une façon de rendre opératoire l'idée de Hayek est de constituer un "marché de référence" 
+qui fonctionne entre une variété suffisante d'agents et auquel tous les autres peuvent se référer par 
+des moyens de communication directs. C'est très différent d'une économie planifiée, mais on a de 
+nouveau une référence centralisée. Remarquons que pour les marchés dont chaque transaction se 
+traduit  socialement  par  une  décision  qui  s'inscrit  dans  la  durée  et  des  circonstances 
+idiosyncratiques — comme le marché du travail par une décision d'embauche, ou de l'immobilier 
+par  un  acte  notarié  —  la  réalisation  d'une  telle  référence  de  prix  est  difficile  et  a  fait  l'objet  de 
+dispositifs divers comme la bourse du travail qui fonctionnait avec des accords par "métiers", etc. 
+Ces marchés sont faiblement spéculatifs en ce sens que les transactions ne peuvent être faites et 
+défaites  instantanément.  En  revanche  sur  les  matières  premières  minérales  et  agricoles,  les 
+actions, et sur les devises, une quantité standard peut être définie et des marchés "idéaux" ont été 
+facilement  organisés  qui  servent  de  référence  mondiale.  Ce  sont  des  marchés  fortement 
+spéculatifs où pratiquement toute stratégie spéculative peut être appliquée.  
+
+La question qui se pose dès lors est celle de l'impact de la volatilité du marché de référence sur la 
+coordination  et  sur  la  pertinence  des  décisions  des  agents.  Comme  Hayek  l'avait  souligné  la 
+coordination  a  pour  rôle  de  susciter  de  bonnes  réactions  aux  changements.  Notons  que  de  tels 
+changements  sont  visibles  localement  sur  les  marchés  faiblement  spéculatifs  comme  celui  du 
+travail  ou  de  l'immobilier  par  consultation  des  séries  temporelles  locales.  En  revanche  ce  n'est 
+plus le cas pour la coordination par les marchés financiers. Considérons un agriculteur devant des 
+choix  d'investissements  pour  les  années  à  venir  soit  de  plantation  d'arbres  fruitiers,  soit 
+d'équipement en matériel mécanisé, soit d'augmentation ou de diminution de son cheptel, soit de 
+construction de bâtiments spécialisés. Les prix des céréales lui sont imposés par les grossistes qui 
+se  référent  aux  prix  des  cargos  qui  sont  tirés  de  ceux  des  marchés  financiers.  Aussi  bien  les 
+incertitudes  sont  telles  qu'il  est  fortement  incité  à  ne  pas  se  lancer  dans  de  nouvelles  pratiques. 
+D'autant  plus,  dans  ce  cas,  que  les  aléas  climatiques  et  météorologiques  ont  toute  chance 
+d'augmenter.  
+
+Pourquoi les produits dérivés ne constituent pas un environnement décisionnel susceptible 
+de remplacer le signal-prix ? C'est une question essentielle. Dès lors qu'il n'y a plus de tendances, 
+les  assurances  protègent  certes,  mais  n'indiquent  aucune  direction  plutôt  qu'une  autre,  les 
+entrepreneurs se rendent compte qu'ils ont grande chance de faire des mauvais choix et ceci les 
+incite à ne pas bouger.  
+
+L'emploi  des  produits  dérivés  pour  palier  les  risques  ne  concerne  pratiquement  que  les 
+entreprises  de  dimension  suffisante.  Pour  une  industrie  de  taille  modeste,  de  même  qu'en 
+agriculture,  les  risques  sont  trop  variés  et  les  choix  trop  dépendants  des  prix  pour  qu'on  puisse 
+rationaliser  les  contours  d'une  stratégie  avec  des  produits  à  terme.  C'est  aussi  le  cas  pour 
+l'industriel innovant qui procède par learning-by-doing en essayant des prototypes en laboratoire, 
+en tentant de déterminer le prix de revient d'une fabrication en série, et en essayant d'évaluer si la 
+
+ 
+ 
+ 
+ 
+demande  prévisible  est  profitable.  Il  a  besoin  pour  cela  d'estimation  précise  des  coûts  des 
+composants et de l'énergie. Ce mode d'investigation est courant. 30 
+
+A  cause  de  la  spéculation,  le  marché  global  de  référence,  au  lieu  de  réaliser  une 
+moyennisation entre les pratiques qui efface les particularités parce qu'elles ne sont signifiantes 
+que  localement,  impose  à  l'ensemble  des  acteurs  les  inquiétudes  sur  l'avenir  que  ressentent  les 
+spéculateurs  qui  se  traduisent  par  la  volatilité  et  le  coût  élevé  des  produits  dérivés,  eux-mêmes 
+très agités. D'après certaines études, alors que les marchés organisés sur les denrées alimentaires 
+étaient en 1996 principalement utilisés par les producteurs pour se couvrir des risques (ce qui est 
+l'origine historique de la notion d'option), à partir de 2011 leur usage est surtout spéculatif.31 
+
+Comme il a été remarqué à propos du marché des droits négociables d'émission de CO2 
+en  Europe,  cette  forte  agitation  –  que  certains  ont  qualifiée  d'hystérique  –  empêche  la  lecture 
+d'informations  fiables  concernant  les  changements :  "Cette  volatilité  constitue  un  problème 
+d'efficacité  environnementale  lorsqu'il  devient  impossible  pour  les  acteurs  d'observer  une 
+tendance fiable à long terme car, pour prendre l'exemple de la lutte contre l'effet de serre et du 
+marché  européen  (ETS),  c'est  la  prévisibilité  du  prix  du  carbone  qui  peut  inciter  les  firmes  à 
+innover et à investir pour adopter durablement des technologies moins polluantes [...] au contraire 
+la taxe rend visible, transparent et prévisible le prix des émissions polluantes". 32 
+
+Diagrammes extraits du rapport du FMI  Global Financial Stability Report, The Quest for Lasting Stability 2012 
+montrant l'agitation extrême du prix de produits dérivés (ici du marché des dettes souveraines),  
+noter que les axes d'ordonnée commencent à zéro. 
+
+b) La mise en place historique des marchés dérivés organisés n'a-t-elle pas été accompagnée 
+d'un malentendu ? 
+Parcourons rapidement la seconde moitié du siècle dernier. 
+
+Les années d'après guerre et les théorèmes d'équilibre dans l'incertain. 
+C'est  pendant  la  seconde  guerre  mondiale  que  Paul  Lévy  et  indépendamment  Shizuo  Kakutani 
+découvrirent  le  lien  profond  existant  entre  la  théorie  du  potentiel  (théorie  des  équations  aux 
+dérivées  partielles  elliptiques)  et  le  mouvement  brownien.  Ceci  donna  une  forte  impulsion  à 
+l'étude des processus aléatoires avec l'étape majeure de la découverte par Kiyoshi Itō du fait que 
+le  mouvement  brownien  permettait  de  définir  une  intégrale  nouvelle  étendant  l'intégrale  de 
+Wiener  à  des  fonctions  aléatoires  adaptées  et  vérifiant  un  calcul  différentiel  nouveau,  le  calcul 
+d'Ito. 
+
+Les mathématiques se développaient durant cette période totalement indépendamment de 
+la  finance.  Les  avancées  théoriques  considérables  —  en  France  sous  l'impulsion  principale  de 
+Paul-André  Meyer  —  n'avaient  guère  comme  seul  domaine  d'application  que  le  calcul  des 
+ouvrages d'art sous sollicitations aléatoires où l'on savait désormais faire passer l'aléa à travers les 
+non linéarités. 
+
+ 
+ 
+	
+ 
+  
+Durant  ce  temps  l'économie  française  était  celle  des  "trente  glorieuses".  L'effort  de 
+reconstruction  du  pays  fut  essentiellement  public.  La  Banque  de  France  nationalisée  en  1945 
+faisait des prêts et avances au Trésor généralement gratuits. Les banques devaient consacrer une 
+partie  de  leurs  dépôts  à  acheter  des  bons  du  trésor,  et  les  assureurs  devaient  acheter  des 
+obligations. La monnaie était contrôlée, l'inflation — maintenue en moyenne au dessous de 6% 
+— érodait les dettes. L'Etat encadrait le crédit et la modernisation du pays fut financée sans crise 
+financière. 
+
+La  doctrine  en  France  —  jusque  vers  la  fin  des  années  1960  —  était  celle  d'une 
+planification incitative par l'action publique selon un mixte des idées de J. M. Keynes et de Pierre 
+Massé.  En  revanche  les  économistes  travaillaient  intensément  sur  le  perfectionnement  des  vues 
+néoclassiques  pour  mieux  fonder  les  notions  d'équilibre  et  de  marché.  La  théorie  dite  de 
+"l'équilibre général" qui explique les prix par l'égalité de l'offre et de la demande, initiée par Léon 
+Walras, avait obtenu des résultats d'existence et des conditions d'unicité dans le cadre statique et 
+déterministe.  Mais  Kenneth  Arrow  (1953)  et  Gérard  Debreu  (1952-59)  montrent  que  la  théorie 
+générale de l'équilibre peut se généraliser au cas où le futur est incertain en introduisant la notion 
+de  "biens  contingents".  Pour  rendre  opérationnelles  ces  idées  sans  ouvrir  un  grand  nombre  de 
+marchés  et  sans  supposer  de  grandes  capacités  de  calcul  des  agents  Arrow  suggère  la  mise  en 
+place de marchés financiers pourvus de produits à terme (contingent claims). 
+
+Sur  la  théorie  moderne  des  marchés  financiers  et  la  prise  en  compte  des  idées  de  R. 
+Radner  (1972),  je  renvoie  aux  chapitres  6  et  seq.  du  traité  de  Rose-Anne  Dana  et  Monique 
+Jeanblanc  (1994).  Insistons  juste  sur  les  points  suivants :  a)  les  raisonnements  se  font  à  temps 
+discret,  en  fait  sur  deux  dates  l'instant  présent  et  l'instant  futur,  b)  l'existence  de  l'équilibre  est 
+établie sous des conditions assez générales mais l'unicité relève d'hypothèses spécifiques relatives 
+au caractère "complet" des marchés.  
+
+L'avancée  fondamentale  historiquement  est  que  ces  travaux  furent  la  justification  et  le 
+déclanchement  effectif  des  mises  en  place  des  marchés  financiers  organisés  avec  leurs  produits 
+dérivés.  Cela  était  souligné  par  K.  Arrow  en  1953  explicitement :  "La  signification  de  ce 
+théorème [répartition des risques par des marchés financiers] est qu'il permet d'économiser sur le 
+nombre  de  marchés.  Une  répartition  optimum  des  risques  peut  être  atteinte  à  l'aide  de  S+C 
+marchés  seulement  et  non  plus  SC".  Et  en  effet  les  options  sur  devises  apparaissent  en  1972  à 
+Chicago, les options sur taux d'intérêt débutent en 1973, et de 1978 à 1990 s'ouvrent les marchés 
+à terme dans toutes les places financières. 
+
+La révolution Black-Scholes  
+Le fait qu'il était peut-être possible de gérer les actifs contingents par des techniques de gestion 
+de  portefeuille  n'apparut  au  début  que  comme  un  perfectionnement  secondaire,  les  idées 
+porteuses  étaient  celles  des  théorèmes  Arrow-Debreu-Radner.  L'article  de  Black  et  Scholes  de 
+1973 était technique et se plaçait sous des hypothèses mathématiques très particulières. Ce n'est 
+que  progressivement  qu'on  se  rendit  compte  qu'il  ouvrait  la  porte  à  une  véritable  révolution 
+marquée  par  un  changement  de  rationalité  –  assez  délicat  à  expliquer  au  grand  public  –  que  la 
+communauté des économistes de la finance a très rapidement faite sienne33.  
+
+Il  s'agit  dans  ce  court  article  d'une  situation  d'école  où  les  écritures  mathématiques  sont 
+aisées  et  explicites.  Mais  on  y  a  déjà,  en  germe,  la  mise  en  œuvre  d'une  logique  nouvelle,  qui 
+préconise  des  agissements  différents,  extrêmement  convaincante,  devenue  depuis  une  théorie 
+bien  charpentée,  très  générale,  enseignée  dans  de  nombreux  ouvrages  depuis  une  trentaine 
+d'années34.  La  conviction  sur  laquelle  je  me  fonde  dans  la  présente  analyse  est  que  la  subtilité 
+actuelle  des  outils  numériques  de  la  spéculation  –  tant  vers  la  haute  fréquence  qu'en  ce  qui 
+concerne la traduction des faits matériels, économiques et politiques sur les comportements des 
+acteurs,  grâce  aux  big  data  et  à  l'intelligence  artificielle  –  rend  la  théorie  de  l'arbitrage  plus 
+pertinente  que  jamais.  Soyons  clair,  cela  ne  supprime  pas  du  tout  l'intérêt  des  réflexions  de 
+politique économique. 
+
+Pourquoi  la  valuation  des  produits  à  terme  par  couverture  et  absence  d'arbitrage  est-elle 
+
+ 
+ 
+ 
+ 
+ 
+ 
+une  révolution ?  Pourquoi  ce  raisonnement  change-t-il  véritablement  la  rationalité ?  Pourquoi 
+peut-il  avoir  des  conséquences  majeures  sur  l'économie ?  Parce  que  son  résultat  est  absurde  au 
+regard  de  la  logique  classique :  le prix du produit dérivé ne dépend pas de la tendance du sous-
+jacent. 
+
+Il  s'agit  d'une  propriété  mathématique  de  la  théorie  des  processus  aléatoires  liée  à 
+l'intégrale stochastique de semi-martingales, et il est tout à fait étonnant qu'on ait besoin de faire 
+appel  à  des  notions  aussi  avancées  pour  comprendre  la  finance  contemporaine.  En  général,  les 
+économistes se piquent de "bon sens" et affectionnent des modèles très élémentaires susceptibles 
+d'être  compris  par  les  gestionnaires  de  terrain,  et,  corrélativement  à  même  d'influencer  les 
+pratiques économiques réelles. 
+
+Mais  c'est  ainsi,  il  s'agit  d'une  révolution  aussi  importante  que  les  changements 
+conceptuels de la théorie de la relativité ou ceux de la mécanique quantique fondés eux aussi sur 
+des  notions  mathématiques  avancées.  On  peut  cependant  penser  que  celle-ci  aura,  et  a  déjà  eu, 
+des conséquences sociales bien plus profondes que les perfectionnements des théories physiques. 
+Elle fut acceptée immédiatement par les opérateurs sur les marchés financiers qui firent l'effort 
+d'apprendre  l'analyse  stochastique  et  le  calcul  d'Itô  parce  qu'elle  définit  les  conditions  de 
+transactions justes en un sens tout à fait pragmatique : ni le vendeur ni l'acheteur ne peut faire un 
+profit  sans  risque,  c'est  la  condition  de  non  arbitrage.  Ce  nouveau  mode  de  pricing  et  de 
+couverture  des  produits  contingents  favorisa  incontestablement  le  développement  des  marchés 
+dérivés  dans  les  places  financières  de  tous  les  continents  à  la  fin  des  années  1970  et  dans  le 
+courant des années 1980. 
+
+Néanmoins  la  difficulté  de  compréhension  a  rapidement  pris  l'échelle  d'un  phénomène 
+social  historique,  qui  dure  encore,  caractéristique  de  notre  période  néo-libérale :  la  finance 
+fonctionne  aujourd'hui  selon  des  principes  que  non  seulement  les  hommes  politiques  mais  les 
+universitaires  des  sciences  humaines  et  même  une  part  significative  des  économistes  de  terrain 
+pensent  selon  des  grilles  anciennes,  inaptes  à  rendre  compte  du  rôle  absolument  central  de  la 
+volatilité dans la structure mathématique, comptable, et institutionnelle des marchés. 
+
+On a sous-estimé l'importance de la volatilité. 
+On  a  cru  que  la  mise  en  marché  des  produits  à  terme  éliminait  les  incertitudes,  comme  si  la 
+volatilité était un épiphénomène et que ses effets pervers étaient annihilés par les produits dérivés. 
+L'opinion générale dans les années 1990 parmi les économistes est bien représentée par Margaret 
+Slade. Elle fait référence aux travaux de Arrow et Debreu selon lesquels "a market for contingent 
+claims can be treated just like a market with no uncertainty". On a pensé que la mise en place des 
+marchés  financiers  ne  pouvaient  qu'améliorer  le  fonctionnement  de  l'économie,  il  ne  venait  à 
+l'idée  de  personne  que  leur  donner  plus  d'importance  dans  la  gouvernance  économique  pût 
+représenter  un  moins.  Le  cadre  de  pensée  de  MM.  Arrow  et  Debreu  n'avait  pas  accordé  à  la 
+volatilité sa juste importance. 
+
+Les marchés de biens contingents n'ont pas diminué la volatilité, c'est le contraire qui s'est 
+produit,  la  volatilité  a  envahit  aussi  les  nouveaux  produits,  les  tendances  sont  devenues  des 
+licornes et la "révolution Black-Scholes" fait qu'on n'en a objectivement plus besoin pour gérer 
+son portefeuille sur ces marchés. 
+
+II/ Crises d'imminence constante 
+
+Devant la multiplicité des menaces scientifiquement avérées et devant les longs délais entre les 
+décisions  et  leurs  effets  en  matière  de  transition  énergétique,  il  est  difficile  de  comprendre  la 
+surdité  apparente  des  hommes  politiques  et  des  acteurs  économiques.  Plusieurs  raisons  ont  été 
+soulignées, fondées sur les contradictions entre comportement individuel et raison collective, sur 
+l'usage des biens communs, sur l'attitude de "passager clandestin"  (Bouleau nov. et déc. 2009), 
+(G. Giraud 2012), (Ekeland 2015), etc. 
+
+ 
+ 
+ 
+ 
+ 
+A mon avis il manque à ces explications un trait psychologique fondamental qui pourrait 
+être la raison principale. C'est le déni qui réside dans l'idée de similitude : croire que la situation 
+est semblable aujourd'hui à ce qu'elle était hier.  
+
+C'est une économisation mentale du monde qui nous fait penser ainsi, nous allons voir par 
+
+quels schémas et paradigmes. 
+
+A) Le catastrophisme 
+Sur  la  grande  question  de  savoir  si  la  civilisation  conditionnée  par  la  nature  et  un  passé  de 
+conquête  est  à  même  d’affronter  les  nouveaux  défis  liés  à  la  finitude  de  la  planète  plusieurs 
+attitudes ont été adoptées par les essayistes : 1) on peut laisser le lecteur avec une perspective de 
+désastre, en misant sur l’effet social que peut avoir un livre pour susciter une prise de conscience 
+dans  l’esprit  de  Jared  Diamond  (2006)  avec  l'exemple  de  l'île  de  Pâques,  2)  on  peut  adopter  la 
+ligne  philosophique  de  Jean-Pierre  Dupuy  (2002)  que  la  vision  de  la  catastrophe  est  la  source 
+efficiente du ressaut nécessaire, 3) ou bien encore s’en remettre à une forme d’optimisme abstrait 
+à  la  manière  d’Edgar  Morin  (2004)  qui  brosse  un  tableau  lucide  des  problèmes  « qui  prouvent 
+que les processus engagés nous conduisent à l’abîme » puis, qui conclut que l’imprévisible peut 
+nous sauver : « Je pense donc que des processus encore invisibles et minoritaires dans le présent 
+peuvent se développer et créer, en s’alliant les uns aux autres, une métamorphose comme le ver 
+tout nu de la chrysalide qui se transforme, au cours d’une autodestruction qui se révèle en fait être 
+en même temps une auto-construction, en un être très différent, le papillon ou la libellule doté de 
+qualités nouvelles ». C'est aussi le procédé de Hubert Reeves (2013). 
+
+Excepté  celle  de  Jean-Pierre  Dupuy,  ces  attitudes,  à  mon  avis,  ne  tiennent  pas  compte 
+suffisamment  de  l'économie.  La  position  de  Dupuy  en  revanche,  économiste  lui-même,  mérite 
+d'être analysée au détail, elle est celle de quelqu'un qui voit l'économie comme une violence peu 
+capable  de  penser  le  désastre  écologique,  et  qui  s'en  détourne  donc  comme  stratégie  sur  ce 
+problème, tout en faisant confiance à une pensée strictement analytique. 
+
+Je n'utilise ici qu'une petite partie de l'œuvre de Jean-Pierre Dupuy au risque de manquer 
+certaines  dimensions  de  sa  pensée :  l'ouvrage  (Dupuy  2002)  et  les  articles  (Dupuy  2008,  2009, 
+2012).  Je  me  servirai  également  du  texte  intitulé  « De  la  possibilité  d’une  futurologie 
+scientifique »  (2004)  qui  a  circulé  comme  prépublication  mais  ne  semble  plus  disponible 
+actuellement. 
+
+Jean-Pierre Dupuy distingue trois cas où la prédiction de l'avenir peut intervenir. 1) Le cas 
+de l'état futur d'un système lointain sur lequel la prédiction elle-même n'a pas d'influence. Alors 
+la prévision s'apparente à celle d'un système physique. 2) Le cas où le prédicteur agit par la parole 
+sous forme conditionnelle : voici ce qui se passerait si vous décidez telle chose ou si vous faisiez 
+telle  autre.  3) Enfin  le  cas  où  le  prédicteur  sait  que  sa  prédiction  va  perturber  le  système  et  en 
+tient compte pour trouver la formulation la plus pertinente. 
+
+La  prospective  concerne  le  second  cas.  Elle  étudie  des  scenarios.  Pour  Dupuy  elle  n'est 
+pas  adaptée  à  l'étude  du  type  d'incertitude  radicale  à  laquelle  nous  nous  trouvons  aujourd'hui 
+confrontés.  
+
+En revanche il propose d'approfondir le troisième cas. Pour cela il insiste sur une situation 
+où la lecture de la problématique du futur est particulière et importante : le temps du projet. Le 
+temps du projet est le cas où il y a coïncidence entre ce que dit la prévision et le monde perturbé 
+par  cette  prévision.  On  voit  la  procédure  de  point fixe  dont  il  s'agit,  et  on  imagine  bien  qu'on 
+puisse  la  rencontrer  en  économie  avec  les  prédictions  auto-réalisatrices,  les  marchés  ou  la 
+spéculation  par  exemple.  La  planification  à  la  française  telle  que  l'avait  conçue  Pierre  Massé 
+visait typiquement à réussir cette conjonction ainsi que le dit Roger Guesnerie "[La planification] 
+visait à obtenir par la concertation et l'étude une image de l'avenir suffisamment optimiste pour 
+être  souhaitable  et  suffisamment  crédible  pour  déclencher  les  actions  qui  engendreraient  sa 
+propre réalisation"35. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Pour  résoudre  le  problème  de  la  catastrophe  majeure  Jean-Pierre  Dupuy  veut  mettre  à 
+profit le temps du projet au sens ci-dessus. Il est persuadé que viser un tel point fixe est la seule 
+façon d'être irréfutable. Il faut donc annoncer et prédire la catastrophe avec les moyens d'annonce 
+qui  la  rendent  nécessaire  et  s'en  échapper  néanmoins36.  D'où  la  formulation  qui  est  la  dernière 
+phrase  de  son  livre  "Le  catastrophisme  éclairé  consiste  à  penser  la  continuation  de  l'expérience 
+humaine comme résultant de la négation d'une autodestruction — une autodestruction qui serait 
+inscrite dans son avenir figé en destin". Il considère qu'il faut rendre crédible la perspective de la 
+catastrophe pour accroître la force ontologique de son inscription dans l'avenir. Mais évidemment 
+cela ne veut pas dire augmenter le nombre des centrales nucléaires. Ce qu'il veut dire c'est que 
+l'activité  de  prédiction  doit  constituer  une  partie  intégrante  du  fonctionnement  social  de  sorte 
+qu'elle puisse avoir un réel effet causal sur ce fonctionnement. 
+
+Approchons  nous  davantage  du  raisonnement  avancé  :  "La  méthode  philosophique  que  j'ai 
+proposée  sous  le  nom  de  « catastrophisme  éclairé »  pour  aborder  ces  questions,  écrit-il,  trouve 
+son origine dans un paradoxe qu'Henri Atlan et moi avons découvert ensemble, en 1976, et qui 
+n'a pas cessé de m'obséder, il s'agit du paradoxe de Newcomb". De quoi s'agit-il ? Une question 
+relative à l'aversion face au risque et à la prévision : 
+
+Soit  deux  boîtes,  l'une  transparente,  qui  contient  mille  euros,  l'autre,  opaque,  qui  soit 
+contient  un  million  d'euros,  soit  ne  contient  rien.  Le  choix  de  l'agent  est  soit  H1 :  ne 
+prendre que le contenu de la boîte opaque, soit H2 : prendre le contenu des deux boîtes. 
+Au moment où le problème est posé à l'agent un Prédicteur a déjà placé un million d'euros 
+dans la boîte opaque si et seulement si il a prévu que l'agent choisirait H1. L'agent sait tout 
+cela et il a une grande confiance dans les capacités prédictives du Prédicteur. Que doit-il 
+faire ? 
+  Une première argumentation qui vient spontanément à l'esprit de ceux qui découvrent le 
+problème conclut que l'agent doit choisir H1. Le prédicteur l'aura prévu et l'agent aura un 
+million.  S'il  choisissait  H2,  il  n'aurait  que  mille  euros.  Le  paradoxe  est  qu'une  seconde 
+argumentation  paraît  tout  aussi  décisive,  alors  qu'elle  conclut  de  manière  opposée. 
+Lorsque  l'agent  fait  son  choix,  il  y  a  ou  il  n'y  a  pas  un  million  d'euros  dans  la  boîte 
+opaque : à prendre les deux boîtes, il gagne évidemment mille euros de plus dans l'un et 
+l'autre cas. H2 est donc sa stratégie dominante. 
+
+On est très éloigné du quotidien des gens. Comment de tels raisonnements quelque peu byzantins 
+ont-ils  une  chance  de  motiver  un  fort  mouvement  sur  l'élaboration  sociale  des  prédictions ?  Ce 
+registre crée un vrai malaise. Car le capitalisme lui, est tout près des gens, il sait leur faire trouver 
+leur intérêt, il est compris par l'agriculteur, par le pêcheur, par les parents pour la  famille. 
+
+Nous allons voir qu'au niveau de l'usager ordinaire et de l'agent économique, un schéma 
+
+de pensée analytique beaucoup plus simple influe grandement sur les comportements. 
+
+B) La catastrophe pensée économiquement 
+Indépendamment de la portée de l'argument logique développé par Dupuy, il reste une question 
+de  fond  que  l'on  peut  formuler  ainsi  :  est-t-il  sûr  que  la  croyance  forte  à  la  plausibilité  de  la 
+catastrophe, et donc le discours demandant d'abandonner l'espoir, aient pour résultat de vivifier 
+l'action  en  vue  d'éviter  la  catastrophe ?  Compte  tenu  de  ce  que  nous  savons  de  l'ampleur  du 
+changement de mode de vie qui est nécessaire pour respecter les limites des ressources minérales 
+et pour tenir compte de la finitude des flux d'énergie et de la faible résilience de la nature, tout 
+porte à croire que le résultat serait au contraire le déni pur et simple de la réalité, d'autant plus que 
+celle-ci est décrite par des scientifiques très lointains. 
+
+D'après une étude réalisée en 2013 par l'ADEME la proportion des Français qui pensent 
+que l'effet de serre est une hypothèse et que la cause des désordres est incertaine n'a jamais été si 
+haute depuis dix ans. Elle atteint 23% en France, on sait qu'elle est bien supérieure en Angleterre 
+et aux Etats Unis.  
+
+ 
+ 
+ 
+ 
+Aussi la question du meilleur registre de propos pour éviter une catastrophe telle que le 
+changement  climatique  à  plus  de  3°C  à  la  fin  du  siècle,  ou  celle  de  l'effondrement  de  la 
+biodiversité,  fait  intervenir  tous  les  méandres  de  la  psychologie  individuelle  et  collective.  Dès 
+lors que la perspective aperçue est traumatisante, le refus de reconnaître cette réalité est souvent 
+l'attitude la plus courante c'est-à-dire la dénégation. "Une vérité niée a autant de poids imaginaire 
+qu'une  vérité  avouée,  Verneinung  que  Bejahung"  écrit  Lacan37.  Mais  déjà  Freud  avait  pointé  le 
+déni à propos des catastrophes. Dans une lettre à Romain Rolland il écrit :  
+
+"Puis-je  m'arrêter  à  un  cas-limite  de  semblable  défense  ?  Vous  connaissez  la  célèbre 
+complainte  des  Maures  espagnols  A  y  de  mi  Alhama,  qui  raconte  comment  le  roi  Boabdil 
+accueille la nouvelle de la chute de la ville Alhama. Il pressent que cette perte signifie la fin de 
+son règne. mais comme il ne veut pas « tenir pour vraie » cette fin, il décide de traiter la nouvelle 
+comme du « non arrivé ».  Voici la strophe 
+
+Des lettres lui parvinrent 
+Disant que Alhama avait été prise 
+Les lettres il les jeta au feu 
+Et le messager il le mis à mort. 
+
+[Boabdil, dernier roi maure de Grenade, y régna de 1487 à 1491] On devine aisément, poursuit 
+Freud,  qu'à  cette  conduite  du  roi  prend  part  le  besoin  de  s'opposer  au  sentiment  de  son 
+impuissance."38 
+
+a) Procrastination et homothétie 
+"On  veut  bien  faire  des  efforts,  mais  dans  quinze  ans,  et,  en  attendant,  c'est  business as usual. 
+Cette habitude de prendre une décision énergique aujourd'hui, mais de remettre au lendemain son 
+exécution, est bien attestée dans la psychologie individuelle : cela s'appelle de la procrastination. 
+Disons par exemple que je décide de faire de l'exercice de m'arrêter de fumer. Je sais que c'est 
+bon  pour  la  santé,  je  vais  donc  m'y  mettre,  mais  pas  aujourd'hui,  cela  tombe  mal,  j'ai  trop  de 
+choses  à  faire  ou  je  suis  trop  fatigué...  Demain  sans  faute.  Le  malheur,  c'est  que  quand  je  me 
+réveille le lendemain matin, je découvre que demain est devenu aujourd'hui, et que le problème 
+se  pose  exactement  dans  les  mêmes  termes.  Il  est  résolu  de  la  même  manière  (pas  aujourd'hui, 
+mais demain sans faute) " (Ekeland 2015). 
+
+C'est  la  similitude  de  la  situation  d'aujourd'hui  à  celle  d'hier  qui  est  paralysante. 
+Psychologiquement  il  y  a  comme  une  situation  stationnaire.  Comment  cela  est-il  possible ?  Si 
+j'avais dit "j'arrête de fumer avant la fin de la semaine" ce serait différent, l'urgence pourrait se 
+mesurer et être comparée aux dispositions concrètes à prendre. Ce qui fait que la catastrophe est 
+gérée  sous  le  régime  de  la  procrastination  c'est  qu'elle  est  incertaine,  c'est  le  hasard  qui  rend 
+possible cette homothétie. 
+
+b) Psychologie du risque de défaut 
+Les discours philosophiques sur l’avenir qui tiennent compte de l’éventualité de l’effondrement 
+sont nombreux et éparpillés, on se place au bord du précipice, sans dater précisément l'instant du 
+drame. Seulement on doit reconnaître que l'économie libérale parvient parfaitement à maintenir 
+son cap habituel dans un monde que des intellectuels promettent au désastre.  C’est qu'elle a un 
+puissant  rôle  d'éducateur  fondé  sur  des  mathématiques  qualitatives  très  simples  qui  expriment 
+d'ailleurs au quotidien davantage la pensée classique que néo-classique ou contemporaine. Si le 
+prix  monte  la  demande  baisse;  le  risque  d'un  placement  doit  être  rémunéré;  la  rareté  d'une 
+ressource fait monter son prix; etc., sorte de "common knowledge" qui est la rationalité ordinaire 
+partagée faite de quelques schémas simples. 
+
+Pour  mieux  dessiner  l'un  de  ces  paradigmes  de  base,  nous  allons  d’abord  épurer  le 
+problème. Les termes d’effondrement, collapse, ruine, désastre, sont vagues. Ils embrassent des 
+le 
+phénomènes 
+basculement vers un régime climatique irréversible, la mort de toute espèce vivante dans l’océan 
+à cause de son acidification, etc. Et il est certain que la signification de l’événement dont on parle 
+est primordiale ainsi que les moyens interprétatifs dont nous disposons pour l’appréhender, nous 
+
+l’épuisement  des  ressources  énergétiques  fossiles, 
+
+très  divers,  comme 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+en  parlerons  en  conclusion.  Mais  nous  allons  simplifier  cet  événement  pour  la  cause  de 
+l’argument en le ramenant à une simple date et nous l’appellerons « la catastrophe ». 
+
+Ce que les philosophes du catastrophisme n’ont pas vu, ou du moins ce sur quoi ils ont eu 
+tort  de  ne  pas  insister,  c’est  qu’on  peut  parfaitement  croire  que  la  catastrophe  est  certaine  et 
+même  proche  en  un  certain  sens,  sans que ceci, en soi, implique que le temps qui s’écoule sans 
+qu’elle se produise la rende plus imminente. Il est même possible et cohérent que la situation soit 
+parfaitement stationnaire au sens que sa non survenue jusqu’à présent ne rende la catastrophe ni 
+plus lointaine ni plus proche. Il suffit pour cela de considérer qu’elle survient à un temps aléatoire 
+qui suit une loi exponentielle. 
+
+Est-ce  là  une  curiosité  mathématique ?  Pas  du  tout,  c’est  extrêmement  courant  et  banal. 
+Les situations que j’évoque que l’on peut appeler d’imminence constante incitent évidemment à 
+ne  pas  changer  de  comportement  c’est-à-dire  au  business as usual.  Elles  se  rencontrent  partout 
+dans la vie quotidienne et souvent en physique. Elles sont la base de la représentation des pannes 
+par les ingénieurs pour les objets fabriqués et pour les centrales nucléaires. Elles sont la notion la 
+plus simple pour des dispositifs dont la sureté et la fragilité n’est pas affectée tant qu’il n’y a pas 
+de panne. Si la catastrophe est déclenchée par la première apparition d’un phénomène parmi un 
+très  grand  nombre  de  phénomènes  indépendants  elle  est  d’imminence  constante.  Si  deux  ou 
+plusieurs  catastrophes  indépendantes  sont  d’imminence  constante,  la  première  catastrophe  qui 
+survient est elle-même d’imminence constante. 
+
+Dans  une  situation  d’imminence  constante  les  signes  avant  coureurs  n’existent  pas,  la 
+catastrophe  survient  par  surprise.  Ceci  dit,  n’oublions  pas  que  dans  une  situation  à  risque,  un 
+signe  avant  coureur  ne  fournit  pas  généralement  de  date  buttoir,  de  sorte  que  la  constance  de 
+l’imminence  ne  se  trouve  pas  réfutée  par  un  tel  avertissement.  En  général  la  causalité  entre  le 
+signe avant coureur et la catastrophe est de nature sémantique et ne permet pas une quantification 
+précise. Ce pourrait être le cas pour des pannes identifiées concernant des dispositifs similaires en 
+grand nombre dont on aurait des statistiques. Mais par définition les catastrophes sont rares. 
+
+Il y a donc une légitimité pour la position que les menaces environnementales mêmes les 
+plus  graves  se  produisent  de  façon  certaine  à  une  date  finie  aléatoire  et  soient  néanmoins 
+d’imminence  constante.  Cette  vision,  si  on  l’adopte,  revient  à  dire  aux  écologistes  :  « causez 
+toujours, ce que vous dites ne change pas ma situation décisionnelle ». Ajoutons que pour tenir 
+cette  position  il  n'est  pas  nécessaire  de  connaître  le  paramètre  de  la  loi  exponentielle  qui  gère 
+ladite catastrophe.  
+
+jouer  un 
+
+rôle  dans 
+
+l’inertie  constatée  devant 
+
+La catastrophe pensée économiquement,  devient  une  explication  possible  du  business as 
+usual,  lorsqu'elle  se  fonde  sur  une  place  centrale  accordée  —  comme  schéma  mental  —  aux 
+situations  d’imminence  constante.  Est-ce  que  ce  « paradigme »  a  suffisamment  d’importance 
+sociale  pour  pouvoir 
+les  menaces 
+environnementales ?  On  pourrait  penser  que  de  tels  petits  schémas  n’ont  aucune  importance 
+compte  tenu  de  l’épaisseur  historique  des  phénomènes  sociaux.  Je  crois  au  contraire  que 
+l'économie inscrit ce réflexe dans la vie quotidienne. Il existe en effet une institution qui consacre 
+des  sommes  importantes  à  éduquer  les  ménages  de  tous  les  pays  dans  le  sens  d’une  perception 
+des risques selon des schémas d’imminence constante. C’est la finance et son usage maintenant 
+du  marché  international  du  crédit.  Quand  Madame  et  Monsieur  Toulemonde  vont  à  la  banque 
+placer  leurs  économies  on  leur  explique  en  tout  premier  lieu  que  les  placements  sûrs  ont  des 
+rendements  bas  et  que  pour  avoir  des  rendements  élevés  il  faut  prendre  des  risques.  Dans 
+l’utilitarisme quotidien le modèle de base est que la faillite de l’entrepreneur, le risque de défaut 
+de  n’importe  quel  prêt  se  traduit  implacablement  sur  le  taux.  Et  derrière  cette  « loi »  se  trouve 
+évidemment  la  logique  que  la  représentation  la  plus  simple  d’une  échéance  aléatoire  est  une 
+variable  exponentielle,  dont  le  paramètre  génère  le  taux  du  prêt.  Plus  c’est  risqué,  plus 
+l’imminence (constante) est brève, plus le taux est élevé, et a contrario plus c’est confiant et sûr, 
+plus l’imminence (constante) du défaut est lointaine et plus le taux est bas.39 
+
+ 
+ 
+ 
+ 
+ 
+Deux  raisons  principales  donne  à  cette  simplification  une  grande  force  pratique.  La 
+première  est  que  le  paradigme  de  l’imminence  constante  s’accorde  bien  avec  l’idée  que  les 
+paiements périodiques des intérêts du prêt se font selon un taux constant. Car il est clair que dans 
+une situation où la faillite serait pensée comme de plus en plus proche il serait normal que le taux 
+des  prêts  augmente40.  La  seconde  est  l’organisation  mondiale  du  marché  des  créances  sous  la 
+forme  de  la  titrisation.  Sans  entrer  ici  dans  les  détails  (cf.  Beacco-Hubaud  2013)  disons  que 
+l’aboutissement  du  travail  d’assemblage,  d’assurance  et  de  notation  des  paquets  de  créances 
+mises  en  marché,  est  de  permettre  aux  acheteurs  de  ne  se  fonder  que  sur  un  seul  paramètre,  le 
+taux, pour décrire le paquet et en déduire un prix de marché du dossier. C'est une simplification 
+radicale de la réalité économique, on gomme toutes  les particularités idiosyncratiques. 
+
+Les  financiers  eux-mêmes  regrettent  le  caractère  primaire  de  ce  dispositif  qui  imprègne 
+toute l’initiative économique contemporaine. Bien des spécialistes suggèrent des améliorations à 
+ce  sujet  qui  permettraient  de  mieux  tenir  compte  de  descriptions  plus  fines  de  la  réalité  des 
+risques  économiques  véritables.  Mais  le  coupable  est  le  prix  de  marché  unique  dans  une 
+organisation mondiale fluide et immédiate. Perfectionner la description, multiplier les paramètres, 
+c’est compartimenter le marché.  
+
+Pour résumer, l'économie et particulièrement la finance de la période néolibérale actuelle, 
+a installé, avec la pédagogie redoutablement efficace des moyens d’agir, une logique économique 
+où  les  risques  sont  —  en  premier  lieu  —  pensés  selon  des  situations  immuables  tant  que  la 
+catastrophe ne s’est pas produite. Ce type d’enseignement pratique est des plus performants.41 
+
+C) Conclusion de la deuxième partie : réformer l'économie du crédit ?  
+La  référence  mentale  à  une  économie  où  les  taux  sont  constants  et  où  le  temps  déroule  un 
+paysage  économique  homothétiquement  est  si  forte  chez  les  agents,  ménages,  entrepreneurs  et 
+investisseurs, qu'on en déduirait logiquement qu'une réforme du crédit est nécessaire pour aider la 
+transition énergétique et écologique. 
+
+Il y aurait plusieurs raisons d'aller dans cette direction à cause notamment du fait que le 
+marché  des  créances  au  niveau  des  prêts  aux  Etats  revient  à  les  taxer  de  façon  inversement 
+proportionnelle  à  leur  réussite  économique  comme  si  les  légitimités  politiques  des  Nations 
+pouvaient être traitées comme les faillites des entreprises. Il y 
+a  sûrement  des  changements  souhaitables  aux  usages  actuels 
+pour  que  les  prêteurs  soient  davantage  liés  et  impliqués  dans 
+les enjeux et la signification des projets qu'ils aident à financer. 
+Mais  le  trait  psychologique  que  nous  soulevons  est  si 
+profondément  ancré  dans  les  mentalités  que  le  réformisme 
+risque d'être insuffisant42. 
+
+Il  faudrait  alors  penser  en  termes  de  rébellion  ou  de 
+révolution : non plus discuter mais renverser la table. Eternelle 
+question.  Le  sociologue  Robert  K.  Merton  1910-2003,  père  de  l'économiste,  célèbre  pour  avoir 
+introduit le concept de "théorie sociologique de moyenne portée" avait proposé le classement ci-
+joint pour les attitudes critiques hors du conformisme. Rébellion signifierait ici de nouveaux buts 
+et de nouveaux moyens économiques.  
+
+Autant dire une si grande ambition, irréaliste, qu'elle 
+
+constituerait de fait une nouvelle forme de procrastination. 
+
+Comme  souligne  justement  Christian  Thimann  la 
+finance ne voit qu'un risque financier alors que le climat et 
+l'environnement relèvent d'une notion de risque plus large43. 
+Les  solutions  au  business  as  usual  dont  nous  parlons 
+résident  beaucoup  plus  dans  l'ouverture  d'un  nouveau 
+domaine  de  la  pensée  pour  l'action  hors  du  champ 
+économique  principal  —  restreignant  donc  la  théorie  et  la 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+pratique économique à un domaine plus étroit — plutôt que de vouloir modifier les fondements 
+de la logique des échanges de biens et de services tels qu'ils sont en usage actuellement même si 
+des réformes sont souhaitables. Le schéma de base est donc celui ci-contre qui accorde un rôle 
+prioritaire et englobant aux préoccupations de préservation de la biosphère. Et concrètement cela 
+signifie  une  vigilance  toute  particulière  sur  les  solutions  toutes  prêtes  que  l'économie  libérale 
+propose  pour  aborder  l'environnement  en  l'incluant  dans  l'économie  du  bien-être  ce  qui 
+reviendrait à renverser le schéma ci-contre en permutant les rectangles de l'économie libérale et 
+de la biosphère. 
+
+III/ Conclusion générale : préconisations 
+
+Les raisons de l'inertie actuelle devant les menaces avérées à la vie humaine sur cette planète sont 
+fortement  ancrées  dans  notre  culture  par  les  valeurs  que  l'histoire  a  façonnées.  Elles  sont 
+multiples citons : a) le citoyen ne voit pas les dégâts (la couche d'ozone, le CO2, la menace sur 
+les ressources halieutiques, la pollution des nappes phréatiques, etc.) b) l'idée fausse que la nature 
+cicatrise toujours (idée qui vient de la lutte ancestrale contre la végétation) c) la question de la 
+préservation  des  biens  communs  et  le  dépassement  de  la  rationalité  économique  pour  tenir 
+compte des générations futures, d) la faiblesse des institutions collectives, etc. 
+
+Nous  nous  restreignons  ici  à  des  facteurs  qui  sont  strictement  dus  à  des  principes 
+
+constitutionnels de la finance contemporaine.  
+
+Au  niveau  des  institutions :  la  prévalence  des  marchés  financiers  dans  l'organisation  de 
+l'économie mondiale et l'effacement du signal-prix. Nous avons montré l'inefficacité des produits 
+à  terme  contre  la  fumée  fabriquée  par  la  volatilité  et  le  fait  que  les  prix  des  ressources  non 
+renouvelables mises en marché n'indiquent plus clairement leur rareté. 
+
+Au niveau psychologique : les règles de base du crédit ont tendance à partager le monde à 
+venir  en  deux  parties,  du  côté  gauche  (sinistre)  la  catastrophe  avec  une  certaine  probabilité,  du 
+côté droit la catastrophe évitée ainsi que cela s'est déroulé jusqu'à présent. Avec la propriété — 
+psychologiquement  fondamentale  —  que  lorsque  le  temps  se  déroule,  le  côté  droit  reste 
+homothétique à lui-même. Conditionnellement à l'évitement du drame, le temps ne change rien. 
+
+Ces  deux  facteurs  étant  pointés,  quelles  solutions  sont  envisageables ?  Nous  allons 
+d'abord revenir sur l'idée beaucoup commentée et déjà expérimentée de taxe sur les transactions 
+financières, et tenter de voir si elle peut être un outil contre la volatilité. Puis nous en viendrons à 
+la préconisation de Solow qui sera notre principale conclusion. 
+
+A) Une taxe peut-elle être un outil pour lutter contre la volatilité ? 
+Il ressort de la synthèse de Colliard-Hoffmann (2015) que l'impact d'une taxe sur les transactions 
+financières (TTF) — qu'elle soit "pure" portant sur toutes les transactions d'un marché ou du type 
+"droit de timbre" n'impactant que les transferts de propriété journaliers — est principalement une 
+réduction des volumes de transaction et en conséquence une certaine réduction de la fluidité. En 
+revanche  en  ce  qui  concerne  la  volatilité  les  avis  sont  dispersés  avec  un  plus  grand  nombre 
+d'études  concluant  à  une  augmentation  ou  une  absence  d'effet  sur  l'agitation  des  prix  et  moins 
+nombreuses celles qui concluent à une diminution. Nous renvoyons à l'Opinions et Débats n°9 et 
+à sa bibliographie sur l'analyse des avantages d'une TTF du point de vue fiscal pour la puissance 
+publique et les mises en œuvre diverses en Europe. 
+
+Une  question  sensiblement  différente,  plus  directement  en  rapport  avec  notre 
+préoccupation ici concernant la fumée produite par les marchés financiers en matière de signal-
+prix,  est  de  savoir  si  on  pourrait  configurer  une  taxe  de  sorte  qu'elle  pénalise  directement  la 
+volatilité. Autrement dit que la taxe dépende de façon croissante de la volatilité du cours mesurée. 
+L'intérêt  théorique  en  serait  le  suivant.  Si  un  agent  économique  est  prêt  à  faire  un 
+investissement qui fait intervenir des actions d’entreprises cotées et des devises, il a deux façons 
+de faire. Soit il se fie exclusivement au marché qui grâce à ses cotations d’actions, de devises, de 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+matières  premières  et  de  produits  à  terme  relatifs  à  ces  actifs  lui  donne  apparemment  toute 
+l’information sur les incertitudes du projet. Soit il dépense un budget spécifique pour s'enquérir 
+lui-même  de  la  rentabilité  de  l’affaire  dans  laquelle  il  entend  s’impliquer  ainsi  que  ses 
+incertitudes. Cette seconde méthode est "l’ancienne logique économique" qui était la principale 
+façon de faire avant les années 1970, qui consistait à mandater des experts pour étudier les projets 
+et  des  ingénieurs  pour  évaluer  les  chances  de  réussites  des  innovations  des  entreprises.  Cette 
+méthode est plus chère que la première qui est gratuite. Mais elle ne fabrique pas l’information de 
+la même manière. Les deux voies sont d’autant plus différentes que la volatilité est grande. D’où 
+l’idée  de  taxer  en  fonction  croissante  de  la  volatilité.  Si  on  taxe  les  transactions  faites  sur  les 
+marchés  volatils  cela  change  la  donne  pour  l’investisseur  entre  l’usage  de  l’information  de 
+marché et l’usage de sa propre information. La gestion des affaires en agissant seulement grâce 
+aux outils des marchés se trouve à cause de la taxe avoir un coût qui va inciter les acteurs à aller 
+chercher  eux-mêmes  ou  auprès  de  prestataires  spécialisés  une  information  de  meilleure  qualité. 
+Pourquoi de meilleure qualité ? Parce qu’elle peut tenir compte de facteurs que le marché ne peut 
+qu’ignorer,  par  exemple  les  liens  d’intérêts  entre  l’investisseur  lui-même  et  la  région 
+géographique concernée ou encore les catégories de biens dont il est question dans le projet, enfin 
+la  qualité  des  hommes  qui  pilotent  compte  tenu  des  informations  recueillies.  Cette  information 
+peut aussi tenir compte d’objectifs à long terme (changement climatique, biodiversité, ressources) 
+que la myopie des marchés ignore. Donc taxer la volatilité, c’est encourager les acteurs à élaborer 
+une  meilleure  information  économique  en  tenant  compte  des  "gens  qui  sont  familiers  avec  les 
+circonstances" pour reprendre l'expression de Hayek. 
+
+Je  n'aborde  pas  ici  la  question  de  la  configuration  technique  d'une  telle  taxe  qui  est 
+relativement simple dans le cas d'une taxe "droit de timbre" et plus délicate s'il s'agit d'une taxe 
+pure  qui  touche  aussi  la  gestion  des  produits  dérivés  par  suivi  de  marché  (gestion  en  risque 
+neutre) en raison du fait que la volatilité se définit à partir des carrés des accroissements, mais ces 
+aspects techniques peuvent être surmontés.  
+
+Ainsi formulé le problème de la TTF devient un choix politique plus clair puisque la taxe 
+revient  à  dire  qu'on  considère  que  l'information  produite  par  les  marchés  financiers  n'est  pas  la 
+plus  pertinente :  devant  l'inefficience  des  marchés,  supposée  ou  constatée,  une  correction  est 
+appliquée  par  incitation  publique  pour  orienter  les  agents  à  rechercher  par  eux-mêmes  une 
+meilleure  information  économique.  On  est  bien  dans  l'esprit  de  l'intelligence  économique 
+distribuée  de  Hayek  et  tout  à  fait  dans  le  prolongement  des  préoccupations  initiales  de  Tobin 
+(1978). 
+
+B) Nécessité d'une information extra-financière 
+a)  Préconisation de Solow 
+Robert Solow conclut l'article de 1974 sur les ressources non renouvelables que nous avons déjà 
+mentionné par une prise de position très claire qui mérite d'être explicitement citée : 
+
+Les  considérations  précédentes  suggèrent  que  le  marché  des  ressources  non 
+renouvelables pourrait être une des situations économiques où une certaine forme de 
+planification organisée indicative pourrait jouer un rôle constructif. Il ne s'agit pas 
+de mettre en place la décision centralisée, qui a sans aucun doute ses imperfections et 
+ses externalités propres. En effet il serait suffisant d'avoir un gouvernement engagé 
+dans un programme permanent de recueil d'information et de dissémination couvrant 
+les tendances concernant la technologie, les réserves et la demande. On pourrait au 
+moins espérer que des normes professionnelles régissent un tel exercice. J'estime que 
+la logique intrinsèque de la planification indicative est qu'une certaine comparaison 
+et  coordination  entre  les  principaux  participants  au  marché,  y  compris  le 
+gouvernement,  puissent  éliminer  les  erreurs  majeures  et  résoudre  beaucoup 
+d'incertitudes.  Dans  le  cas  des  ressources  non  renouvelables,  il  pourrait  y  avoir 
+
+  
+ 
+ 
+l'objectif  supplémentaire  de  générer  un  ensemble  d'attentes  cohérentes  sur  l'avenir 
+lointain.44 
+
+Cette affirmation a d'autant plus de poids qu'elle émane d'un économiste qui ne peut être taxé de 
+rébellion contre la pensée néo-classique.  
+
+En  1974,  cette  idée  que  les  déductions  économiques  ne  peuvent  rendre  compte  que  d'une 
+partie du réel était déjà présente chez plusieurs économistes. En particulier Nicholas Georgescu-
+Roegen  en  fait  un  pilier  de  son  livre  majeur  The  Entropy  Law  and  the  Economic  Process 
+(Harvard  Univsity  Press  1971),  anticipant  dès  cette  date  les  préoccupations  environnementales 
+qui  seront  celles  de  beaucoup  d'économistes  plus  récents  (Amartya  Sen,  Lester  Jones,  Herman 
+Daly, etc.).  
+
+Ainsi Solow réclame une instance étatique ou indépendante capable de prendre en compte 
+les tendances et le long terme pour informer efficacement sur les évolutions de la technologie, les 
+réserves et la demande. Cette préconisation apparaît encore plus indispensable maintenant que les 
+menaces sur l'environnement se sont aggravées et que le fonctionnement des marchés financiers a 
+été théorisé et leurs faiblesses révélées plus clairement. 
+
+b) Pourquoi une information péri-économique ? 
+Finalement dans quelle situation se trouve aujourd'hui l'entrepreneur, agent économique typique 
+de la coordination par les prix chère à Hayek ? Pour les ressources épuisables qui interviennent 
+dans  sa  fonction  de  production  il  a  accès  à  un  prix  spot  agité,  et  nous  avons  développé  des 
+arguments qui montrent que cette agitation a toute chance d'augmenter avec la raréfaction de la 
+ressource jusqu'à une crise qui résoudra le conflit d'interprétation entre l'agitation observée et la 
+conviction  personnelle  que  la  ressource  est  sur  le  point  d'être  épuisée  et  qui  se  traduira  par 
+l'effondrement  du  cours  vers  zéro  et/ou  l'arrêt  de  la  cotation.  Le  propre  de  l'agitation  forte  du 
+cours  est  qu'elle  rend  impossible  l'extraction  de  la  tendance  sous-jacente  et  donc  impossible 
+également  sa  comparaison  avec  le  taux  de  référence  de  sorte  que  la  rareté  n'est  pas  clairement 
+visible sur le prix spot. 
+
+Cependant  l'entrepreneur  dispose  d'une  palette  de  produits  dérivés  qui  lui  permettent  de 
+s'assurer contre les risques de marché des ressources qui l'intéressent. Une question centrale est 
+de  voir  si  cela  peut  remplacer  pour  lui  le  signal-prix  manquant.  Rappelons  que  les  prix  des 
+produits dérivés n'indiquent pas la tendance du sous-jacent de façon objective. Car la théorie de 
+l'arbitrage nous dit que leurs prix ne dépendent que de la volatilité du cours.  
+
+Notre industriel n'a plus les informations micro-économiques qui lui seraient nécessaires. 
+Il  a  moins  de  connaissance,  sa  gouvernance  n'est  plus  une  anticipation  de  l'à  venir,  il  subit  les 
+variations du marché qui sont dues à d'autres acteurs et d'autres interprétations de la réalité. La 
+conséquence est qu'il lui est beaucoup plus difficile de lancer son entreprise selon une vision qu'il 
+construirait  lui-même  —  et  a  fortiori  de  penser  au  moyen  terme  et  de  prendre  l'initiative  de 
+changements pour anticiper la transition énergétique. 
+
+C'est  la  situation  inverse  de  l'empowerment,  l'entrepreneur  se  trouve  diminué  dans  ses 
+possibilités d'agir, obligé de subir. La cause profonde vient de ce que dans le théorème d'Arrow-
+Debreu-Radner  qui  justifie  la  coordination  de  l'économie  par  les  marchés  financiers,  les 
+catégories qui qualifient la seconde date sont choisies lors de la première date. Et dans le passage 
+à temps continu c'est aujourd'hui que les produits à terme sont dessinés. De sorte que l'éventuel 
+qui devrait être façonné par tout ce qui est impensé aujourd'hui et contribue à faire la situation de 
+demain,  est  schématisé  selon  une  grille  objective  qui  ne  peut  pas  prendre  en  compte  les 
+particularités idiosyncratiques connues des seules personnes au fait des circonstances locales. 
+
+Les produits dérivés sont une schématisation extrême de l'éventuel, qui ne concerne que le 
+prix de marché. Ce qui intéresse l'entrepreneur c'est tout le paysage et son évolution dans lequel il 
+agit  ainsi  que  ses  partenaires,  avec  ses  corrélations,  ses  lois  de  probabilités  particulières,  etc., 
+alors que les marchés ne lui fournissent qu'une sorte de flou global instantané sans tendances, et 
+de plus ces assurances que sont les produits à terme ont des prix eux-mêmes agités.  
+
+ 
+ 
+ 
+ 
+ 
+ 
+Pour  planifier  et  décider  à  terme  n'y  a  pas  d'autre  moyen  que  de  connaître  la  rareté  par 
+elle-même  sans  passer  par  le  prix.  Les  marchés  ne  sont  pas  un  instrument  de  pilotage,  il  faut 
+rendre opérationnelle la préconisation de Solow. 
+
+c) Indicateurs. Solutions-exemples pour la sortie d'une ressource. 
+Les  indicateurs  descriptifs  sur  l'état  de  la  planète  sont  un  complément  indispensable  à 
+l'information  économique  lacunaire  qui  scotomise  la  finitude  des  ressources  fossiles  et  du  flux 
+solaire.  C'est  sur  de  telles  descriptions  quantitatives  (en  poids,  volume,  surfaces,  etc.)  qu'est 
+fondée par exemple l'empreinte écologique de M. Wackernagel qu'utilise l'actualisation de 2004 
+du  rapport  Meadows45.  Ces  indicateurs  concernent  toutes  les  grandeurs  physiques  factuelles  et 
+leurs séries temporelles : sur les températures, les glaces, le niveau des mers, les tempêtes, l'état 
+des  rivières,  des  nappes  phréatiques;  mais  également  les  ressources  renouvelables  qui,  si  elles 
+sont  surexploitées,  deviennent  épuisables :  les  ressources  halieutiques,  les  forêts,  les  pâturages, 
+l'artificialisation des sols, la biodiversité, les surfaces accordées aux écosystèmes. 
+
+A  partir  de  ces  données  quantitatives  des  indicateurs  plus  fins  ont  été  élaborés  pour  se 
+relier plus directement à l'économie : indicateurs alternatifs au PIB, indicateurs de performance 
+environnementale des entreprises, etc., ainsi que des outils destinés à la décision collective pour 
+l'accès aux ressources et leur gestion46. A ce niveau les indicateurs font appel à la modélisation et 
+sont  donc  empreints  de  facteurs  interprétatifs  qui  les  façonnent  par  l'histoire  et  la  culture.  Ceci 
+justifie une pensée critique à leur égard qui peut prendre la forme d'une contre-modélisation47 ou 
+d'une  analyse  sociologique48.  Des  indicateurs  élaborés  pour  être  éclairants  dans  une  certaine 
+situation ne peuvent pas être neutres ni politiquement ni axiologiquement. Mais ceci ne saurait les 
+récuser  pour  autant.  La  meilleure  connaissance  que  nous  ayons  de  notre  contexte  est 
+nécessairement entachée d'une appartenance socio-historique qu'il serait vain d'oublier. 
+
+Ces  connaissances  sont  des  outils  qui  peuvent  permettre  de  dégager  des  tendances  de  moyen 
+terme  et  de  long  terme  utiles  aux  entreprises.  Elles  sont  complétées,  c'est  également  important 
+pour faire apparaître la crédibilité des changements envisageables, par des expériences en cours : 
+des entreprises ayant anticipé l'extinction de certaines ressources ou des agglomérations poussant 
+des dispositifs préparant la transition énergétique. Citons l'expérience de Totnes en Angleterre et 
+le  réseau  des  villes  en  transition49,  la  papeterie  Pocheco  sans  déchets  et  à  énergie  solaire50, 
+l'expérience de Mâlain en Bourgogne51, etc. Ces expériences se multiplient dans tous les pays et 
+l'information  à  ce  sujet  se  structure  utilement  sur  Internet  par  les  associations  et  les  structures 
+publiques.52  
+
+La forme opérationnelle la plus simple pour prendre en compte la préconisation de Solow serait 
+de parvenir à créer auprès de l'ONU un organisme similaire à l'IPCC mais concernant la totalité 
+des  ressources  environnementales  avec  la  mission  de  coordonner  les  études  les  plus  sérieuses 
+pour approfondir, perfectionner et mettre à jour en permanence un tableau bien documenté dans 
+l'esprit de ce qu'avait esquissé le rapport Meadows. 
+
+Epilogue 
+Finalement est-il possible que trois économistes mathématiciens de haute volée, Arrow, Debreu 
+et Radner, n'aient pas pris pleine conscience, dans les années 1950-60, de ce que la théorie d'un 
+marché  contingent  à  deux  dates  était  un  cadre  insuffisant  pour  penser  les  conséquences 
+économiques  des  rapports  des  marchés  financiers  et  du  long  terme  ?  C'est  ce  que  notre  étude 
+suggère. Il semble que ce qui dissimule l'importance de la volatilité est l'argument implicite du 
+double passage à la limite : On raisonne avec deux dates, et, en itérant, puis en faisant tendre le 
+pas  vers  zéro,  on  obtient  le  marché  en  temps  continu  qui  est  lui-même  déployé  jusqu'au  long 
+terme.  Dans  ce  partitionnement  et  ce  déploiement  la  volatilité  a  fait  son  apparition,  on  ne  la 
+voyait pas sur les deux dates initiales. D'un point de vue épistémologique ceci fait croire que les 
+agents disposent de tout ce dont ils ont besoin même pour appréhender le long terme, alors qu'ils 
+n'ont même pas d'indication sur la rareté des ressources épuisables. Le lecteur philosophe ne sera 
+pas surpris : la volatilité vient des doutes des agents et des interprétations qui les inquiètent, elle 
+
+ 
+ 
+s'alimente  en  dehors  de  ce  qui  est  économiquement  comptabilisé,  elle  existe  parce  que  les 
+mesures, les observables, les modèles économiques sont des schémas de pensée très pauvres que 
+tous les agents dépassent par leur intelligence du monde vécu. 
+
+La préconisation de Solow revient à s'adresser directement à cette intelligence. 
+
+Annexes 
+A-1. Qu'est-ce que la volatilité ? 
+Lorsque qu'on raisonne dans le cadre de la théorie stochastique de l'arbitrage on considère que le 
+cours  de  l'actif  est  une  semi-martingale.  Pour  fixer  les  idées  soit 𝑋!  une  semi-martingale 
+strictement positive, alors 𝑌! = !!!
+=   𝑀! + 𝐴! est une semi-martingale. Si nous supposons de 
+!!
+plus que 𝑑𝑀! = 𝜎!𝑑𝐵!  et   𝑑𝐴! =   𝑎!𝑑𝑡, la volatilité de 𝑋 est le processus  
+
+!
+!
+
+𝜎! =
+
+𝑑 < 𝑀, 𝑀 >!
+𝑑𝑡
+
+et le drift ou taux de croissance est 𝑎! = !!!
+𝑋 est solution de l'équation différentielle stochastique 𝑑𝑋! = 𝑋!𝜎!𝑑𝐵! + 𝑋!𝑎!𝑑𝑡. Si les processus 
+𝜎! et 𝑎 sont intégrables, 𝑋 s'écrit donc 𝑋! = 𝑋!exp [ 𝜎!
+
+!
+!
+Si  la  semi-martingale  présente  des  sauts,  la  définition  doit  être  modifiée  selon  les 
+
+𝑑𝑠 + 𝑎!
+
+𝑑𝐵! − !
+
+𝑑𝑠]. 
+
+!
+𝜎!
+
+ .  
+
+!
+!
+
+!
+!
+
+!"
+
+!
+
+techniques habituelles de la théorie des martingales.  
+
+Au vu d'une trajectoire, ceci définit la volatilité grâce aux théorèmes d'approximation du 
+!    où 𝜏 est le pas de la 
+type  < 𝑀, 𝑀 >! = lim!→!
+subdivision de [0, t], la limite étant en probabilité et sous de bonnes hypothèses au sens presque 
+sûr. La volatilité est la racine carrée de la pente de cette fonction croissante. 
+
+( 𝑌!!!! − 𝑌!!)! = lim!→!
+
+( 𝑋!!!! − 𝑋!!)!/𝑋!!
+
+L’ordre  de  grandeur  de  σ  dépend  de  la  nature  du  sous-jacent  et  des  circonstances :  dans  les 
+marchés d’action il varie grosso modo entre 20 et 70 %, dans les marchés de change entre 5 et 
+40  %,  dans  les  marchés  de  taux  d’intérêt  entre  disons  4  et  40  %,  il  peut  dépasser  100%  dans 
+certains cas généralement transitoires. 
+
+Comme  l'agitation  des  cours  résulte  de  la  diversité  des  points  de  vue  des  acteurs  sur  le 
+marché  qui  assignent  des  lois  de  probabilités  différentes  à  l'évolution  tendancielle,  la  volatilité 
+exprime une grandeur pluri-interprétative impossible à relier fonctionnellement à des indicateurs 
+quantifiés.  Elle  est  typiquement  "l'émotion  des  marchés"  que  nous  servent  les  rubriques 
+économiques  des  médias  (particulièrement  depuis  que  les  obligations  émises  par  les  Etats  sont 
+cotées sur le marché international des créances). 
+
+Le  plus  souvent  dans  la  littérature  volatilité  ne  veut  guère  dire  que  "agitation".  Dans  tout 
+l'ouvrage de Robert J. Shiller Market Volatility53 celle-ci est pensée comme la variance du cours 
+sur une période de temps. Ceci se raccorde à la formule ci-dessus par l'usage d'estimateurs tels 
+que le Chi2 ou de régressions.  
+
+Le  thème  principal  de  cet  ouvrage  de  Shiller  est  d'étudier  l'excès  de  volatilité  (excess 
+volatility). Dans quels cas peut-on dire que — je cite — "si l'agitation du prix était diminuée, en 
+un sens à définir, de sorte que le prix varie moins, alors il fournirait une meilleure prévision des 
+fondamentaux"54.  L'auteur  de  cet  ouvrage  a  été  désigné  lauréat  du  prix  de  la  Banque  de  Suède, 
+appelé prix Nobel d'économie.  Je suis désolé de prendre ici une position qui semble provocatrice 
+devant  la  respectabilité  de  ces  instances,  mais  je  dois  témoigner  que  le  style  de  Shiller  est 
+essentiellement  littéraire.  Le  terme  de  martingale  ou  de  semi-martingale  n'est  pas  même 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+mentionné,  au  point  que  je  me  demande  si  Robert  Shiller  avait  vraiment  pris  la  mesure  de 
+l'importance de la théorie de l'arbitrage, à cette époque. 
+
+Je défends exactement la thèse opposée, à savoir que les fondamentaux sont subjectifs au 
+regard de la logique des marchés financiers. J'ai développé l'opposition de ces deux rationalités 
+— financière et de politique économique — et ses conséquences dans mon livre Martingales et 
+marchés financiers 55 ainsi que dans quelques articles.  
+
+Cet auteur imagine un marché — du type des marchés financiers pourvus de ses produits à 
+terme — qui fournisse une "bonne prévision des fondamentaux". Mais le cours actualisé ne peut 
+avoir  de  tendance  objective,  sinon  un  profit  sans  risque  serait  possible,  qui  créerait 
+immédiatement  une  modification  du  cours  (en  outre  l'actualisation  présente  en  elle-même  un 
+certain aléa). Que la volatilité soit forte ou modérée, un cours qui rend de "bons services" sur les 
+fondamentaux  ne  peut  exister  sur  les  marchés  financiers.  La  défense  de  ce  mythe  se  prolonge 
+encore aujourd'hui, c'est un enjeu politique. 
+
+La  volatilité  est  pratiquement  engendrée  par  les  avis  différents.  L'incertitude  ne  conduit 
+pas  les  agents  à  repousser  à  plus  tard  leurs  transactions  (wait and see)  –  ce  qui  diminuerait  la 
+liquidité des marchés – mais pour les uns à vendre pour se défaire de ce risque, pour les autres à 
+profiter de cette offre, d'où l'agitation. A moins que l'incertitude soit d'un ordre de grandeur tel 
+que les acteurs préfèrent abandonner le marché et risquer ailleurs, et alors la cotation s'effondre. 
+
+A-2. L'apparent paradoxe de la spéculabilité 
+Comment se fait-il qu'il y ait de la spéculation sur les marchés alors que les tendances ne sont pas 
+visibles ? 
+
+C'est une question que le public ne comprend guère et qu'il est important de clarifier ici. 
+On  peut  schématiser  l'idée  populaire  de  la  façon  suivante :  Si  on  engage  sa  voiture  dans  un 
+chemin  plein  de  cahots,  et  qu'on  a  une  bonne  suspension,  on  sentira  tout  de  même  que  la  voie 
+monte ou qu'elle descend ! Les amortisseurs des véhicules utilisent la viscosité des liquides. Sur 
+le signal cela réalise une moyenne mobile ou convolution. Les signaux se rangent alors dans deux 
+catégories.  Ceux  pour  lesquels  cette  régularisation  permet  de  déceler  la  tendance,  c'est  le  cas 
+d'une route en mauvais état ou pavée, l'irrégularité, — le bruit — n'est pas d'un degré tel qu'on ne 
+puisse  pas  redessiner  la  ligne  qu'aurait  suivi  le  signal  non  perturbé,  c'est-à-dire  la  route  en  bon 
+état. En revanche pour les signaux très aléatoires comme ceux fournis par les marchés financiers 
+fluides, on n'est plus dans cette catégorie, la moyenne mobile ne permet aucune prévision précise.  
+Supposons  une  roulette  qui  ne  soit  pas  bien  équilibrée  et  que  les  numéros  de  19  à  36 
+tombent  un  peu  plus  souvent  que  ceux  de  1  à  18.  On  dira  que  le  cours  du  marché  monte  si  le 
+résultat est de 19 à 36 et qu'il descend si c'est de 1 à 18. Dans ces conditions si on observe les 
+résultats sur une dizaine ou une vingtaine de parties et si c'est notre seule information, nous ne 
+pouvons  pas  savoir  si  la  roulette  est  biaisée  vers  le  haut  ou  vers  le  bas.  Si  nous  observons  les 
+résultats depuis très longtemps, la loi des grands nombres et le théorème de limite centrale nous 
+donneront une répartition approximative de la dérive de cette roulette biaisée, dont la fourchette 
+se resserrera d'autant plus que nous irons loin vers le passé. Mais quelle est la signification d'aller 
+loin vers le passé pour prévoir une tendance instantanée, le biais de la roulette est-il constant, on 
+ne le sait pas. 
+
+La  pensée  néoclassique  est  si  attractive  que  beaucoup  d'économistes  voient  partout  des 
+"presqu'équilibres" comme notre voiture bien suspendue. Par exemple deux chercheurs écrivent à 
+propos  du  prix  du  pétrole  "Plus  le  prix  s'écarte  de  sa  valeur  d'équilibre  de  long  terme  plus  les 
+fondamentalistes  vont  s'activer.  Leurs  ordres  vont  ramener  les  prix  vers  des  valeurs  mieux 
+fondamentalement justifiées. Toutefois, si le prix est proche de sa valeur fondamentale, l'impact 
+des fondamentalistes sur le marché est relativement faible"56, en pensant à une telle stationnarité 
+— agitée mais avec une force de rappel — ils omettent que le comportement peut fort bien être 
+du type "martingale positive tendant vers zéro", sans aucune force de rappel, avec des oscillations 
+de plus en plus vives jusqu'à ce qu'on s'approche tellement de zéro qu'on ne se réveille plus. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Le  second  niveau  de  la  question  est  de  savoir  si  les  produits  dérivés  ne  renseignent  pas  sur  les 
+évolutions  du  marché.  Puisqu'ils  sont  cotés  sur  les  marchés  dérivés,  leur  cote  indique  une 
+évolution future probable. Par exemple si on regarde le prix d'un call à la monnaie et s'il est au 
+dessus de sa valeur théorique c'est que le marché estime que le sous-jacent va monter. 
+
+Il y a deux volets de réponse à cette remarque. D'abord intuitivement : le marché ne dit 
+rien  de  clair.  Il  y  a  beaucoup  d'agitation,  l'expression  "à  la  monnaie"  signifie  que  le  prix 
+d'exercice du call est la valeur actuelle du spot, mais le spot bouge... et la valeur de marché du 
+call lui-même est agitée. Ensuite plus théoriquement : ce que dit la théorie de l'arbitrage, qui n'est 
+pas  autre  chose  que  l'application  cohérente  de  raisonnements  logiques  à  des  situations  de 
+spéculation, c'est qu'il n'est pas possible de réaliser un profit certain. Elle n'interdit pas des profits 
+incertains, mais elle donne une règle importante à ce sujet : si nous nous plaçons sous une loi de 
+probabilité  où  le  cours  a  une  certaine  tendance  (notre  conviction)  et  si  nous  utilisons  cette  loi 
+pour  gérer  des  produits  à  terme  dérivés,  nous  prenons  un  risque  supplémentaire.  En  prenant  de 
+tels risques nous pouvons faire des profits, mais nous pouvons perdre aussi. 
+
+Les produits dérivés permettent de prendre une position vis à vis du marché. C'est à dire 
+constituer  un  portefeuille  qui  va  être  bénéficiaire  si  telle  évolution  se  produit.  Ceci  peut  même 
+être  fait  de  façon  très  précise  et  circonstanciée.  Avec  des  combinaisons  d'options  vanille  à  des 
+échéances différentes on peut prendre une position que le cours sera plus élevé dans trois mois 
+mais plus bas dans six mois et de nouveau plus élevé dans 12 mois. Le marché ne répondra que 
+plus tard. Et sa réponse ne sera qu'un des tirages d'une loi de probabilité. Acheter le sous-jacent 
+pour le revendre ou acheter des produits dérivés, c'est prendre une position c'est-à-dire spéculer. 
+Cela veut dire prendre des risques. 
+
+Un article de Grossman et Stiglitz de 1990 était entièrement consacré à cette question : les 
+marchés  compétitifs  peuvent-ils  empêcher  les  spéculations  profitables ? 57 Certainement  pas, 
+répondent-ils, car la spéculation qui les maintient en équilibre est coûteuse (elle prend du temps 
+et donc des salaires) et elle n'aurait pas lieu si elle n'était pas rémunérée : ce sont les spéculateurs 
+qui  modifient  le  marché  en  rendant  la  spéculation  impossible  donc  les  marchés  autorisent 
+forcément une certaine spéculation. 
+
+La  réalité  est  qu'il  existe  des  équipes  dans  le  monde  entier  qui  consacrent  leur  temps  à 
+scruter tous les défauts du marché dont on pourrait tirer profit. Avec tous les moyens de l'analyse 
+statistique puissante que permet l'informatique contemporaine, ils traquent les comportements — 
+souvent inconscients — des traders pour en profiter. Ils sont très nombreux à travailler à cela c'est 
+ce qui fait que l'organisme qui gère le marché peut compter sur toute une armée internationale de 
+"vérificateurs" dont les spéculations contribuent à donner au spot l'allure qu'il doit avoir selon la 
+théorie de l'arbitrage. 
+
+L'existence même de ces équipes purement spéculatives avec de gros outils statistiques et 
+beaucoup  d'intelligence  humaine  et  artificielle,  fait  que  pour  tout  un  chacun  le  marché  apparaît 
+sans tendance claire ni spéculation possible.  
+
+A-3. Qu'est-ce que spéculer sur les marchés financiers organisés ? 
+Les  deux  principales  caractéristiques  de  ces  marchés  sont  qu'ils  permettent  des  achats  et  des 
+ventes rapides d'un actif à tout instant et qu'ils sont dotés de produits à terme négociables de la 
+même façon que le cours.  
+Spéculer a deux significations : 
+
+a) D'abord "prendre une position". C'est-à-dire constituer par des achats et des ventes un 
+portefeuille  dynamique  avec  des  produits  à  terme  et  du  sous-jacent  en  espérant  finalement  un 
+profit de ces transactions. Un moyen simple aujourd'hui est de se servir de produits dérivés. Par 
+exemple  acquérir  un  call  permet  un  profit  si  le  cours  final  est  supérieur  à  la  valeur  d'exercice, 
+c'est une position spéculative à la hausse. 
+
+b) Mais, sans produits dérivés, on peut aussi spéculer en achetant et en vendant certaines 
+quantités de l'actif à des instants variés. Il n'est pas nécessaire de choisir ces instants a priori, ils 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+peuvent dépendre des évolutions que le cours vient de révéler. Alors, si on pense le cours comme 
+un  processus  stochastique,  spéculer  en  ce  sens  c'est  réaliser  une  intégrale  stochastique  d'une 
+quantité choisie (la stratégie) adaptée au processus, par rapport au cours. A temps discret 
+
+et en temps continu 
+
+𝑓(𝑡!
+
+)(𝑋!!!! − 𝑋!!) 
+
+!
+
+!
+
+!
+
+𝑓 𝑠 𝑑𝑋!
+
+où Xt  est la valeur du cours à l'instant t, et f(s) un processus aléatoire adapté à la filtration de Xt. 
+
+On  dit  que  le  marché  de  cet  actif  est  stochastiquement  complet  si  la  méthode  a)  peut 
+toujours  se  réaliser  par  la  méthode  b).  C'est  le  cas  si  le  cours  suit  un  mouvement  brownien 
+géométrique, ou, sous des hypothèses assez larges, si on peut le représenter par la solution d'une 
+équation différentielle stochastique markovienne par rapport à un mouvement brownien. D'autres 
+cas  sont  connus.  En  revanche  cette  propriété  n'a  pas  lieu  si  le  cours  présente  des  sauts  (cf. 
+Bouleau Lamberton 1989). 
+
+A-4. Temps continu vs temps discret. 
+Pour remplir la fonction de coordination par les prix, les marchés d'actions, de matières premières 
+et de devises pourraient fort bien ne fournir que des cotations hebdomadaires. Nulle part la réalité 
+des  échanges  et  leur  contexte  ne  change  si  rapidement  qu'il  faille  disposer  d'une  cotation  en 
+continu.  
+
+A  temps  discret  on  dispose  toujours  d'une  tendance  donnée  par  les  deux  dernières 
+
+cotations. Est-ce à dire que cela supprimerait les difficultés que nous avons évoquées ?  
+
+Cette  tendance  observée  présentera  elle-même  une  agitation  par  le  même  argument  que 
+les  marchés  empêchent 
+l'arbitrage  s'exprime 
+mathématiquement plus facilement en temps continu. Grâce au calcul intégro-différentiel de Itô, 
+on dispose de formules explicites en temps continu qui sont plus combinatoires en temps discret. 
+Mais tous les phénomènes se retrouvent d'un côté comme de l'autre. 
+
+les  profits  sans  risque.  La 
+
+théorie  de 
+
+En revanche, en ce qui concerne l'émergence et le rôle historique des idées, il est certain 
+que la rencontre des mathématiques stochastiques avec la finance par le papier charnière de Black 
+et  Scholes  de  1973,  puis  la  redécouverte  de  la  thèse  et  des  ouvrages  de  Louis  Bachelier,  et  le 
+développement de la théorie moderne de l'arbitrage avec les travaux de Brennan et Schwartz, de 
+Harrison  et  Pliska,  de  Merton,  etc.,  s'est  faite  grâce  au  temps  continu,  et  que  c'est  l'analyse 
+stochastique  à  temps  continu  qui  fit  émerger  les  concepts  nouveaux  à  la  base  des  pratiques 
+financières des salles des marchés aujourd'hui58. Au point qu'on est en droit de se demander si les 
+raisonnements avec deux instants comme ceux des théorèmes d'existence d'équilibre, des années 
+1950-60, étaient capables de faire apparaître les phénomènes que nous observons aujourd'hui (cf. 
+section I-D-b  ci-dessus). 
+
+En principe toute la phénoménologie à temps continu a sa traduction à temps discret et la 
+théorie  de  l'arbitrage  peut  être  faite  dans  les  deux  présentations.  Mais  on  doit  noter  que 
+historiquement  la  couverture  par  suivi  de  marché  a  été  découverte  d'abord  en  temps  continu  et 
+que,  par  exemple,  le  papier  de  Cox-Ross-Rubinstein  est  postérieur  de  six  ans  à  celui  de  Black-
+Scholes.  De  sorte  que  tout  porte  à  croire  que  les  propriétés  telles  que  probabilité  risque  neutre, 
+prépondérance  de  la  volatilité  sur  les  prix  des  options,  etc.,  n'avaient  pas  été  imaginées  ni 
+envisagées dans les années 1950-60 : La thèse que j'ai présentée plus haut est que l'organisation 
+mondiale  des  marchés  financiers  pourvus  de  leurs  dérivés  dans  les  années  1970-80,  n'avait  pas 
+pris la mesure du bouleversement que constituent le rôle majeur de la volatilité. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Notes 
+
+1 Solow R. (1974). 
+2 Sénat, Rapport d'information fait au nom de la délégation sénatoriale à la prospective sur "Une crise en quête de fin, 
+Quand l’Histoire bégaie" P.-Y. Collombat, 9 février 2017. 
+3 C'est le thème principal de la préface des Eléments d'économie politique pure et L. Walras l'approfondit à la fin de 
+sa vie dans l'article "Economique et Mécanique" (Walras 1909). Il souligne l'identité formelle des équations de la 
+statique en mécanique et celles de l'équilibre économique en prenant l'exemple des moments des forces agissant sur 
+la balance romaine et la proportionnalité des raretés et des prix. De même dans The Theory of Political Economy 
+(1871) Jevons écrit "la théorie que nous exposons peut être décrite comme la mécanique de l'utilité et de l'intérêt 
+personnel". 
+4 Contemplation of the world's disappearing supplies of minerals, forests, and other exhaustible assets has led to 
+demands for regulation of their exploitation. The feeling that these products are now too cheap for the good of future 
+generations, that they are being selfishly exploited at too rapid a rate, and that in consequence of their excessive 
+cheapness they are being produced and consumed wastefully has given rise to the conservation movement. Il est à 
+noter que jusqu'alors, notamment chez L. C. Gray (Gray 1913), le fait que les ressources sont "pillées" au regard de 
+l'histoire n'est pas perçu comme un problème grâce à une foi solide dans le progrès. 
+5 Hayek F., "The Use of Knowledge in Society" (Hayek 1945). 
+6 Hotelling H. "The economics of exhaustible resources" (Hotelling 1931).	
+7 qui se distingue des approches précédentes purement réflexives telles que celle de L. C. Gray (Gray 1914). 
+8 Voir (Bouleau 2003). 
+9 Cf. E. Pichler et al. (2012); sur les ressources renouvelables : cf. R. S. Pindyck (1984). 
+10 "to assess whether real-world markets give appropriate signals of resource scarcity and whether the necessary 
+conditions for efficient-resource allocation are met in practice." M. E. Slade "Do Markets Underprice Natural-
+Resource Commodities?" background paper for the World Development Report WPS 962 Aug. 1992. 
+11 "since then prices have been increasingly volatile; large run ups have been followed by equally large declines, but 
+there is little evidence of a sustained trend". 
+12 S. D. Deshmukh et S. R. Pliska (1985). Ces auteurs développent un modèle dans lequel le prix actualisé est une 
+martingale si et seulement si le temps nécessaire à la découverte de plus de gisement est indépendant du stock de 
+réserves actuel. Mais progressivement, comme nous le verrons, les auteurs sentent la nécessité du langage des 
+processus d'Ito et des semi-martingales pour rendre compte du rôle des marchés.  
+13 Smith V. K. "Natural Resource Scarcity: A Statistical Analysis" Review of Economics and Statistics, 61: 423-
+427(1979) 
+14 (Slade 1991). Voir également (Slade Thille 1997) où le prix est supposé un processus d'Ito. 
+15 Signalons l'étude de Louis H. Ederington (Ederington et al. 2011) pour sa vaste bibliographie et son analyse  
+géopolitique dans le cas du pétrole. Cette synthèse montre que la modélisation stochastique récente est fort diverse, 
+(table 1 page 16) avec des processus d'Ito et des hypothèses sur la volatilité ou même des processus de sauts 
+engendrés par des mesures de Poisson. 
+16 Voir Bollen, J., Mao, H. & Zeng, X. J. , "Twitter mood predicts the stock market", J. of Comp. Sci. 2, 1-8 (2011); 
+Preis, T., Moat, H. S. & Stanley, H. E., "Quantifying Trading Behavior in Financial Markets Using Google Trends", 
+Sci.  Rep. 3, 1684 (2013). A côté d'un trading algorithmique grégaire dont on a beaucoup parlé qui ne représente 
+qu'une minorité, se développe des méthodes conditionnelles à certaines situations interprétées en fonction de 
+statistiques de plus en plus documentées. Quant au trading haute fréquence (HFT), plusieurs études empiriques 
+suggèrent qu'il réduit le bid-ask, améliore la fluidité, et serait à même de détecter des anomalies ou des informations 
+pertinentes qui échapperaient aux intervenants en raison des coûts de suivi de marché. Globalement ces méthodes 
+informatiques réduisent les asymétries d'information entre agents et améliorent la conformité des marchés à la théorie 
+stochastique de l'arbitrage. Voir l'ouvrage (Wang Zheng 2014). 
+17 Sur la théorie de l'arbitrage citons J.M. Harrison and S. R. Pliska (1981); R.C. Dalang, A. Morton, and W. 
+Willinger (1990); F. Delbaen, W. Schachermayer (2006). Notons que la fumée engendrée par les marchés financiers 
+est de si bonne qualité aléatoire que de nombreux brevets ont été déposés pour utiliser ce hasard à d'autres fins : 
+US20140274323; WO2014127312A1; US20080275824; US20050245308; US20100274702; US20140309014; 
+US20060105840, etc. il ne présente pas de cycles. 
+18 Cf. (Fattouh 2007); (Lee et al. 2006). 
+19 Ce cas est ignoré par la majeure part de la littérature. Les auteurs raisonnent  comme si le cas de faible volatilité 
+était le cas général de sorte qu'on puisse retrouver la tendance en appliquant au prix un filtre de Kalman (Pindyck R. 
+S. "The long Run Evolution of Energy Prices" CEEPR Jan. 1999. Citons un article où la convergence de martingales 
+positives vers zéro est étudiée, celui de S. A. Clark, "Bubbles and Capital Formation in a Stochastic Production 
+Model with Infinite Time Horizon" Emory Univ. 21 Aug. 2008. 
+20 Un placement dans un fonds qui rapporte 4,5% où les dividendes sont réinvestis en permanence, réalise une 
+croissance exponentielle. Si, en plus, de l'incertitude vient ajouter de la volatilité et que cette volatilité dépasse 0,3 les 
+
+																																																								
+ 
+!𝜎d𝐵! + 𝑋!𝑎d𝑡, avec α >1. 
+
+oscillations sont telles qu'à la longue le capital s'effrite jusqu'à la ruine. Par exemple, imaginons un économiste 
+amateur qui satisfait une pulsion pour le jeu en fréquentant une fois par an le casino, mais qui, par prudence, a placé 
+sa fortune à 10% annuellement et qui, par prudence également, ne joue chaque année que la moitié de sa fortune sur 
+"pair". Dans ces conditions l'effet cumulé de son placement et de son jeu, pourtant équitable, fait tendre sa fortune 
+vers zéro. Et ce résultat serait encore vrai si son argent était placé à 15% annuellement, mais il en irait autrement s'il 
+était placé à 16% auquel cas il s'enrichirait de plus en plus malgré les oscillations. 
+21 La forte volatilité induit des comportements nouveaux de stockage ou au contraire de production plus immédiate à 
+cause de l’incertitude sur la valeur future des réserves non encore exploitées, cette contradiction a tendance à nourrir 
+la volatilité Cf. R. S. Pindyck "Volatility in Natural Gas and Oil Markets", CEEPR, June 2003 
+22 Le  cas  des  semi-martingales  positives  qui  tendent  vers  zéro  n'est  pas  la  seule  phénoménologie  de  crise  qui  peut 
+résulter de la croissance de la volatilité, il peut se faire aussi que les amplitudes de variation du prix augmentent au 
+delà de toute limite en un temps fini, empêchant l'organisme organisateur du marché de continuer la cotation, comme 
+la dynamique modélisée par l'équation  d𝑋! = 𝑋!
+23 (Gerlach et al. 2006). 
+24 Cf. (FMI 2014). 
+25  H. Kristoffersen, directeur de la stratégie, "Les enjeux de la volatilité du pétrole et du gaz", 28 août 2013. 
+26 Cf. (Hommes et al. 2007); (Gürkaynak 2008); (Farhi Tirole 2009); (Kamihigashi 2007). 
+27 (Schönbucher 1998). 
+28 (Krugman Wells 2016). 
+29 L. Walras  «Œuvres diverses», in: Auguste et Léon Walras œuvres économiques complètes, Vol XIII, édité par 
+Dockès P., Mouchot C. et Potier J.-P., Economica 2000 p567. 
+30 Cf (Ramey Ramey 1991). 
+31 S. Spratt, "Food price volatility and financial speculation" Inst. of Development Studies, Univ of Sussex, Jan 2013. 
+32 Cf. (Chiroleu-Assouline 2011). 
+33 (Black Scholes 1973).  
+34 Citons parmi les plus récents : (Lamberton Lapeyre 2007), (Ross 2011), (Hull 2012), (Davis Duffie Fleming 
+Shreve 2013), (Bouleau 2003), (Di Nunno Oksendal 2011), (Cont Tankov 2004), (Karatzas Shreve 2010), (Delbaen 
+Schachermayer 2006), (Bjork 2009), (Roman 2012), (Campolieti Makarov 2014).	
+35 (Guesnerie 1996). 
+36 Il est courant en théorie des jeux que la stratégie gagnante est celle qui suit un principe stratégique pendant toute la 
+partie et change de méthode juste avant la fin. C'est le cas par exemple dans le jeu de Marienbad. 
+37 Séminaire XXII, 18-3-1975. 
+38 Sigmund Freud Œuvres complètes XIX PUF 1995, p 336. 
+39 De même les banques de détail utilisent maintenant les big data pour connaître la valeur du patrimoine et des 
+revenus d'un emprunteur afin de lui proposer un taux qui "correspondent aux risques". 
+40 La signification des notes des dettes souveraines, leurs conséquences sur la politique des Etats est évidemment 
+beaucoup plus complexe que la vision de base de l'épargnant. Au demeurant nous pouvons noter que l'échelle 
+discrète et à grandes mailles des notations données par les agences contribuent à maintenir une vision homothétique 
+parce que les notes ne sont modifiées que pour des événements graves (comme le Brexit pour le Royaume Uni) et 
+reste constantes le plus souvent.	
+41 Encore aujourd'hui le même argument dont s'était servi W. Nordhaus pour critiquer les conclusions du Club de 
+Rome — à savoir qu'elles ne tenaient pas assez compte du progrès technique — est toujours employé parce que la 
+situation est similaire : les incertitudes sur l'évolution physique due au changement climatique sont à mettre en face 
+des incertitudes sur l'innovation technique, donc on ne peut conclure. 
+42 J. Schumpeter a fait remarquer que les règles prudentielles peuvent aussi être la justification de prises de risques 
+"les automobiles parce qu’elles sont munies de freins roulent plus vite que si elles en étaient dépourvues." 
+Capitalisme, socialisme et démocratie, Payot 1951. 
+43 intervention au colloque Assessing and managing climate-related financial risks : the frontier of knowledge  
+Université Paris Dauphine 16 déc. 2016. 
+44 "The  same  considerations  suggest  that  the  market  for  exhaustible  resources  might  be  one  of  the  places  in  the 
+economy  where  some  sort  of  organized  indicative  planning  could  play  a  constructive  role.  This  is  not  an 
+endorsement  of  centralized  decision  making,  which  is  likely  to  have  imperfections  and  externalities  of  its  own. 
+Indeed it might be enough to have the government engaged in a continuous program of information-gathering and 
+dissemination  covering  trends  in  technology,  reserves  and  demand.  One  could  at  least  hope  to  have  professional 
+standards govern such an exercise. I take it that the underlying logic of indicative planning is that some comparison 
+and coordination of the main participants in the market, including the government, could eliminate major errors and 
+resolve much uncertainty. In the case of exhaustible resources, it could have the additional purpose of generating a 
+set of consistent expectations about the distant future." 
+45 (Meadows et al. 2004).	
+
+																																																																																																																																																																																				
+46 Sur les indicateurs nous renvoyons aux articles de D. Couvet, de N. Gondran et de G. Thiry, au chapitre 12 de 
+L'âge de la transition, Institut Veblen et Les petits matins 2016. 
+47 Cf. (Bouleau 2014). 
+48 Cf. Gabrielle Bouleau (2012). Voir également tous les articles du numéro thématique de VertigO "La trajectoire 
+politique des indicateurs écologiques" Volume 16 n°2 sept. 2016. 
+49 Cf.  http://www.totnesinformation.co.uk/  et https://fr.wikipedia.org/wiki/Ville_en_transition 
+50 Cf.  http://www.terraeco.net/Comment-une-usine-d-enveloppes-est,58737.html	
+51 Cf.  http://yonnelautre.fr/spip.php?article8807 
+52 Mentionnons le site https://www.colibris-lemouvement.org/ 
+53 MIT Press 1989. 
+54 "if the price movements were rescaled down in some sense to be defined, so as to be less variable, then price 
+would do a better job of forecasting fundamentals". 
+55 Odile Jacob 1998, prix Turgot du meilleur livre d'économie financière 1998, prix Fnac 2000 du livre d'entreprise, 
+nouvelle édition augmentée Mathématiques et risques financiers, O. Jacob 2009. On pourra également se reporter à 
+l'article "Finance et opinion" Esprit nov. 1998. 
+56 (Reitz Slopek 2009). 
+57 (Grossman Stiglitz 1980). 
+58 Cette rupture historique est très apparente sur la courbe d'usage du terme "volatility" à partir de 1975 sur le logiciel 
+Ngram Viewer de Google. 
+
+																																																																																																																																																																																				
+ 
+ 
+ 
+Références 
+
+Ayel G. et al. Les stocks alimentaires et la régulation de la volatilité des marchés en Afrique,  AFD 2013. 
+Arbulu P., "La bourse de Paris au XIXe siècle : l’exemple d’un marché émergent devenu efficient" Revue d'économie 
+
+financière 49, 213-249, 1998. 
+
+Arrow K., "Le rôle des valeurs boursières pour la répartition la meilleure des risques" Econométrie Coll. Int. CNRS 
+
+1952, 40, 41-47, discussion 47-48, CNRS 1953. 
+
+Arrow K., Debreu G. "Existence of an Equilibrium for a Competitive Economy" Econometrica 22, n°3, 1954. 
+Baumeister, C., Peersman, G., 2009, Sources of the Crude Oil Market Volatility Puzzle, Working Paper, Bank of 
+
+Canada and Ghent University. 
+
+Beacco J.-M., Hubaud B., Titrisation, maillon clé du financement de l'économie Eyrolles, RB éd. 2013. 
+Bjork T.,  Arbitrage Theory in Continuous Time Oxford Univ. Press 2009. 
+Black F., Scholes M., 1973. ‘The pricing of options and corporate liabilities.’ Journal of Political Economy 81:637-
+
+654. 
+
+Böheim M., Firgo M., Pichler E., "The Role of Financial Speculation on Markets for Industrial Metals", Working 
+
+Papers WU-Wien sept. 2012. 
+
+Bouleau G., "Ce que nous apprend l’histoire des indicateurs environnementaux", Revue Forestière Française n°5, 
+
+645-652, (2012). 
+
+Bouleau G. et Deuffic Ph., "Qu’y a-t-il de politique dans les indicateurs écologiques?" VertigO Vol. 16 n°2 sept. 
+
+2016. 
+
+Bouleau N., Financial Markets and Martingales: Observations on Science and Speculation, Springer 2003. 
+Bouleau N., Error Calculus for Finance and Physics, the Language of Dirichlet Forms De Gruyter  2003. 
+Bouleau N., Mathématiques et risques financiers, O. Jacob, 2009. 
+Bouleau N., "Une pensée devenue Monde" Esprit  nov. 2009,  p130-146. 
+Bouleau N., "Un, deux, trois, soleil" Esprit déc. 2009, p85-104. 
+Bouleau N., "On Excessive Mathematization, Symptoms, Diagnosis and Philosophical bases for Real World 
+
+Knowledge " Real World Economics. n 57, 6 September 2011, 90-105. 
+
+Bouleau N., "Limits to Growth and Stochastics" Real World Economics. n°60, 20 June 2012, 92-106. 
+Bouleau N., La modélisation critique, Quae 2014. 
+Bouleau N., Penser l'éventuel, faire entrer les craintes dans le travail scientifique, Quae 2017. 
+Bouleau N., Lamberton D. "Residual risks and hedging strategies in Markovian markets", Stochastic processes and 
+
+their applications 33,131-150, (1989). 
+
+Campolieti G., Makarov R.,  Financial Mathematics: A Comprehensive Treatment Chapman and Hall 2014. 
+Capelle-Blancard G., Couppey-Soubeyran J., "L'intégration des marchés boursiers" Questions internationales n°34 
+
+La Doc. Française 2008. 
+
+Chiroleu-Assouline M., "La fiscalité environnementale, instrument économique par excellence", Revue Française de 
+
+finances publiques, 114, p17-25 (2011). 
+
+Clark S. A., "Bubbles and Capital Formation in a Stochastic Production Model with Infinite Time Horizon" Emory 
+
+Univ. 21 Aug. 2008. 
+
+Colliard J.-E., Hoffmann P., "Taxes sur les transactions financières : Théorie, expériences et implémentation" 
+
+Opinions et Débats n°9, ILB fév. 2015. 
+
+Cont R., Tankov P., Financial Modelling with Jump Processes, Chapman and Hall 2004. 
+Cox J. C., Ross S. A., Rubinstein M., "Option pricing : a Simplified Approach" J. of Financial Economics, 7 (1979), 
+
+229-263. 
+
+Dalang R.C., A. Morton, and W. Willinger, Equivalent martingale measures and no-arbitrage in stochastic securities 
+
+market model, Stochastics and Stochastic Reports 29, 185-201, (1990). 
+
+Dana R.-A., Jeanblanc M., Marchés Financiers en Temps Continu, valorisation et équilibre, Economica 1994. 
+Dana R.-A., Jeanblanc M., Kennedy A.,  Financial Markets in Continuous Time, Springer 2002. 
+Dasgupta P.S.  and G.M. Heal, Economic Theory and Exhaustible Resources, Cambridge: University Press, 1979 
+Davis M., Duffie D., Fleming W. H., Shreve St., Mathematical Finance Springer 2013. 
+Debreu G. "A social equilibrium  existence theorem" Proc. Nat. Acad. of Sciences, 38, 886-893, 1952. 
+Debreu G. "Market equilibrium" Proc. Nat. Acad. of Sciences, 42, 876-878, 1956. 
+Debreu G., Théorie de la valeur, Dunod 1959. 
+Delbaen F., Schachermayer W. The mathematics of arbitrage Springer 2006. 
+Deshmukh S., Pliska St., "A martingale Characterization of the Price of a Nonrenewable Resource with Decision 
+
+Involving Uncertainty" J. of Economy Theory 35, 322-342, (1985)  
+
+Di Nunno G., Oksendal B.,  Advanced Mathematical Methods for Finance, Springer 2011. 
+Diamond J. Effondrement, comment les sociétés décident de leur disparition ou de leur survie, Gallimard 2006. 
+Dockès P., Mouchot C. et Potier J.-P., L. Walras  «Œuvres diverses», in: Auguste et Léon Walras œuvres 
+
+économiques complètes, Vol XIII, édité par Economica p567, 2000. 
+
+Dupuy J.-P., Pour un catastrophisme éclairé, quand l’impossible est certain, Seuil 2002. 
+
+ 
+Dupuy J.-P. , "Le temps, le paradoxe", in Déterminismes et complexités : du physique à l'éthique, La Découverte, 
+
+2008, p. 321-334. 
+
+Dupuy J.-P., "Le Futur bifurque-t-il ? Vers une nouvelle science du futur. A la recherche d'une éthique du futur", in 
+
+Bifurcations, La Découverte, 2009, p. 373-386. 
+
+Dupuy J.-P. "Faire comme si le pire était inévitable" in Où va le monde, Mille et une Nuits 2012. 
+Ederington L. H., Fernano Ch. S.,  Lee Th. L., Linn S. C., May D., " Factors Influencing Oil Prices: A Survey of the 
+Current State of Knowledge in the Context of the 2007-08 Oil Price Volatility" Working Paper Series, U.S. 
+Energy Information Administration, 2011. 
+
+Ekeland I., Le syndrome de la grenouille, l'économie et le climat, O. Jacob 2015. 
+El Karoui N., Loisel St., Prigent J.-L., Vedani J., "Market inconsistencies of the market-consistent European life 
+
+insurance economic valuations: pitfalls and practical solutions" hal-01242023, 2015. 
+
+Elliott R. J., Kopp P. E. Mathematics of Financial Markets Springer 1999. 
+Farhi E., Tirole J., "Bubbly Liquidity" 20 Oct. 2009. 
+Fattouh B., "The Drivers of Oil Prices: The Usefulness and Limitations of Non- Structural Model, the Demand–
+
+Supply Framework and Informal Approaches" Univ. of London mars 2007. 
+
+FMI Global Financial Stability Reports Oct. 2012, Oct. 2013, April 2014. 
+Gerlach S., S. Ramaswamy, M. Scatigna, "150 years of financial market volatility" BIS Quarterly Review, Sept. 2006. 
+Giraud G., Illusion financière, Les éditions de l’atelier 2012. 
+Giraud G., Renouard C., Le facteur 12 Carnets Nord 2012. 
+Gray L. C., "The Economic Possibilities of Conservation" The Quarterly J. of Economics, Vol. 27, No. 3 (1913). 
+Gray L. C.  "Rent Under the Assumption of Exhaustibility" The Quarterly J. of Economics, Vol. 28, No. 3 (1914). 
+Grossman S. J.,  Stiglitz J. E., "On the Impossibility of Informationally Efficient Markets" The American Economic 
+
+Review Vol. 70, No. 3 (Jun., 1980), pp. 393-408. 
+
+Guesnerie R., L'économie de marché Le Pommier poche 2006; Pour une politique climatique globale, blocages et 
+
+ouverture, Editions rue d'Ulm 2010. 
+
+Guesnerie R., Stern N., Deux économistes face aux enjeux climatiques, Le Pommier 2013. 
+Guerrien B., Dictionnaire d'analyse économique, La Découverte 1996. 
+Gürkaynak R. S.  "Economic Tests of Asset Prices Bubbles: Taking Stock" J. of Economic Surveys Vol. 22, No. 1, 
+
+pp. 166–186, (2008). 
+
+Harrison J.M. and S. R. Pliska, Martingales and stochastic integrals in the theory of continuous trading, Stochastic 
+
+Processes and their Applications 11, 215-260, (1981). 
+
+Hayek F., "The Use of Knowledge in Society" The Amer. Economic Review, XXXV, n4, 519-530, 1945. 
+Hayek F., "La Falsification de la science" Conférence à la mémoire d'Alfred Nobel, le 11 Décembre1974. 
+Hirshleifer J. "Speculation and Equilibrium: Information, Risk, and Markets." Quarterly Journal of Economics 89 
+
+(Nov. 1975), 519-42. 
+
+Hirshleifer J. "Liquidity, Uncertainty and the Accumulation of Information". In C. F. Carter and L. J. Ford, (eds.), 
+
+Uncertainty and Expectations in Economics. Oxford: Blackweil, 1972. 
+
+Hommes C., Sonnemansy J., Tuinstraz J., van de Veldenx H., "Expectations and Bubbles in Asset Pricing 
+
+Experiments" Univ. Amsterdam Feb. 2007. 
+
+Horan, S. M., Peterson, J. H., Mahar, J., 2004. Implied Volatility of Oil Futures Options Surrounding OPEC 
+
+Meetings, Energy Journal 25, 103-125. 
+
+Hotelling H., "The Economics of Exhaustible resources", J. of Political Economy Vol 39, n2, 137-175, 1931. 
+Hull J.  Options, Futures and Other Derivatives Pearson 2012. 
+Jevons St., The Theory of Political Economy (1871). 
+Jouini E., "Perception, risque et décision de long terme" Opinions et Débats n°10, ILB 2015. 
+Kamihigashi T., "The Spirit of Capitalism, Stock Market Bubbles, and Output Fluctuations" 5 Oct. 2007. 
+Karatzas I., Shreve E. Methods of Mathematical Finance, Springer 2010. 
+Kemp M. C. and N. V. Long (eds.), Exhaustible Resources, Optimality, and Trade, Amsterdam, New York, Oxford: 
+
+North Holland Publishing Company, 1980. 
+
+Kronenberg T., "Shoud we worry about the failure of the Hotelling rule ?" doi: 10.1111/j.1467-6419.2008.00549.x 
+
+(2008). 
+
+Krugman P., R. Wells, Microéconomie De Boeck 2016. 
+Lamberton D., Lapeyre B., Introduction to Stochastic Calculus Applied to Finance, Chapman and Hall 2007. 
+Lee, J., List, J.A. and Strazicich, M.C.  "Non-renewable resource prices: Deterministic or stochastic trends?" Journal 
+
+of Environmental Economics and Management, 51(3), pp. 354–370, (2006). 
+
+Leroy St. "Expectations Models of Asset Prices: A Survey of Theory " The Journal of Finance, Vol. 37, No. 1 (Mar., 
+
+1982), pp. 185-217 
+
+Lin C.-Y, Wagner G., "Steady-state growth in a Hotelling model of resource extraction" Journal of Environmental 
+
+Economics and Management, DOI: 10.1016/ j.jeem.2006.12.001, 2007. 
+
+Lund D., Nymoen R. "Comparative statics for real options on oil: What stylized facts to use?" Department of 
+
+Economics, University of Oslo, No. 14/2013, 2013. 
+
+Lubochinsky C., "Transfert du risque de crédit : de l'ingéniosité bancaire à l'instabilité financière" Revue d'économie 
+
+financière hors série Risques 2008, 101-105. 
+
+Lubochinsky C., "Dérivés, titrisation et effet de levier : quel avenir" Les cahiers du cercle des économistes, PUF 
+
+2009. 
+
+Meadows D., Randers J., Meadows D.,  Limits to Growth, The 30-Year Update, Earthscan 2004. 
+Morin E., "Le probable et l’incertain" revue Nouvelles clés, n°43, 2004. 
+Nguyen H. T., Pham T. D., "On the law of Large Numbers for Continuous Time Martingales and Application to 
+
+Statistics", Stochastica, vol VI, n°1, 1982. 
+
+Pearson K., The History of Statistics in the 17th & 18th Centuries, Ch. Griffin & Co 1978. 
+Pichler E., Böheim M., Firgo M., "The Role of Financial Speculation on Markets for Industrial Metals" FMMI, MMI 
+
+NÖ, sept 2012. 
+
+Pindyck R. S., 1980 "The Optimal Production of an Exhaustible Resource When Price is Exogenous and Stochastic" 
+
+WP 1162-80. 
+
+Pindyck R. S., 1984, "Uncertainty in the Theory of Renewable Resource Markets"Revue of Economic Studies 289-
+
+303. 
+
+Pindyck R. S., 2004, "Volatility and Commodity Price Dynamics", Journal of Futures Markets 24, 1029–1047. 
+Portait R., Poncet P., Finance de marché, Dalloz 2008. 
+Spratt S., "Food price volatility and financial speculation" Inst. of Development Studies, Univ of Sussex, Jan 2013. 
+Radner R., "Existence of equilibrium of plans, Prices and Price Expectations in a Sequence of Markets" 
+
+Econometrica 40, 289-303, 1972. 
+
+Ramey G., Ramey G. A. "Technology commitment and economic fluctuations" Nat. Bureau of Economic Research, 
+
+June 1991. 
+
+Ramsey F. P., "A Mathematical Theory of Saving"  The Economic Journal, Vol. 38, No. 152, 543-559 (1928). 
+Rawls J., Political Liberalism, Columbia Univ. Press 1993. 
+Reeves H., Là où croît le péril… croît aussi ce qui sauve, Seuil 2013 . 
+Reitz S., U. Slopek, « Non-Linear Oil Price Dynamics: A Tale of Heterogeneous Speculators ? », German Economic 
+
+Review, vol. 10, n° 3, pp. 270-283 (2009). 
+
+Revuz D., Yor M.,  Continuous Martingales and Brownian Motion, Springer 1994. 
+Roman St., Introduction to the Mathematics of Finance: Arbitrage and Option Pricing Springer 2012. 
+Ross Sh., An Elementary Introduction to Mathematical Finance, Cambridge Univ. Press 2011. 
+Schönbucher P. J., "A Market Model for Stochastic Implied Volatility" Bonn Univ. June 1998.	
+Schulmeister S., "Une Taxe Générale sur les Transactions Financières : un bilan des avantages, des inconvénients, et 
+
+une proposition" WIFO Working Papers, No. 344, Oct. 2009. 
+
+Shiller R. J.  Market Volatility The MIT Press 1989. 
+Sinn H.-W., "The Theory of Exhaustible Resources" Zeitschrift für Nationalökonomie, Vol. 41 (1981), No. 1-2, pp. 
+
+183-192. 
+
+Slade M. E. "Market structure, marketing method, and price instability" Quarterly J. of Economics Vol. 106, No. 4, 
+
+pp. 1309-1340 (1991). 
+
+Slade M., "Do Markets Underprice Natural-Resource Commodities" Working Papers, World Bank 1992. 
+Slade M., Thille H. "Hotelling Confronts CAPM: A Test of the Theory of Exhaustible Resources" The Canadian 
+
+Journal of Economics / Revue canadienne d'Economique, Vol. 30, No. 3 (Aug., 1997), pp. 685-708. 
+
+Slade M., Thille H. "Whither Hotelling: Tests of the Theory of Exhaustible Resources" Annual Review of Resource 
+
+Economics Vol. 1: 239-260 (2009). 
+
+Smith, J. L., 2009, World Oil: Market or Mayhem? Journal of Economic Perspectives 23, 145-164. 
+Smith V. K. "Natural Resource Scarcity: A Statistical Analysis" R. of Economics and Statistics, 61: 423-427 (1979) 
+Solow R., “A Contribution to the Theory of Economic Growth,” The Quarterly Journal of Economics, Vol. 70, No. 1, 
+
+pp. 65–94, 1956. 
+
+Solow R., "The Economics of Resources or the Resources of Economics" The Amer. Economic Review, Vol. 64, No. 
+
+2, (May, 1974), pp. 1-14. 
+
+Tobin J., "A Proposal for International Monetary Reform" Easter Economic J. 4(3-4), 153-159, 1978. 
+Walras L., "Economique et Mécanique" Bull. Soc. Vaudoise de Sc. Naturelles, Vol 45, 313-325, (1909) 
+Wang, Z., & Zheng, W. High-frequency trading and probability theory. World Scientific, (2014). 
+Weinstein, M.C. and Zeckhauser, R.J. (1975) The optimal consumption of depletable natural resources. Quarterly 
+
+Journal of Economics 89: 371–392.

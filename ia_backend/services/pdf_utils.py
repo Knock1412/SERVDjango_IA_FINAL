@@ -5,12 +5,12 @@ from pdfminer.layout import LAParams
 
 def determine_dynamic_chunk_size(total_pages):
     """
-    Détermine dynamiquement le chunk_size en fonction du nombre total de pages.
+    Découpage hybride optimisé industriel :
+    - ≤ 80 pages : page-par-page
+    - > 80 pages : blocs de 5 pages
     """
-    if total_pages <= 10:
+    if total_pages <= 80:
         return 1
-    elif total_pages <= 25:
-        return 3
     else:
         return 5
 

@@ -2,16 +2,15 @@ from .ollama_gateway import generate_ollama
 from bert_score import score as bert_score
 from keybert import KeyBERT
 
-# Initialisation du modèle keywords multilingue cohérent
 kw_model = KeyBERT(model='paraphrase-multilingual-MiniLM-L12-v2')
 
-# Pondérations centralisées (stable prod)
+# Pondérations
 BERT_WEIGHT = 0.7
 KEYWORD_WEIGHT = 0.3
 FULL_WEIGHT = 0.6
 PARTIAL_WEIGHT = 0.4
 
-# --------- Résumés Bloc et Global ---------
+# --------- Résumés Bloc ---------
 
 def summarize_block(text):
     prompt = (
@@ -24,29 +23,34 @@ def summarize_block(text):
     predict_len = 650 if len(text) > 6000 else 500
     return generate_ollama(prompt, num_predict=predict_len, models=["mistral:instruct"])
 
-def summarize_global(summary_list, num_predict=650):
+# --------- Fusion globale et intermédiaire ---------
+
+def summarize_global(summary_list, num_predict=650, is_final=False):
     joined = "\n".join(summary_list)
-    prompt = (
-    "Tu es un assistant IA expert en synthèse de documents professionnels pour entreprise."
-    "À partir des résumés partiels ci-dessous, rédige un résumé final structuré et professionnel selon le plan suivant :"
-    "**Introduction :** Présente le contexte général et l’objectif global du document."
-    "**Points clés :** Regroupe et développe de manière claire et synthétique les idées principales en 2 à 4 paragraphes distincts."
-    "**Conclusion :** Résume en une synthèse concise les principaux apports du document."
-    "Contraintes rédactionnelles strictes :"
-    "- Utiliser un vocabulaire professionnel et fluide."
-    "- Structurer chaque partie avec des paragraphes distincts."
-    "Voici les résumés partiels à synthétiser :"
-    f"{joined}"
-)
+
+    if is_final:
+        prompt = (
+            "Tu es un assistant IA expert en synthèse de documents professionnels pour entreprise.\n"
+            "À partir des résumés intermédiaires ci-dessous, rédige un résumé final structuré et professionnel selon le plan suivant :\n"
+            "**Introduction :** Présente le contexte général et l’objectif global du document.\n"
+            "**Points clés :** Regroupe et développe de manière claire et synthétique les idées principales en 2 à 5 paragraphes distincts.\n"
+            "**Conclusion :** Résume en une synthèse concise les principaux apports du document.\n"
+            "Contraintes rédactionnelles strictes :\n"
+            "- Utiliser un vocabulaire professionnel et fluide.\n"
+            "- Structurer chaque partie avec des paragraphes distincts.\n"
+            "Voici les résumés intermédiaires à synthétiser :\n"
+            f"{joined}"
+        )
+    else:
+        prompt = (
+            "Tu es un assistant IA de synthèse.\n"
+            "Fusionne les résumés suivants en gardant l'essentiel de façon claire et compacte, sans reformuler excessivement :\n"
+            f"{joined}"
+        )
+
     return generate_ollama(prompt, num_predict=num_predict, models=["mistral:instruct"])
 
-def determine_predict_length(block_count):
-    if block_count <= 15:
-        return 1000
-    else:
-        return 1200
-
-# --------- Scoring hybride pondéré ---------
+# --------- Scoring ---------
 
 def compute_bertscore(ref, hyp):
     P, R, F1 = bert_score([hyp], [ref], lang="fr", model_type="distilbert-base-multilingual-cased")
@@ -76,8 +80,6 @@ def evaluate_summary_score(reference_text, summary_text, partial_summaries=None)
 
     final_score = (FULL_WEIGHT * score_full) + (PARTIAL_WEIGHT * score_partial)
     return round(final_score, 4)
-
-# --------- Amélioration automatique (optionnel, conservé pour future extension) ---------
 
 def improve_summary(original_text, current_summary):
     prompt = (

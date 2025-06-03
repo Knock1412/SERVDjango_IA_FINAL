@@ -1,7 +1,7 @@
 import requests
 
 
-pdf_url = "https://edutice.hal.science/edutice-00000852v1/document"
+pdf_url = "https://hal.science/hal-02440708v1/document"
 
 entreprise = "Entreprise_S3_Test"
 

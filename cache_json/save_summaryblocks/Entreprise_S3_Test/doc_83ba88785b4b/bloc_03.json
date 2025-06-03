@@ -1,7 +1,7 @@
 {
   "bloc": 3,
-  "summary": "197\n\npour la détection de VIRUS ont été créés.\nIl est recommandé de passer toutes les machines à l'antivirus périodiquement, et plus particulièrement avant l'utilisation d'une disquette ou d'un programme suspect. Il existe également des logiciels anti-VIRUS qui s'exécutent automatiquement lors du démarrage de la machine.\n\nB. Traitement\n\nIl existe deux manières de traiter un ordinateur infecté par un VIRUS :\n\n1. la suppression de l'infection en utilisant un logiciel anti-VIRUS ou des outils de diagnostic spécifiques au VIRUS en question ;\n2. la mise en place d'un système informatique ne contenant aucun programme suspect et ne communiquant pas avec le réseau pour éviter toute infection future.\n\nIl est également recommandé de garder des backups réguliers de tous les fichiers importants sur un support extérieur (disquette ou disque dur) afin de pouvoir rétablir rapidement la configuration de l'ordinateur en cas d'infection.",
+  "summary": "1. La figure 3b affiche l'état des vecteurs d'interruption après l'installation de VIRUS.\n2. La figure 3a sert de comparaison.\n3. L'activation est la partie la plus courte du programme VIRUS, son but étant de déterminer si elle doit être activée. Par exemple: Est-ce vendredi 13? ou Suis-je installé sur cette machine assez longtemps ? Dans le cas d'une réponse positive de la question, l'individu identifié comme Jean-Michel COSTE est impliqué.\n4. Le BULLETIN DE L'EPI n'est pas mentionné explicitement dans le texte fourni, mais peut être considéré comme un document ou une publication lié au sujet discuté (VIRUS).",
   "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
-  "score": 0.6363,
-  "translated": false
+  "score": 0.7461,
+  "translated": true
 }

@@ -2,6 +2,7 @@ import threading
 import queue
 import time
 import os
+import math
 
 from ia_backend.services.pdf_utils import (
     extract_blocks_from_pdf,
@@ -11,19 +12,19 @@ from ia_backend.services.pdf_utils import (
 from ia_backend.services.summarizer import (
     summarize_block,
     summarize_global,
-    determine_predict_length,
     evaluate_summary_score,
 )
 from ia_backend.services.cache_manager import save_json
 from ia_backend.services.backup_service import save_global_summary
 from ia_backend.services.job_logger import log_job_history
-
-# 🚩 NOUVEL IMPORT POUR LA DETECTION / TRADUCTION
 from ia_backend.services.language_detection_and_translation import process_text_block
 
 # Seuils dynamiques
 BLOCK_THRESHOLD_INITIAL = 0.7
 BLOCK_THRESHOLD_SECONDARY = 0.65
+
+# Nouveau paramètre V2
+INTERMEDIATE_GROUP_SIZE = 5
 
 job_queue = queue.PriorityQueue()
 JOB_STATUS = {}
@@ -59,7 +60,7 @@ def process_job(job: Job):
         save_txt(full_text_path, full_pdf_text)
 
         total_pages = extract_blocks_from_pdf(job.pdf_path, return_pages_only=True)
-        print(f"🧩 Mode : découpage dynamique | Total pages : {total_pages}")
+        print(f"🧩 Mode : découpage dynamique hiérarchique | Total pages : {total_pages}")
 
         blocks = extract_blocks_from_pdf(job.pdf_path)
         summaries = []
@@ -78,14 +79,10 @@ def process_job(job: Job):
             best_summary = ""
             attempt = 0
 
-            # === Première boucle avec seuil 0.7 (max 5 tentatives)
             while attempt < 5:
                 attempt += 1
 
-                # Génération du résumé via IA
                 summary, model = summarize_block(text)
-
-                # 🚩 NOUVEAU : détection + traduction dès la génération
                 processed_summary, translated = process_text_block(summary)
 
                 if translated:
@@ -93,7 +90,6 @@ def process_job(job: Job):
                 else:
                     print(f"🌍 Bloc {idx+1} déjà en français avant scoring.")
 
-                # Le scoring est toujours réalisé sur la version traduite
                 score = evaluate_summary_score(text, processed_summary)
                 print(f"⚙️ Bloc #{idx+1} Essai {attempt} - Score = {round(score,3)} - Meilleur = {round(best_score,3)}")
 
@@ -107,7 +103,6 @@ def process_job(job: Job):
                 else:
                     print("🔁 Reprocessing...")
 
-            # Si toujours pas validé, on passe au seuil relâché 0.65
             if best_score < BLOCK_THRESHOLD_INITIAL:
                 print(f"⚠️ Passage seuil secondaire pour bloc {idx+1}")
 
@@ -137,7 +132,6 @@ def process_job(job: Job):
                             print(f"✅ Bloc {idx+1} validé après seuil secondaire avec score {round(best_score,3)}")
                             break
 
-            # Enregistrement final du bloc (toujours version traduite)
             json_dir = f"cache_json/save_summaryblocks/{job.entreprise}/{job.folder_name}"
             save_json(json_dir, idx, {
                 "bloc": idx + 1,
@@ -151,11 +145,34 @@ def process_job(job: Job):
 
         summaries.sort()
         joined = [s for _, s in summaries]
-        num_predict = determine_predict_length(len(joined))
-        print(f"🔍 Génération résumé global avec num_predict = {num_predict}")
 
-        final_summary, model_used = summarize_global(joined, num_predict=num_predict)
-        global_score = evaluate_summary_score(full_pdf_text, final_summary, partial_summaries=joined)
+        # ✅ Étape de fusion intermédiaire
+        intermediates = []
+        for i in range(0, len(joined), INTERMEDIATE_GROUP_SIZE):
+            group = joined[i:i+INTERMEDIATE_GROUP_SIZE]
+            group_text = " ".join(group)
+            print(f"🔄 Fusion intermédiaire du lot {i//INTERMEDIATE_GROUP_SIZE + 1} contenant {len(group)} résumés...")
+            intermediate_summary, model_used = summarize_global(group, num_predict=600)
+
+            # On stocke chaque résumé intermédiaire
+            inter_json_dir = f"cache_json/save_summaryintermediates/{job.entreprise}/{job.folder_name}"
+            os.makedirs(inter_json_dir, exist_ok=True)
+            save_json(inter_json_dir, i//INTERMEDIATE_GROUP_SIZE, {
+                "intermediate_block": i//INTERMEDIATE_GROUP_SIZE + 1,
+                "summary": intermediate_summary
+            })
+
+            intermediates.append(intermediate_summary)
+
+        print(f"🔍 Fusion finale sur {len(intermediates)} résumés intermédiaires...")
+        # Nouveau calcul dynamique num_predict fusion finale
+        if len(intermediates) <= 10:
+            final_predict_len = 1300
+        else:
+            final_predict_len = 1500
+
+        final_summary, model_used = summarize_global(intermediates, num_predict=final_predict_len, is_final=True)
+        global_score = evaluate_summary_score(full_pdf_text, final_summary, partial_summaries=intermediates)
         print(f"📊 Score résumé global (info only) = {round(global_score, 3)}")
 
         save_global_summary(job.entreprise, job.folder_name, final_summary)
@@ -164,7 +181,7 @@ def process_job(job: Job):
         JOB_STATUS[job.job_id] = "terminé"
         JOB_RESULTS[job.job_id] = {
             "summary": final_summary,
-            "mode": "decoupage_dynamique"
+            "mode": "hierarchical_v2"
         }
 
     except Exception as e:

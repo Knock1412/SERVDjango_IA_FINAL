@@ -1,7 +1,7 @@
 {
   "bloc": 2,
-  "summary": "194\n\n- le  numéro  de  la  piste  d'interruption\n\n- un pointeur vers une zone de mémoire où sera chargé le programme à\nenregistrer (par exemple, l'adresse des premiers octets du secteur 2).\n\nAinsi, au démarrage, le BOOT permet de trouver le programme d'interruption\net de lui donner le contrôle. Celui-ci permettra la lecture de l'adresse\ndu disque sur laquelle se trouve le système DOS et la mise en marche\ndu programme DOS qui est exécuté par cette même adresse. C'est pour cela\nque si vous voulez installer un VIRUS BOOT, il faut modifier le secteur 0 de\nla disquette à partir de laquelle votre PC va démarrer, ou bien modifier\nles premiers octets du programme DOS situé sur l'unité d'échange interne.",
+  "summary": "1. Le texte traite de la structure et du fonctionnement des virus informatiques.\n2. Les quatre parties essentielles d'un virus sont détaillées, selon une structure en schéma (Figure 3a).\n3. La première partie est le programme d'installation qui s'exécute à l'activation du programme hôte et permet de brancher les trois autres parties sur les interruptions appropriées.\n4. Le virus peut détourner le vecteur TIMER vers un sous-programme d'activation pour se déclencher régulièrement, et le vecteur \"accès disque\" vers un sous-programme de propagation qui permet de reproduire le virus lors d'un accès disque inoffensif.\n5. Après l'installation, le programme donne la main à son programme hôte comme ferait un ver, et l'utilisateur ne peut rien voir.",
   "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
-  "score": 0.6403,
+  "score": 0.7687,
   "translated": false
 }

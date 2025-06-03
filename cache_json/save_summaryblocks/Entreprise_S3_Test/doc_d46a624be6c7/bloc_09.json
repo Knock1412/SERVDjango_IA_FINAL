@@ -1,0 +1,7 @@
+{
+  "bloc": 9,
+  "summary": "1. Le texte décrit la volatilité d'une grandeur économique en présence d'incertitude sur son évolution possible et suggère que cette volatilité peut être considérée comme une mesure objective de l'incertitude affectant son prix instantané.\n2. La famille exponentielle est un modèle couramment utilisé en économie pour représenter des phénomènes à croissance constante, mais elle est critiquée dans le Club de Rome dans les années 1970 pour sa simplicité.\n3. Dans le cas d'une grandeur exposée à un aléa constant relativement à la grandeur, deux scénarios peuvent se produire : soit des fluctuations vers le haut et vers le bas autour de la courbe exponentielle (si l'aléa est faible), soit une convergence vers zéro des trajectoires après des oscillations (si l'aléa dépasse un certain seuil).\n4. Le phénomène de convergence vers zéro est connu dans le cas des martingales, qui sont des processus d'espérance mathématique constante. Il existe des martingales positives dont toutes les trajectoires tendent vers zéro.\n5. Une proposition générale : si une semi-martingale positive solution de Xt = XtσtdBt + Xtatdt suit certaines conditions, alors elle tendra vers zéro presque sûrement lorsque t augmente indéfiniment.",
+  "source_pdf": "https://hal.science/hal-02440708v1/document",
+  "score": 0.7548,
+  "translated": false
+}
