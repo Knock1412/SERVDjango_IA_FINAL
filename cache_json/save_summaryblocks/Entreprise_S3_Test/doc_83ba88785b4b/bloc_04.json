@@ -1,0 +1,7 @@
+{
+  "bloc": 4,
+  "summary": "1. Le programme d'activation passe main au programme de déclenchement.\n  2. Le programme d'activation est exécuté à chaque clic du Timer, permettant régulièrement l'activation du virus.\n  3. Le programme de déclenchement assure la fonction de reproduction (propagation) du virus.\n4. Cette fonction transfère le virus sur un autre support.\n5. Pour rester indécelable, ce sous-programme est souvent \"branché\" sur le programme d'écriture-lecture disque.\n6. La reproduction du virus se fait automatiquement lorsqu'un utilisateur donne une commande (par exemple DOS: DIR A).\n7. Les méthodes de reproduction sont spécifiques à chaque virus et caractérisent les VIRUS.\n8. Une fois la reproduction terminée, le programme passe main au programme original de traitement de l'interruption.\n9. Le déclenchement est responsable des qualités destructrices des virus.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7135,
+  "translated": false
+}

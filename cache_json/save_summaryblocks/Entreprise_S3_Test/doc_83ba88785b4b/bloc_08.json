@@ -1,0 +1,7 @@
+{
+  "bloc": 8,
+  "summary": "1. Le secteur d'activité peut être visualisé avec les outils DEBUG, PCTOOLS, ou NORTON. Si les messages d'erreur habituels ont disparu ou remplacés par d'autres, il faut être prudent.\n2. Les viruses appelés \"partition\" installent-se sur toutes les partitions d'un disque dur. Chaque partition étant vue comme un disque possédant la structure BOOT, FAT, DIRECTORY. Une partition peut être créée pour deux raisons: utilisation de plusieurs systèmes d'exploitation différents ou pour répartir les applications par genre. Les informations sur chaque partition sont stockées dans une table de partitions appelée Master Boot.\n3. Certaines zones, notamment celle qui est un refuge privilégié pour certains viruses, ne peuvent être décrite par un numéro de secteur logique (par exemple le virus STONE).\n4. Il n'existe pas de protection universelle contre les viruses. La meilleure protection est une grande méfiance et la prudence est nécessaire. Toute disquette provenant de l'extérieur doit être considérée comme suspecte. Les machines doivent être passées à l'antivirus avant de commencer une formation.\n5. Le bulletin de l'EPI (Enseignement Professionnel Infirmier) parle des viruses, leur détection, et les mesures de protection courantes.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7423,
+  "translated": false
+}

@@ -1,0 +1,7 @@
+{
+  "bloc": 3,
+  "summary": "1. Le texte fourni traite de l'état des vecteurs d'interruption dans un programme appelé VIRUS après son installation, comme l'illustre la figure 3b.\n\n2. La figure 3a n ' est pas explicitement mentionnée dans le texte.\n\n3. La partie d'activation du programme VIRUS, qui est la section la plus courte, détermine si elle doit être déclenchée. Par exemple, il vérifie si aujourd'hui est vendredi 13 ou s'il a été installé sur la machine pendant un temps suffisant.\n\n4. Dans l'exemple donné, l'activation se produirait si Jean-Michel COSTE était la réponse à la question.\n\n5. Le texte fait également référence au « Bulletin de l'EPI », bien qu'aucune information sur son contenu ou sa pertinence ne soit fournie dans ce contexte.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7681,
+  "translated": true
+}

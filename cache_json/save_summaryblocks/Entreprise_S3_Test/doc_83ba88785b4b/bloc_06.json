@@ -1,0 +1,7 @@
+{
+  "bloc": 6,
+  "summary": "1. Appel urgent pour TIMER (souvent dit de ralentir le système, mais il induit effectivement un effet)\n- Importance de TIMER: assure une installation de virus en mémoire\n\n2. Installation du virus \"Boot\"\n- Pour installer en mémoire, un virus se cache dans un programme exécutable\n- Il n'y a aucune garantie que les programmes infectés seront fréquemment exécutés, d'où la création du virus Lehigh qui s'est installé dans COMMAND. COM pour une installation garantie lors du démarrage.\n- Solution : utilisez une disquette propre DOS et copiez un COMMAND original. Dossier COM.\n\n3. Importance du programme de démarrage\n- Exécuté au démarrage du système, présent sur tout stockage magnétique (disque ou disquette)\n- Comprendre la structure des disques est important pour comprendre les points suivants\n\n4. Structure du disque flottant\n- Un disque de disquette se compose de deux faces et 40 pistes\n- Chaque piste contient 9 secteurs de 512 octets chacun\n- Pour plus de commodité, le DOS compte ses secteurs séquentiellement de 0 à 719\n- Le tableau ci-dessous indique la correspondance:\nVisage Secteurs Physiques Secteurs Logiques\n1 à 9 8\n10 à 17\n2-- 18-26-\n...\n\n5. Secteurs réservés sur les disques flottants\n- Secteur 0: réservé\n- Secteurs 1 à 4: Répertoire (annuaire primaire)\n- Les secteurs BOOT et FAT sont également réservés.\n\n6. Le secteur Boot contient deux types d'informations.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7374,
+  "translated": true
+}

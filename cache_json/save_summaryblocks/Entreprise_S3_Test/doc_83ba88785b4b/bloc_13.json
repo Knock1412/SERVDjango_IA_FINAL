@@ -1,0 +1,7 @@
+{
+  "bloc": 13,
+  "summary": "1. Le texte traite de l'informatique et plus précisément du virus informatique, qui peut infecter les machines IBM PC.\n2. Il mentionne trois numéros de la Revue de l'Utilisateur d'IBM PC : le 64 (septembre 1990) qui traite du jeu Ping-pong, le 66 (novembre 1990) qui parle de Jérusalem et le 70 (mai 91) qui aborde les virus partition.\n3. Il propose deux livres pour protéger des virus : \"Virus Protection\" de Pamela Kane (éditions SYBEX) qui est accompagné d'une disquette contenant quelques utilitaires, et \"La peste informatique\" d'Alain Acco et Edmond Zucchelli (éditions CALMANN-LEVY).\n4. Les conseils pour protéger des virus sont : ne pas utiliser de programmes ou de disquettes suspects, ne jamais démarrer une machine avec une disquette dans le lecteur (mode de transmission des \"BOOT virus\"), après infection, décontaminer toutes les disquettes susceptibles d'être passées sur la machine, ne pas procéder à la réinstallation avant d'être sûr que le virus n'en est pas la cause, protéger les originaux et conserver en permanence une disquette système saine et protégée pour redémarrer la machine avant une désinfection.\n5. Il est conseillé de procéder à des contrôles réguliers et de ne pas accuser systématiquement les virus, car un mauvais fonctionnement peut souvent être dû à une mauvaise utilisation.\n6. Le texte conclut avec le nom de Jean-Michel Coste.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.733,
+  "translated": false
+}

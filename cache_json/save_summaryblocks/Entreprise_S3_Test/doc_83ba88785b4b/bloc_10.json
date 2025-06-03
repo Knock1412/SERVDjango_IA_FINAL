@@ -1,0 +1,7 @@
+{
+  "bloc": 10,
+  "summary": "1. Existence de logiciels antivirus avec performances diverses, chacun ayant une signature propre utilisée pour la détection.\n2. Les signatures des virus sont choisies par le programmeur de l'antivirus et servent à identifier les virus connus.\n3. Les méthodes d'implantation du virus étant restreintes, un logiciel antivirus peut retrouver les paramètres originaux et les réactiver en annulant le lancement du programme parasite.\n4. La solution destructrice consiste à effacer ou reformater le fichier contaminé. Il est nécessaire de posséder une disquette DOS saine pour effectuer ce traitement.\n5. Un logiciel antivirus peut être lancé depuis le disque dur, mais il y a un risque de pollution de ce programme.\n6. La phase d'identification des nouveaux virus est délicate car elle est essentielle pour la production d'antivirus efficaces.\n7. Un réseau d'utilisateurs existe pour détecter les nouveaux virus (le Bulletin de l'EPI).",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7525,
+  "translated": false
+}

@@ -1,0 +1,7 @@
+{
+  "bloc": 2,
+  "summary": "1. Le texte traite du fonctionnement de virus informatiques.\n2. Les virus sont structurés en quatre parties (Figure 3a): programme d'installation, programme d'activation, programme de propagation et programme résident.\n3. Le programme d'installation est exécuté dès le lancement du programme hôte. Il doit laisser une partie de son code résident pour agir tout au long de l'activité de la machine. Ce programme d'installation attache les trois autres parties sur les interruptions les plus appropriées, et peut détourner le vecteur TIMER vers le sous-programme d'activation pour s'activer régulièrement. Le vecteur \"accès disque\" peut être détourné vers le programme de propagation pour déclencher la reproduction du virus lors d'un accès inoffensif au lecteur A:.\n4. L'installation terminée, le programme donne la main à son programme hôte comme un VER (Virus Électronique Résident). L'utilisateur n'a rien vu de l'installation du virus.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7005,
+  "translated": false
+}

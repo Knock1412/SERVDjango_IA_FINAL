@@ -1,0 +1,42 @@
+[
+  {
+    "job_id": "352e6efb-cf27-4a3d-8d9e-81c192f5cf10",
+    "pdf_url": "https://edutice.hal.science/edutice-00000862v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T11:53:29.742538",
+    "duration": 207.91
+  },
+  {
+    "job_id": "1cc9af3c-7dec-4736-92ec-873f5a2ed13d",
+    "pdf_url": "https://edutice.hal.science/edutice-00000862v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T11:59:51.897615",
+    "duration": 253.56
+  },
+  {
+    "job_id": "4907c715-5870-4594-b746-37ac7b0b37b4",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T12:23:02.458342",
+    "duration": 1192.68
+  },
+  {
+    "job_id": "acf3b8e6-5c20-493e-9514-cddcb34ec76d",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T13:34:31.723636",
+    "duration": 1153.34
+  },
+  {
+    "job_id": "1ee53ef6-19fe-49c7-adb1-d720255c76b5",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-03T13:50:00.453780",
+    "duration": 434.93
+  }
+]
