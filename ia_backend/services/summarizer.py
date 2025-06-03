@@ -27,12 +27,21 @@ def summarize_block(text):
 def summarize_global(summary_list, num_predict=650):
     joined = "\n".join(summary_list)
     prompt = (
-        "Tu es un expert IA chargé de produire un résumé final structuré à partir des résumés partiels suivants.\n\n"
-        "- Introduction : contexte général du document\n"
-        "- Points clés : synthèse regroupée des idées majeures\n"
-        "- Conclusion : résumé final clair et concis\n\n"
-        f"{joined}"
-    )
+    "Tu es un assistant IA expert en synthèse de documents professionnels pour entreprise.\n\n"
+    "À partir des résumés partiels ci-dessous, rédige un résumé final structuré et professionnel selon le plan suivant :\n\n"
+    "1️⃣ **Introduction :** Présente le contexte général et l’objectif global du document.\n"
+    "2️⃣ **Points clés :** Regroupe et développe de manière claire et synthétique les idées principales en 2 à 4 paragraphes distincts.\n"
+    "3️⃣ **Conclusion :** Résume en une synthèse concise les principaux apports du document.\n\n"
+    "Contraintes rédactionnelles strictes :\n"
+    "- Utiliser un vocabulaire professionnel et fluide.\n"
+    "- Structurer chaque partie avec des paragraphes distincts.\n"
+    "- Éviter les répétitions, formules vagues ou résumés trop courts.\n"
+    "- Respecter la grammaire, l’orthographe et la ponctuation françaises.\n"
+    "- Ne pas débuter les paragraphes par : 'le document présente...' ou 'le passage suivant...'.\n"
+    "- Ne pas simplement reformuler les résumés partiels mais produire une vraie synthèse globale et homogène.\n\n"
+    "Voici les résumés partiels à synthétiser :\n\n"
+    f"{joined}"
+)
     return generate_ollama(prompt, num_predict=num_predict, models=["mistral:instruct"])
 
 def determine_predict_length(block_count):
