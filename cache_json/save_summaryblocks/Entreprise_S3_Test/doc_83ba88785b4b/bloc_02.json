@@ -1,0 +1,7 @@
+{
+  "bloc": 2,
+  "summary": "194\n\n- le  numéro  de  la  piste  d'interruption\n\n- un pointeur vers une zone de mémoire où sera chargé le programme à\nenregistrer (par exemple, l'adresse des premiers octets du secteur 2).\n\nAinsi, au démarrage, le BOOT permet de trouver le programme d'interruption\net de lui donner le contrôle. Celui-ci permettra la lecture de l'adresse\ndu disque sur laquelle se trouve le système DOS et la mise en marche\ndu programme DOS qui est exécuté par cette même adresse. C'est pour cela\nque si vous voulez installer un VIRUS BOOT, il faut modifier le secteur 0 de\nla disquette à partir de laquelle votre PC va démarrer, ou bien modifier\nles premiers octets du programme DOS situé sur l'unité d'échange interne.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.6403,
+  "translated": false
+}

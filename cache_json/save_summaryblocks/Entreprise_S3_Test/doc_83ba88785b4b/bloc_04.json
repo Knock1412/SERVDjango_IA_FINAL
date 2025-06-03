@@ -1,0 +1,7 @@
+{
+  "bloc": 4,
+  "summary": "1. Importance des antivirus dans le système informatique moderne en raison de la grande variété de performances et des performances différentes des virus.\n2. Chaque virus est constitué d'une suite précise d'instructions, qui peut être identifiée grâce à une signature choisie par le programmeur d'antivirus.\n3. Les méthodes d'implantation des virus étant restreintes, l'antivirus peut retrouver les paramètres originaux et les rétablir pour éradiquer le virus.\n4. Une disquette DOS \"propre\" doit être conservée pour remédier au virus contaminé.\n5. Les auteurs de virus ont mis en œuvre des camouflages efficaces, tel que le changement de signature et le rétablissement temporaire des données erronées.\n6. L'avenir est difficile à prévoir pour les antivirus, compte tenu du développement des techniques de camouflage des virus par les programmeurs.\n7. Les logiciels antivirus deviennent de plus en plus performants et sont proposés dans le marché avec des mises à jour régulières.\n8. Exemples d'antivirus: FLUSHOT+, V-ANALYST, VIRUSCAN (McAfee Associates).",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.6866,
+  "translated": false
+}
