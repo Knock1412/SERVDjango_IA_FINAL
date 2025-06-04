@@ -1,0 +1,684 @@
+Applications éducatives de la visioconférence numérique
+Patrick Guihot
+
+To cite this version:
+
+Patrick Guihot. Applications éducatives de la visioconférence numérique. http://www.inrp.fr, 1998.
+￿edutice-00000413￿
+
+HAL Id: edutice-00000413
+
+https://edutice.hal.science/edutice-00000413v1
+
+Submitted on 17 Mar 2004
+
+HAL is a multi-disciplinary open access
+archive for the deposit and dissemination of sci-
+entific research documents, whether they are pub-
+lished or not. The documents may come from
+teaching and research institutions in France or
+abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est
+destinée au dépôt et à la diffusion de documents
+scientifiques de niveau recherche, publiés ou non,
+émanant des établissements d’enseignement et de
+recherche français ou étrangers, des laboratoires
+publics ou privés.
+
+INSTITUT NATIONAL DE RECHERCHE PÉDAGOGIQUE
+
+Technologies nouvelles et éducation
+
+Août 1998
+
+Applications éducatives de la visioconférence numérique
+
+(n° 40206)
+
+Rapport de synthèse
+
+Responsable de la recherche : P. GUIHOT
+
+I. Cadres de la recherche
+
+1. Finalité
+
+Alors qu’un nombre non négligeable d’établissements scolaires disposait de stations de
+visioconférence numérique, aucune étude sérieuse n’avait encore été entreprise sur les usages
+éducatifs  de  ce  système  de  communication  émergent.  C’est  afin  d’essayer  de  répondre  aux
+préoccupations  des  sites  équipés  ou  en  voie  de  l’être  que  l’unité  “ Formation,  éducation  et
+distance ”  a  entrepris  une  recherche  exploratoire  visant  à  déterminer  leurs  différents  types
+d’usage éducatif et à sérier leur éventuelle efficacité en regard des objectifs des lycées.
+
+En outre, l’histoire déjà longue des technologies à l’École a montré qu’il ne suffisait pas
+qu’une technique ait fait la preuve de son efficacité pour qu’elle soit ipso facto intégrée dans
+les activités scolaires, nous avons inclus dans nos objectifs de recherche l’étude des modalités
+d’intégration  des  dispositifs  concernés  dans  le  cadre  particulier  des  lycées  (formation  des
+enseignants, conditions matérielles, financières et techniques).
+
+La visioconférence, comme toute technologie à l’École, est ici appréhendée comme un
+outil,  un  instrument  mis  au  service  des  apprentissages.  Dès  lors,  en  tenant  compte  de  sa
+spécificité, il s’est agi d’examiner en quoi il peut aider à atteindre les missions essentielles des
+lycées.
+
+2. Dispositif étudié
+
+Désignant  l’ensemble  des  dispositifs  permettant,  entre  des  sites  distants,  une
+communication en temps réel basée sur l’échange d’images et de sons, la visioconférence est
+utilisable tant sur réseau numérique à intégration de services (NUMERIS en France) que sur
+Internet.
+
+La visioconférence sur Internet pose encore trop de problèmes techniques pour que l’on
+puisse dans l’immédiat la considérer comme un outil aisément utilisable par des enseignants
+en  général  peu  férus  de  technologies,  c’est  pourquoi  nous  nous  sommes  exclusivement
+intéressés aux dispositifs NUMERIS.
+
+La  visioconférence  NUMERIS  recouvre  trois  grands  types  de  dispositifs :  les  stations
+individuelles  (micro-ordinateur),  les  dispositifs  de  communication  de  groupes  à  groupes
+(meubles) et les visiocentres notamment utilisés à l’université. C’est au second de  ces types
+que  nous  nous  intéressons  dans  le  cadre  de  ce  projet.  Au-delà  du  fait  que  ces  “ meubles ”,
+
+d’usage  collectif,  constituent  l’essentiel  des  équipements  des  établissements  scolaires  en
+visioconférence,  il  nous  est  apparu  que  l’intégration  de  tout  dispositif  technologique  en
+contexte scolaire posait suffisamment de problèmes pour que soient privilégiées des solutions
+ne  paraissant  pas  trop  remettre  en  cause  le  mode  d’organisation  de  nos  établissements
+scolaires basé sur le collectif.
+
+3. Éléments de problématique
+
+Les  visioconférences  connaissent  un  important  développement,  y  compris  dans  le
+
+système éducatif.
+
+Les  visioconférences  sont,  globalement,  considérées  comme  un  moyen  potentiel  de
+remédier  à  certains  problèmes  actuels  du  système  éducatif  (ouverture,  modernité,
+enseignement des options rares etc.). Côté enseignants, cet engouement, sans doute lié au fait
+que  l’usage  de  la  visioconférence  est  perçu,  dans  un  premier  temps,  comme  relevant  de
+pratiques  de  communication  proches  de  celles  qui  prévalent  en  général  dans  les  classes,
+conduit  à  essentiellement  projeter  sur  l’outil  les  mêmes  types  d’activité  (conférences
+magistrales). Ces considérants nous paraissent méconnaître une caractéristique essentielle de
+la visioconférence, à savoir qu’il s’agit avant tout d’un système de communication interactif
+qui appelle d’autres processus d’enseignement. Nous suivons en cela BAKIS lorsqu’il regrette
+que le “ terme téléconférence, en  suggérant  a priori  une forme de  communication renvoyant
+quasi exclusivement à un exposé, ne rende pas compte de toutes les utilisations possibles de
+tels systèmes ” [BAKIS, 1985].
+
+Notre recherche,  lancée sous forme  d’appel à association,  a  un  caractère  exploratoire ;
+elle vise  à  déterminer  les  différents  types  d’usage  éducatif  des  visioconférences  numériques
+mais  aussi  à  commencer  à  déterminer  les  conditions  de  leur  intégration  dans  le  cadre  des
+établissements scolaires.
+
+4. Équipes associées
+
+Exigeant la possession de matériels ou, à défaut, une disponibilité prochaine, notre appel
+a association a abouti à l’association à nos travaux de diverses équipes d’enseignants selon la
+configuration suivante :
+
+•  Équipes s’inscrivant dans une logique académique : académies de Nice et des Antilles-
+
+Guyane Cette dernière a dû renoncer suite à des difficultés d’équipement.
+
+•  Équipe officiant dans un établissement isolé équipé : lycée Sévigné (Cesson Sévigné).
+•  Équipes officiant dans un établissement isolé en voie d’équipement : lycées Jules Ferry
+
+(Versailles) et Jean Monnet (La Queue Lez Yvelines).
+ Au  total,  de  30  à  35  enseignants.  Il  est  intéressant  de  souligner  qu’il  s’agit  très
+
+majoritairement d’enseignants de disciplines relevant des lettres et sciences humaines.
+
+ A ces équipes doivent être ajoutés les lycées des Arènes de Toulouse et Jean Perrin de
+St  Ouen  l’Aumône  qui  ont,  postérieurement  à  l’appel  d’offre,  décidé  de  participer
+volontairement  à  nos  travaux,  les  établissements  étrangers  avec  lesquels  nous  avons
+communiqué  par  visioconférence  (Irlande,  Grande  Bretagne,  Allemagne,  Luxembourg,  Pays
+Bas) ainsi que le CRDP de Montpellier qui suit nos travaux.
+
+ 5. Protocole de recherche
+
+ Le protocole de recherche s’est organisé en deux phases. La première, dite extensive, a
+consisté  à  recenser  les  usages  † spontanés†   des  meubles  de  visioconférence,  au  travers  de
+périodes  limitées  de  prêts  de  matériels  pour  les  lycées  non  encore  équipés  (académie  de
+Versailles), à constituer des réseaux d’établissements et à initier une réflexion collective quant
+
+Page 2
+
+à  la  place  et  au  rôle  des  dispositifs  concernés  mis  au  service  des  objectifs  des  lycées.  La
+seconde, en cours, est dite intensive. Elle a pour objectif d’explorer des modalités d’usage de
+la visioconférence plus  en  prise  avec  des  objectifs  disciplinaires  et  à  vérifier  les  hypothèses
+issues de la première phase.
+
+ Nous nous sommes ainsi efforcés de :
+
+•  recenser les visioconférences organisées par les établissements associés (classement en
+
+fonction d’une typologie établie par l’INRP),
+
+•  évaluer les résultats obtenus à l’issue de chaque séance ou cycle de visioconférence en
+
+fonction des objectifs poursuivis et des modalités de son déroulement,
+
+•  essayer de caractériser les modalités de communication mises en œuvre au moyen d’une
+
+observation d’un maximum de séances de visioconférence (méthode des graphes)
+
+•  commencer  à  sérier  les  conditions  aussi  bien  matérielles  que  pédagogico-didactiques
+nécessaires  à  l’intégration  de  la  visioconférence  dans  les  établissements  scolaires,
+notamment au niveau des représentations des acteurs impliqués (entretiens collectifs et
+individuels).
+
+ II. Principaux résultats
+
+ 1 Au plan technique.
+
+ Du  point  de  vue  technique,  la  visioconférence  s’avère,  finalement,  peu  difficile  à
+
+utiliser. On verra qu’il n’en va pas tout à fait de même au plan pédagogique.
+
+ Tous  les  systèmes  utilisés  dans  le  cadre  de  la  recherche  (Alcatel,  EGT  et  Sony)  sont
+conformes à la  norme  internationale  H 320,  qui  garantit  la  compatibilité  des  échanges  entre
+des matériels hétérogènes et permet les visioconférences multisites.
+
+ Le prix d’achat d’un meuble de visioconférence (100 à 150 KF), système monobloc peu
+encombrant (téléviseur, caméra, CODEC, micro) généralement monté sur roulettes, dépend du
+niveau  d’équipement  (banc  titre,  caméra  et/ou  micro  supplémentaire  etc.).  A  ce  prix,  non
+négligeable pour un établissement scolaire, doivent être ajoutés les coûts de raccordement au
+réseau  NUMERIS  (675  F),  d’abonnement  mensuel  (150  F  par  accès)  et  celui  des
+communications. Celles-ci, à la charge du poste appelant, varient en fonction de la destination
+de  l’appel  et  du  nombre  d’accès  utilisés.  Si  le  coût  pour  un  accès  de  base  (128  Kb/s)  reste
+relativement modeste (2x 64 Kb/s soit un coût double de celui du téléphone) la multiplication
+des  accès,  intéressante  du  point  de  vue  des  performances  vidéo  fait  monter  les  coûts  à  un
+niveau qui peut être difficilement supportable par le budget d’un établissement.
+
+ La qualité de l’image, sauf en cas de liaison à 384 Kb/s (3 lignes NUMERIS), rarement
+envisageable  dans  le  contexte  d’un  lycée  du  fait  des  frais  induits,  est  fréquemment  mise  en
+cause. Or, même à 128 Kb/s (1 seule ligne), elle s’avère finalement suffisante. En situation de
+communication  de  base  (interlocuteur  (s)  seul  (s)  présent(s)  à  l’écran),  pour  peu  que  les
+interactants s’astreignent à un minimum de discipline, l’intérêt de communiquer l’emporte sur
+tout  autre  considérant  et  la  faible  animation  de  l’image  (10  à  15  images  par  seconde)  ne
+constitue  finalement  pas  un  obstacle  majeur,  sauf  peut-être  pour  les  échanges  en  langue
+étrangère  où  la  synchronisation  image-son  est  importante.  Elle  ne  pose  aucun  problème  et
+constitue  un  apport  essentiel  lorsqu’il  s’agit  de  transmettre,  en  appui  au  discours,  des
+documents fixes (photographies, cartes,  schémas). Par contre,  sauf  à  disposer  de  3  lignes,  il
+convient de s‘abstenir de toute transmission de documents animés.
+
+Page 3
+
+ La qualité du son, par contre, est essentielle. Il ne peut y avoir de réelle communication
+si  elle  est  insuffisante.  Il  faut  alors  veiller  à  ce  que  chacun  puisse  intervenir  au  cours  de
+chaque séance (micro mobile voire plusieurs micros).
+
+ Comme on pouvait s’y attendre, la configuration des lieux joue un rôle essentiel. Ainsi,
+une disposition des acteurs correspondant à celle qui prévaut le plus souvent en classe peut, à
+la  rigueur,  correspondre  à  une  séance  de  réception  d’un  cours  mais  guère  à  des  processus
+nécessitant une forte implication des interactants. Une disposition en cercle ou en fer à cheval
+est à préconiser.
+
+ 2. Au plan des usages éducatifs
+
+ Moyen d’ouverture des classes, la visioconférence permet de pallier certaines carences
+des lycées (ex : enseignement des options rares), d’enrichir l’enseignement (ex : consultation
+d’experts), d’aider à  l’orientation des  élèves  (ex :  liaisons  lycées-enseignement  supérieur)  et
+de  mettre  en  œuvre  des  procédures  de  travail  (ex :  télétravail)  facilitant  l’autonomie  des
+élèves.
+
+ Dans  tous  les  cas  de  figure,  il  s’agit  avant  tout  d’un  système  de  communication  en
+temps  réel  basé  sur  l’expression  orale  et  l’interaction  entre  Hommes.  En  ce  sens,  la
+visioconférence  répond  à  deux  soucis  actuels  du  système  éducatif :  le  développement  des
+compétences orales des élèves, dont on reconnaît généralement l’insuffisance, et celui de leur
+capacité à s’investir dans leur propre éducation, à s’autonomiser.
+
+ Cependant,  les  expérimentations  conduites  au  cours  de  notre  recherche  ont  permis  de
+montrer  que  l’usage  scolaire  de  la  visioconférence  était  plus  complexe  qu’il  y  paraissait  de
+prime abord. Cet outil ne peut être efficace que pour autant que des procédures originales de
+travail, dépassant largement le cadre des séances, sont mises en œuvre.
+
+ Les  visioconférences  ont  toujours  été  utilisées  dans  un  contexte  collectif.  Leur
+utilisation  en  classe  permet  effectivement  de  multiplier  les  ressources  et  les  possibilités  de
+travail en offrant potentiellement des situations d’exploitation diverses et variées :
+
+•  “ cours ” en classe diffusé vers un site distant,
+•  “ communication ” d’un intervenant isolé † en studio†  vers un ou plusieurs sites,
+•  “ intervention ” d’un intervenant présent sur un site avec communication avec un autre
+
+site,
+
+•  “ communication ” d’élèves vers un site distant suivie ou agrémentée régulièrement de
+
+plages réservées au débat,
+
+•  “ échanges ” entre deux groupes distants sur un thème donné,
+•  “ échanges ” entre plusieurs sites etc.
+
+ Ces  situations  répondent  à  des  finalités  diverses.  Elles  correspondent  soit  à  des
+procédures  de  transmission  de  contenu  (cours,  communications  d’experts  etc.),  soit  à  un
+travail  commun  entre  deux  ou  plusieurs  sites  sur  un  thème  donné.  Le  niveau  d’interactivité
+varie  évidemment  suivant  les  cas.  Selon  les  situations  choisies,  les  intérêts  et  les  acquis
+diffèrent mais des règles générales peuvent être isolées.
+
+ Un intérêt des chefs d’établissement et des enseignants
+
+ Les chefs d’établissements sont sensibles à l’aspect moderne de la visioconférence qui
+concourt à une image positive de leurs établissements. Cette image paraît, cependant, suffire à
+nombre d’entre eux qui n’assurent que fort peu la  promotion  interne des  équipements qu’ils
+ont acquis.
+
+Page 4
+
+ Quant  aux  enseignants,  deux  grandes  catégories  peuvent  être  isolées.  Il  y,  d’une  part
+ceux  qui,  classiquement,  rejettent  le  système  parce  qu’il  ferait  peser  une  menace  de  type
+illichien  (la  visioconférence  remplacerait  les  enseignants)  et,  d’autre  part,  ceux  qui  se
+montrent plutôt favorables. Pour ces derniers, il est à noter qu’enseignants non spécialement
+férus  de  technologies,  ils  appréhendent  les  usages  de  la  visioconférence  en  configuration
+“ meuble ”, comme un moyen de moderniser leur enseignement sans trop de remises en cause.
+Les stratégies de contrôle qui en découlent ne sont sans doute pas pour rien dans le fait qu’un
+nombre croissant d’enseignants se sont intéressés au dispositif dans les établissements les plus
+dynamiques.
+
+ En dehors du cas particulier de l’enseignement des options rares, nombre d’enseignants
+ont spontanément tendance à considérer la visioconférence comme un moyen d’enrichir leur
+enseignement (activités supplémentaires ou complémentaires aux cours). Au-delà du fait que
+cette tendance correspond à une phase de découverte, d’exploration tous azimuts des  usages
+de l’outil, il apparaît également qu’elle témoigne d’une approche initiale consistant à séparer
+nettement  les  activités  d’enseignement  disciplinaire  (affaire  des  cours)  de  celles  conduites
+avec la visioconférence. Les séances à contenu pluridisciplinaire ou culturel ou encore basées
+sur la consultation d’experts (moyen d’enrichissement des cours) voire ayant pour finalité de
+faire  partager  une  sortie  scolaire  avec  d’autres  constituent  une  forte  proportion  des
+propositions  initiales  des  enseignants.  La  visioconférence  prend  alors  un  statut  équivalent  à
+celui des sorties pédagogiques, un outil important mais marginal.
+
+ Un outil motivant pour les élèves
+
+ Les élèves manifestent a priori un grand intérêt pour les échanges par visioconférence.
+•  dans le cas des options rares, l’intérêt des élèves pour la visioconférence est soutenu par
+leur motivation pour un enseignement que, sans recours cet outil, ils ne pourraient pas
+suivre dans leur établissement.
+
+•  cet  outil  est  en  bonne  part  perçu  comme  constituant  une  certaine  rupture  avec  les
+pratiques  qui  ont  habituellement  cours  dans  le  quotidien  des  établissements  (effet  de
+intéressés  par  une
+nouveauté).  Les  élèves  sont  spontanément  particulièrement 
+communication  avec  des  pairs  français  et  étrangers  (communication  à  caractère
+† personnel† ) et avec des personnalités considérées comme compétentes dans le domaine
+de  questions  d’actualité  et/ou  de  société  qui  les  intéresse.Ce  surcroît  de  motivation
+initiale  a,  cependant,  progressivement  tendance  à  s’estomper  à  mesure  que  l’outil  se
+banalise et  qu’il  apparaît  que  l’usage  qui en est fait ne correspond  pas  tout  à  fait  à  ce
+qu’ils en attendent.
+
+•  sauf  dans  le  cas  d’insertion  directe  dans  le  cursus  scolaire,  en  particulier  lorsque  le
+contenu  n’est  traité  que  par  visioconférence  (ex :  enseignement  des  options  rares,
+† cours†  d’un expert sur un sujet du programme), les sujets strictement scolaires passent
+au  second  plan  de  l’intérêt  spontané  des  élèves  surtout  si  l’activité  visioconférence  se
+démarque  des  exigences  scolaires  habituelles  (absence  d’évaluation).  Une  explication
+peut  être  risquée :  les  élèves  sont  avant  tout  des  † professionnels†   de  l’enseignement
+calquant  grosso  modo  leur  attitude  sur  la  perception  qu’ils  ont  des  attentes  et  des
+exigences  des  enseignants.  L’insertion  ou  non  de  la  visioconférence  dans  les
+apprentissages joue ainsi un rôle majeur dans le degré de mobilisation de leur attention.
+En l’absence d’insertion explicite, ils perçoivent la visioconférence comme un dispositif
+échappant  aux  règles  d’évaluation  inhérentes  aux  activités  scolaires  ordinaires  et  ont
+tendance  à  s’en  désintéresser  sauf  quand  ils  interviennent  personnellement.  La
+visioconférence est, pour eux, d’abord un jeu.
+
+Page 5
+
+•  les  élèves  de  lycées  restent,  en  effet,  centrés  sur  le  † moi† .  Ils  sont  d’autant  plus
+intéressés  qu’ils  sont  personnellement  impliqués  dans  l’interaction  et  manifestent
+fréquemment le désir d’une communication personnalisée. Ce souci paraît pouvoir être
+satisfait sans difficulté par un affichage, visible à l’écran, des noms des élèves. Encore
+faut-il  que  leur  disposition  permette  cette  visualisation  (ex :  salle  en  fer  à  cheval)  et
+qu’ils aient facilement accès au micro.
+
+•  la  visioconférence  est  particulièrement  motivante  dans  le  cas  de  communication  de
+groupe à groupe. Pour peu que les élèves ne soient pas placés uniquement en situation
+de  réception,  elle  leur  permet  de  s’investir,  d’être  actifs.  Leurs  productions,  en
+particulier  quand  il  s’agit  de  communication  entre  groupes  distants,  ne  sont  plus
+uniquement  destinées  à  l’enseignant  mais  à  des  pairs  vis-à-vis  desquels  ils  ont
+conscience d’avoir des devoirs. Un travail qu’ils considéreraient comme fastidieux dans
+le  cadre  de  la  classe  ne  l’est  plus  dès  lors  qu’il  est  destiné  à  d’autres  à  qui  il  faut
+apporter  quelque  chose.  Encore  faut-il  que  l’exercice  n’apparaisse  pas  comme
+totalement gratuit et que les conditions soient réunies pour  que  la  communication  soit
+effective.
+ En tout état de cause, la motivation des élèves à échanger est un des principaux ressorts
+
+sur lequel il convient de s’appuyer.
+
+ Des contraintes d’utilisation
+
+ Ces contraintes, liées à la spécificité du processus de communication mis en œuvre par la
+visioconférence,  diffèrent  selon  les  usages  (cours  ou  travaux  de  groupe).  Une  contrainte
+commune est cependant qu’il s’agit d’un dispositif de communication en temps réel. Sa mise
+en  œuvre  au  sein  d’un  établissement  scolaire,  dont  la  vie  est  rythmée  par  des  emplois  du
+temps, demeure complexe.
+
+ Rapportée à cette caractéristique, la visioconférence demeure un dispositif lourd :
+
+•  Elle pose des problèmes d’organisation, de coordination entre enseignants et de mise au
+point  des  plannings  de  visioconférences,  en  particulier  lorsque  la  communication
+s’effectue  avec  des  partenaires  étrangers.  En  effet,  avec  ces  derniers,  le  caractère  de
+dispositif  de  communication  en  temps  réel,  jouant  à  plein,  limite  de  fait  le  nombre  de
+visioconférences  possibles  (environ  15  semaines  communes  entre  la  France  et  le
+Royaume Uni, 10 semaines entre la France, le Royaume Uni et les Pays Bas). Le travail
+engagé est mis en péril dès que des modifications de planning interviennent.
+
+•  Elle nécessite toujours un très important travail de la part des enseignants tant au niveau
+de  la  préparation  (identifier  le  ou  les  partenaires,  déterminer  en  commun  les  objectifs
+poursuivis, établir la trame des séances, organiser le travail préparatoire avec les élèves)
+que  du  suivi,  en  particulier  lorsqu’il  s’agit  de  cycles  de  visioconférence,  et  de
+l’évaluation.
+
+•  Il  est  très  difficile,  pour  les  enseignants,  d’assurer  conjointement  l’animation  de  la
+séance  et  la  manipulation  du  matériel  (cas  de  manipulation  de  groupe  à  groupe).  La
+présence d’un tiers paraît dès lors fort utile. Ce constat pose question dès lors qu’on se
+préoccupe  de  généralisation  de  l’usage  scolaire  de  la  visioconférence.  Un  dispositif
+quelconque de communication a d’autant plus de chances de voir ses  usages  s’étendre
+que son utilisation s’avère souple et n’exige pas la mobilisation de personnels autres que
+l’enseignant  utilisateur.  La  tendance  à  exiger  une  qualité  quasi  professionnelle  des
+séances,  en  matière  de  cadrage  par  exemple,  en  imposant  la  présence  d’un  tiers,  va  à
+l’encontre de cet objectif.
+
+Page 6
+
+ Cette  lourdeur  est  encore  accrue  lorsqu’il  s’agit  de  visioconférences  multisites.  En
+obligeant à une organisation très stricte des échanges, ces dernières limitent considérablement
+les possibilités d’interaction et paraissent devoir être réservées à la multidiffusion de cours ou,
+à la rigueur, à de très courtes séances destinées à lancer un cycle d’échange (prise de contact
+et  coordination  des  activités).  En  cas  de  † diffusion†   de  cours,  le  maintien  de  l’intérêt  des
+élèves dépend des capacités de l’intervenant (maîtrise du processus de communication et du
+dispositif) et de l’organisation de son intervention. Un long monologue est, en effet, à éviter,
+l’attention des élèves, en phase de réception, n’excédant guère 15 à 17 minutes.
+
+ La complexité des processus de communication mis en œuvre, en particulier dans le cas
+
+d’une communication de groupe à groupe, est à souligner.
+
+•  le  média  rend  impossible  la  parole  à  plusieurs  et,  en  conséquence,  favorise  la
+monopolisation  de  la  parole  par  certains  d’où  l’apparition  de  phénomènes  de
+dyadisation  (communication  en  binômes)  et  de  longs  dialogues  (monopolisation  de  la
+parole par certains).
+
+•  Pour  communiquer  par  visioconférence,  il  faut,  d’abord,  établir  le  contact  d’où  la
+nécessité de rituels conviviaux en ouverture et fermeture de sessions. Ces dernières, qui
+relèvent d’un processus de mise en communication, déstabilisent parfois les enseignants
+alors  qu’elles  s’avèrent  nécessaires  au  bon  déroulement  des  séances.  En  outre,  la
+communication médiatisée est très différente de la communication  en  face à face dans
+laquelle se trouvent mobilisés à la fois des messages verbaux et des messages relevant
+de la métacommunication. Ces derniers sont, avec la visioconférence, filtrés et, dès lors,
+quasi  imperceptibles  par  les  interlocuteurs  ce  qui  réduit  l’interactivité  et  rend  difficile
+toute prise de parole spontanée.
+
+•  On  ne  peut  tirer  profit  d’une  séance  de  visioconférence  que  si  elle  correspond  à  un
+besoin mais aussi si les interactants sont en état de se comprendre, faute de quoi il y a
+rapidement  désintérêt  des  élèves  et  impossibilité  de  tout  apprentissage.  Cette
+compréhension n’est possible que si les interactants disposent d’un référentiel commun,
+d’un niveau de connaissances suffisant dans le domaine abordé. Un important travail de
+préparation est nécessaire (étude préalable du sujet, échanges de documents en amont de
+la séance) ; une séance de visioconférence ne peut être improvisée.
+
+•  Les interventions d’experts d’un domaine donné posent à cet égard problème du fait de
+leur distance avec le système éducatif. Il paraît judicieux de demander à tout intervenant
+extérieur soit de découper son intervention en courtes périodes suivies de questions des
+élèves, soit de se mettre, dès le départ, en situation de répondre aux questions des élèves
+(meilleure chance d’obtenir des réponses correspondant au niveau réel des élèves). Dans
+tous les cas, un travail préparatoire est indispensable.
+ Au-delà  des  problèmes  techniques,  le  rôle  de  l’enseignant  tout  au  long  du  processus
+
+éducatif incluant la visioconférence est essentiel mais complexe.
+
+ Place et rôle de l’enseignant
+
+ Outre  les  tâches,  importantes,  de  préparation  et  de  suivi,  en  classe,  des  séances  de
+visioconférence, il  revient  aux  enseignants  d’assurer  leur  animation.  Or,  ceux-ci  rencontrent
+des difficultés qui dépassent le cadre strict des tâches techniques déjà abordées.
+
+ Le poids du média (effet d’image) et des accords avec les partenaires les conduit parfois
+à  privilégier  le  † bon  déroulement†   de  la  séance  telle  qu’initialement  programmée.  Il  arrive
+alors que ce souci opère au détriment du processus d’apprentissage. Une angoisse du † trou† ,
+en  cours  de  visioconférence,  est  perceptible  chez  les  enseignants  peu  expérimentés.
+L’établissement  de  scripts  précis  est  une  réponse  à  cette  angoisse.  Mais  la  visioconférence
+
+Page 7
+
+n’est  pas  un  spectacle,  une  émission  de  télévision.  Un  † trou†   dans  les  échanges  n’est  pas
+obligatoirement, un vide (ex : phase de recherche collective de réponse à une question). Et, si
+c’est  le  cas,  c’est  à  l’enseignant  de  relancer  la  communication  sous  forme  de  synthèse  des
+interventions précédentes ou de question directe au site distant. Une séance de visioconférence
+est  organisée  en  fonction  d’objectifs  précis  et  c’est,  comme  en  classe,  à  l’enseignant,  seul
+garant des apprentissages, qu’il revient d’en être l’organisateur mais aussi l’animateur. Il lui
+faut  aussi  savoir  clore  une  communication  non  satisfaisante  du  point  de  vue  des  objectifs
+poursuivis (ex : en cas d’insuffisance de préparation d’un site).
+
+ Une  visioconférence  doit  être  précisément  organisée  et  l’être  de  concert  avec  les
+interlocuteurs.  La  détermination  de  scénarii  précis,  essentiels  en  tant  que  cadre  de  la
+communication, ne doit cependant pas trop contraindre les échanges. Il faut savoir s’éloigner,
+si  nécessaire,  du  scénario  pré-établi  en  fonction  des  réactions  des  élèves,  ce  qui,  en  cas  de
+communication de groupe à groupe suppose une complicité avec le correspondant (expert ou
+enseignant  du  site  distant).  La  constitution  d’un  réseau  d’adultes,  préalable  à  toute
+visioconférence en présence des élèves, est dès lors essentielle. Nous y avons veillé à travers
+la publication d’un annuaire des sites équipés.
+
+ Enfin, un enseignant utilisant avec ses élèves un dispositif de visioconférence, doit avoir
+des compétences en matière de communication médiatisée. Ainsi, pour un intervenant présent
+dans  une  classe  et  dont  le  discours  est  relayé  par  visioconférence  dans  un  lycée  distant,  il
+s’avère difficile d’associer effectivement les deux sites. Sauf à avoir affaire à un professionnel
+des médias habitué à s’adresser à une caméra, le site distant se sent le plus souvent placé en
+marge de la communication.
+
+ Modifications de l’acte d’enseignement
+
+ Pour  être  performante, 
+modifications de l’acte d’enseignement.
+
+tout  recours  à 
+
+la  visioconférence 
+
+implique  donc  des
+
+ Il implique que chaque visioconférence soit bâtie en tenant compte de la spécificité de
+l’outil. Ainsi, une transmission de contenu ne peut être une simple transposition des cours en
+présentiel.  Pour  chaque  séance  de  ce  type,  de  gros  efforts  de  structuration  sont  nécessaires.
+Dans le cas des options rares, une importante adaptation des procédures d’apprentissage se fait
+généralement  rapidement  jour ;  pour  une  bonne  partie  des  séances,  il  s’agit  d’être  surtout  à
+l’écoute des élèves, de leurs difficultés, de se poser davantage en tuteur.
+
+ Par  ailleurs,  une  séance  de  visioconférence  s’inscrivant  dans  un  processus
+d’apprentissage, 
+implique,  hors  connexion,  d’importantes  phases  de  préparation  et
+d’exploitation avec les  élèves.  Il  est  clair  qu’il  est  plus  aisé  de  travailler  en  visioconférence
+avec de petits effectifs. La difficulté de permettre une participation  de  tous  les  élèves  d’une
+classe à effectif parfois élevé, est à souligner. La question relève ici du processus éducatif mis
+en  œuvre.  Le  meuble  de  visioconférence  est  un  dispositif  de  communication  de  groupe  qui
+appelle la mise en œuvre de procédures de travail originales (travail de groupes). Les élèves
+participent quand ils sont intéressés et ils le sont d’autant mieux qu’ils sont impliqués dans le
+travail.  La  mise  en  place,  en  classe,  de  procédure  de  travail  de  groupes  apparaît  comme  la
+condition sine qua non à un usage régulier et performant de la visioconférence en lycées.
+
+ Au-delà, c’est à  la mise  en  œuvre d’une réelle pédagogie  de communication que  nous
+appelle  la  visioconférence.  Le  cas  des  langues  étrangères,  application  de  la  visioconférence
+généralement considérée comme † naturelle† , permet d’illustrer ce fait.
+
+ Les difficultés sont, dans ce domaine, nombreuses. Elles tiennent, semble-t-il, en bonne
+part  des  différences  de  compétences  en  matière  de  pratique  orale  entre  les  partenaires  (les
+Néerlandais comme les Anglais privilégient, au moins en début d’apprentissage, l’expression
+
+Page 8
+
+orale, les Français plutôt l’écrit). Les Français paraissent ainsi défavorisés par rapport à leurs
+partenaires.  L’absence  de  réel  niveau  commun  génère  le  plus  souvent  une  pseudo
+communication.  Ces  difficultés  ne  paraissent  pouvoir  être  dépassées  que  par  des  pratiques
+orales régulières, complexes à mettre en œuvre dans le cadre de classes souvent nombreuses,
+un  entraînement  pouvant,  par  exemple,  prendre  la  forme  d’échanges  entre  des  élèves  et  des
+adultes (ex : native speakers) et, pour des communications entre élèves, pour autant que ceux-
+ci soient collectivement engagés dans un réel projet commun dont l’intérêt est seul susceptible
+de faire passer au second plan les difficultés “ techniques ” de la langue.
+
+ Il ne paraît guère envisageable d’utiliser, de manière performante, la visioconférence en
+dehors d’une approche pédagogique communicative. Celle-ci, visant à susciter chez l’élève le
+désir  d’apprendre  au  moyen  d’une  utilisation  fréquente  de  ses  connaissances  et  de  son
+expérience,  est  centrée  sur  l’apprenant.  Elle  vise  à  mobiliser  l’intérêt  des  élèves  en  les
+associant  au  choix  de  tâches  pourvues  d’un  sens  et  dont  la  bonne  exécution  lui  procure
+satisfaction et, à terme, assurance.
+
+ III. Conclusions et perspectives
+
+ En  multipliant  les  ressources  utilisables,  en  permettant  de  régler  certains  problèmes
+rencontrés par le système éducatif et en offrant la possibilité de diversifier les procédures de
+travail, la visioconférence de groupe  s’affirme comme un  outil pédagogiquement intéressant
+mais dont l’usage est plus complexe qu’il n’y paraît de prime abord. Au-delà de la question
+relative  à  la  difficulté  de  recourir  à  un  système  de  communication  en  temps  réel  dans  une
+organisation  rigide  (le  rôle  du  chef  d’établissement  est  alors  particulièrement  important),  se
+pose  celle,  essentielle,  du  processus  de  communication.  Outil  spécifique,  la  visioconférence
+impose  ses  règles.  De  manière  globale,  son  intégration  réussie  dans  l’enseignement  aboutit
+presque toujours à des modifications substantielles de l’acte d’enseignement.
+
+ Plusieurs exigences méritent d’être prises en compte :
+
+•  il  n’est  possible,  pour  un  enseignant,  d’utiliser  régulièrement  le  dispositif  que  pour
+autant  qu’il  accepte  les  contraintes  lourdes  que  son  usage  implique  (recherche  de
+partenaires, préparation, suivi et évaluation avec les collègues avec qui on communique
+etc.), et se mette lui-même en situation de constante communication avec les collègues
+avec qui il projette de travailler.
+
+•  l’utilisation  scolaire  de  la  visioconférence  appelle  la  mise  en  œuvre  d’une  pédagogie
+faisant une large part à la communication. La visioconférence n’est  qu’un outil qui  ne
+peut  en  aucun  cas  générer  à  lui  seul  une  communication.  In  fine,  ceci  suppose,  dans
+l’idéal,  que  les  processus  de  mise  en  apprentissage  des  élèves  l’emportent  sur  le  seul
+processus  † classique†   d’enseignement.  Il  peut  difficilement  y  avoir  d’un  côté  une
+pédagogie  classique  et,  de  l’autre,  une  pédagogie  propre  à  la  visioconférence.  Là  est
+l’enjeu essentiel de la formation et non l’aspect technique.
+
+•  une  communication  ne  peut  réellement  s’établir  que  pour  autant  qu’une  étroite
+collaboration existe entre les groupes en communication. Un groupe est plus menacé par
+l’indifférence  que  par  des  clivages  ou  des  oppositions.  La  détermination  explicite  des
+objectifs  des  échanges  est  une  des  conditions  nécessaires  à  un  fonctionnement
+satisfaisant des groupes en communication. Une autre est la nécessité de veiller à ce que
+les groupes possèdent un référentiel commun du point de vue du sujet traité. Un écart de
+niveau de connaissance rend impossible toute réelle communication.
+
+•  Lorsqu’il  s’agit  de communication de  groupe à groupe, il convient de veiller à  ce  que
+tous les membres de chaque groupe soient intéressés par le déroulement des séance, ce
+
+Page 9
+
+qui  suppose  que  tout  le  monde  soit  visuellement  † inscrit†   dans  le  cercle  de  la
+communication  et  ait  facilement  accès  au  micro.  En  outre,  la  claire  conscience  que  la
+séance  s’inscrit  dans  le  cadre  des  apprentissages  exigés  de  l’institution  scolaire
+(inscription  dans  un  programme)  aide  à  soutenir  l’intérêt  des  élèves.  Il  est  donc
+recommandé d’adopter des modalités de travail de groupe (l’intervenant prend alors le
+statut  de  porte  parole  d’un  groupe  dont  tous  les  membres  sont  intéressés  par  le
+déroulement  et  peuvent  être  appelés  à  intervenir  en  réponse  à  des  questions  du  site
+distant).
+
+•  La  motivation  à  communiquer  des  élèves,  signalée  ci-dessus,  ne  peut  durer  que  s’ils
+sentent qu’ils sont impliqués dans une situation réelle de communication et en tirent des
+bénéfices. Ceci suppose que la séance de visioconférence soit, en classe, précédée d’un
+travail de préparation de contenu et suivie d’une exploitation.
+
+•  L’enseignant reste le garant essentiel des apprentissages visés au travers des séances de
+visioconférence.  Il  lui  revient  donc  d’animer  les  débats  et  d’adapter  ses  interventions
+selon le déroulement constaté. À cet égard, comme en situation classique de cours, un
+script préalable est nécessaire mais il ne doit pas obligatoirement être respecté à la lettre.
+Il faut permettre une certaine souplesse.
+
+•  La visioconférence étant un système de communication † audiovisuel† , l’acquisition, par
+les  élèves,  de  compétences  de  communication  est  nécessaire.  Celles-ci  touchent  bien
+entendu  au  dispositif  mais  aussi  à  des  compétences  plus  générales  (ex :  capacité  à
+exposer, à argumenter) qui peuvent d’ailleurs être développées par l’usage de l’outil.
+•  Du  point  de  vue  des  contenus,  c’est  à  l’enseignant  qu’il  revient  de  veiller  à  ce  que  le
+contenu des interventions et des débats corresponde au niveau qu’est en droit d’attendre
+tout enseignant.
+
+•  Ces exigences, importantes, nécessitent une formation de tous les enseignants intéressés.
+Celle-ci  paraît  devoir  comprendre  deux  volets.  Le  premier,  de  très  courte  durée,
+recouvre  la  formation  à  la  manipulation au dispositif. Le second,  plus  essentiel,  paraît
+devoir concerner la formation aux méthodes de la pédagogie de communication.
+Cette  recherche,  exploratoire,  envisageait  la  visioconférence  sous  un  angle  général  du
+point  de  vue  de  ses  usages  éducatifs.  Il  reste,  aujourd’hui,  à  approfondir  ces  derniers  d’un
+point de vue didactique.
+
+IV. Valorisation
+
+PERRIAULT  (J.),  DUCHAINE  (J.),  GUIHOT  (P.),  1995 :  “ La  vidéotransmission  et  la
+visioconférence au  service  de  l’enseignement  à  distance  et  présentiel ”,  in  GUIHOT  (P.),
+BRIVET  (S.),  BOCQUET  (F.),  1995 :  École  rurale,  communication  et  technologies
+nouvelles,  Actes  du  colloque  d’Autrans,  Quéaux,  INRP/CRESPC/Parc  naturel  du
+Vercors/CNDP, pp. 223-228.
+
+GUIHOT  (P.),  1996 :  “ La  visioconférence  numérique,  un  dispositif  de  communication  au
+service de l’éducation et de  la  formation  ”,  communication  effectuée  par  visioconférence
+multisite  dans  le  cadre  des  journées  Ecoles-entreprises  de  l’académie  de  Versailles,  St
+Ouen l’Aumône, avril 1996 (conférencier invité).
+
+BORGEL (C.) : “ Annuaire des sites français équipés en systèmes de visioconférence ”, Paris,
+
+INRP.
+
+GUIHOT  (P.),  1996 :  “ Problématique  d’usage  éducatif  de  la  visioconférence  numérique ”,
+
+Séminaire national “ Visioconférence t enseignement, Paris, décembre 1996.
+
+Page 10
+
+GUIHOT  (P.),  1996-97 :  membre  du  groupe  ministériel  chargé  de  la  mise  en  œuvre  de  la
+mesure  59  du  nouveau  contrat  pour  l’école  (enseignement  des  options  rares  au  lycée  à
+l’aide des dispositifs de proximité, visioconférence).
+
+GUIHOT  (P.),  1998 :  “ Usages  éducatifs  et  modalités  d’intégration  de  la  visioconférence
+numérique  en  lycées ”,  communication  à  la  quatrième  Biennale  de  l’éducation  et  de  la
+formation, Paris, CNAM, 17 avril 1998 (CD-ROM en cours d’édition).
+
+GUIHOT (P.), 1998 : “ Former à la pédagogie de communication pour former à l’utilisation
+pédagogique  des  réseaux  de  communication ”,  séminaire  franco-canadien  de  recherche
+Formation de formateurs aux nouvelles techniques de l’information et des réseaux, Lyon,
+École centrale, 5 et 6 novembre 1998.
+
+CASSONNET (S.), 1997 : Formation à l’utilisation de la visioconférence des enseignants du
+
+Bisschop Bekkers College d’Eindhoven (Pays Bas), juillet 1997.
+
+CASSONNET  (S.),  1998 :  Animation  d’un  stand  “ Visioconférence  en  lycées ”,  Versailles,
+
+Journées académiques Multimédia et enseignement, janvier 1998.
+
+CASSONNET (S.), 1998 : “ Pourquoi et comment utiliser la visioconférence numérique dans
+l’enseignement  au  lycée ”,  Vesoul,  journée  de  formation  des  enseignants  du  lycée  des
+Haberges.
+
+CASSONNET  (S.),  1998 :  “ Elargir 
+
+la
+visioconférence ”,  communication  dans  le  cadre  du  cycle  Technologies  nouvelles  de
+communication, Paris, Cité des sciences et des techniques de La Villette,
+
+l’horizon  pédagogique  des 
+
+lycées  à 
+
+l’aide 
+
+CASSONNET (S.), 1998 : “ Des outils pour élargir l’horizon pédagogique ”, XXIè siècle n° 2,
+
+juin 1998, revue du ministère de l’Education nationale.
+
+GUIHOT 
+
+(P.),  1998 :  “ Nouvelle 
+
+in  colloque
+Visiocommunication et formation, École Normale supérieure de Cachan, 19 et 20 octobre
+1998.
+
+technologie,  nouvelle  pédagogie ” 
+
+CLAIR  (J.F.),  BORGEL  (C.)  1998 :  “Utiliser  la  visioconférence  numérique  au  lycée,
+
+pourquoi, comment ”, Bulletin de l’EPI (à paraître).
+
+De plus, divers articles de presse ont traité de la recherche (Télescope, Les Nouvelles de
+
+Versailles, Ouest France, La Lettre de l’éducation Pays de Loire).
+
+Enfin,  un  projet  SOCRATES  a  été  initialisé  entre  un  établissement  français  et  des
+
+établissements britanniques, luxembourgeois, néerlandais et italiens.
+
+Page 11
