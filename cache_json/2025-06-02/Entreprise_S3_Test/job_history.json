@@ -1,0 +1,18 @@
+[
+  {
+    "job_id": "d6ce96f4-775b-4403-b0af-87f3f594e206",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-02T13:02:38.918172",
+    "duration": 2990.57
+  },
+  {
+    "job_id": "2910f3b6-81c3-4107-a5c2-dea04b521ecd",
+    "pdf_url": "https://edutice.hal.science/edutice-00000862v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-02T13:13:26.752281",
+    "duration": 431.67
+  }
+]
