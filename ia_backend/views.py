@@ -1,7 +1,6 @@
 import uuid
 import requests
 import os
-import shutil
 import json
 import time
 import hashlib
@@ -13,7 +12,8 @@ from rest_framework.response import Response
 
 from ia_backend.services.pdf_utils import extract_blocks_from_pdf, detect_annex_start_page
 from ia_backend.services.backup_service import load_global_summary_if_exists
-from ia_backend.job_queue import job_queue, Job, JOB_RESULTS
+from ia_backend.job_queue import Job
+from ia_backend.tasks import process_job_task  # 👉 IMPORT DU TASK CELERY
 
 # ---------- Logging centralisé ----------
 logger = logging.getLogger(__name__)
@@ -79,37 +79,31 @@ def summarize_from_url(request):
         total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
         annex_page = detect_annex_start_page(local_pdf_path)
         effective_pages = annex_page if annex_page else total_pages
-
         estimated_blocks = effective_pages if effective_pages < 10 else effective_pages // 3
-
     except Exception as e:
         logger.warning(f"Erreur lecture préliminaire PDF : {e}")
         estimated_blocks = 10
 
-    job = Job(
-        priority=estimated_blocks,
-        job_id=job_id,
-        entreprise=entreprise,
-        pdf_path=local_pdf_path,
-        pdf_url=pdf_url,
-        folder_name=folder_name
-    )
-    job_queue.put(job)
-    logger.info(f"📨 Job {job_id} ajouté à la file (priorité={estimated_blocks})")
-    logger.info(f"⏳ En attente de la fin du job {job_id}...")
+    # 👉 Construction du job sous forme de dictionnaire pour Celery
+    job_data = {
+        "priority": estimated_blocks,
+        "job_id": job_id,
+        "entreprise": entreprise,
+        "pdf_path": local_pdf_path,
+        "pdf_url": pdf_url,
+        "folder_name": folder_name
+    }
 
-    while True:
-        result = JOB_RESULTS.get(job_id)
-        if result:
-            duration_total = round(time.time() - start_total, 2)
-            logger.info(f"✅ Résumé IA généré en {duration_total}s")
-            return Response({
-                "summary": result.get("summary", ""),
-                "job_id": job_id,
-                "mode": result.get("mode", ""),
-                "duration": duration_total
-            })
-        time.sleep(2)
+    logger.info(f"📨 Job {job_id} envoyé à Celery (priorité={estimated_blocks})")
+
+    # 👉 Envoi asynchrone à Celery avec gestion de priorité possible
+    process_job_task.apply_async(args=[job_data], priority=0)  # On mettra la priorité dynamique ici plus tard
+
+    return Response({
+        "job_id": job_id,
+        "status": "processing",
+        "message": "Résumé IA en cours de traitement."
+    })
 
 @api_view(["POST"])
 def ask_from_url(request):

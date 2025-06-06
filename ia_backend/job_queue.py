@@ -37,9 +37,7 @@ INTERMEDIATE_GROUP_SIZE = 5
 MAX_ATTEMPTS = 4
 
 # ---------- Job Queue ----------
-job_queue = queue.PriorityQueue()
-JOB_STATUS = {}
-JOB_RESULTS = {}
+
 
 class Job:
     def __init__(self, priority, job_id, entreprise, pdf_path, pdf_url, folder_name):
@@ -50,8 +48,6 @@ class Job:
         self.pdf_url = pdf_url
         self.folder_name = folder_name
 
-    def __lt__(self, other):
-        return self.priority < other.priority
 
 def save_txt(path, content):
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -61,7 +57,7 @@ def save_txt(path, content):
 # ---------- Pipeline complet ----------
 def process_job(job: Job):
     try:
-        JOB_STATUS[job.job_id] = "en cours"
+        
         start_total = time.time()
 
         logger.info(f"\n🚀 Démarrage traitement job {job.job_id} (priorité : {job.priority})")
@@ -158,42 +154,7 @@ def process_job(job: Job):
         save_global_summary(job.entreprise, job.folder_name, final_summary)
         log_job_history(job.job_id, job.entreprise, job.pdf_url, "terminé", "mistral", start_total)
 
-        JOB_STATUS[job.job_id] = "terminé"
-        JOB_RESULTS[job.job_id] = {
-            "summary": final_summary,
-            "mode": "hierarchical_annex_v5"
-        }
+        logger.info(f"\n✅ Traitement finalisé pour job {job.job_id}")
 
     except Exception as e:
         logger.error(f"❌ Erreur job {job.job_id}: {e}", exc_info=True)
-        JOB_STATUS[job.job_id] = "échec"
-        JOB_RESULTS[job.job_id] = {"error": str(e)}
-
-# ---------- Worker batch ----------
-def lot_worker():
-    lot_id = 0
-    batch = []
-    last_flush = time.time()
-
-    while True:
-        try:
-            job = job_queue.get(timeout=1)
-            batch.append(job)
-        except queue.Empty:
-            pass
-
-        if batch and (len(batch) >= 5 or time.time() - last_flush > 10):
-            lot_id += 1
-            logger.info(f"\n📦 Traitement du lot #{lot_id} ({len(batch)} jobs)")
-            logger.info("—" * 40)
-
-            for job in batch:
-                process_job(job)
-
-            logger.info(f"\n✅ Lot #{lot_id} terminé")
-            logger.info("═" * 40)
-            batch.clear()
-            last_flush = time.time()
-
-# ---------- Lancement des workers ----------
-threading.Thread(target=lot_worker, daemon=True).start()
