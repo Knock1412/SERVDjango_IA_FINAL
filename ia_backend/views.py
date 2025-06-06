@@ -13,7 +13,9 @@ from rest_framework.response import Response
 from ia_backend.services.pdf_utils import extract_blocks_from_pdf, detect_annex_start_page
 from ia_backend.services.backup_service import load_global_summary_if_exists
 from ia_backend.job_queue import Job
-from ia_backend.tasks import process_job_task  # 👉 IMPORT DU TASK CELERY
+from ia_backend.tasks import process_job_task
+
+from celery.result import AsyncResult
 
 # ---------- Logging centralisé ----------
 logger = logging.getLogger(__name__)
@@ -21,7 +23,7 @@ logger.setLevel(logging.INFO)
 
 if not logger.handlers:
     handler = logging.StreamHandler()
-    formatter = logging.Formatter('%(message)s')  # ✅ Suppression timestamp
+    formatter = logging.Formatter('%(message)s')
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
@@ -33,7 +35,6 @@ def extract_filename_from_url(pdf_url):
 @api_view(["POST"])
 def summarize_from_url(request):
     start_total = time.time()
-    job_id = str(uuid.uuid4())
 
     pdf_url = request.data.get("url", "")
     entreprise = request.data.get("entreprise", "anonyme")
@@ -42,11 +43,14 @@ def summarize_from_url(request):
         return Response({"error": "URL manquante."}, status=400)
 
     folder_name = extract_filename_from_url(pdf_url)
+    local_pdf_filename = f"{folder_name}.pdf"
+    job_id = str(uuid.uuid4())
     job_folder = f"{folder_name}_{job_id[:8]}"
     folder_cache_dir = os.path.join(CACHE_DIR, job_folder)
     os.makedirs(folder_cache_dir, exist_ok=True)
-    local_pdf_path = os.path.join(folder_cache_dir, f"{folder_name}.pdf")
+    local_pdf_path = os.path.join(folder_cache_dir, local_pdf_filename)
 
+    # ✅ Vérif de cache AVANT de relancer Celery
     existing_summary = load_global_summary_if_exists(entreprise, folder_name)
     if existing_summary:
         duration_total = round(time.time() - start_total, 2)
@@ -58,6 +62,7 @@ def summarize_from_url(request):
             "duration": duration_total
         })
 
+    # Sinon on continue normalement pour générer
     try:
         logger.info(f"📄 Téléchargement du PDF depuis {pdf_url}...")
         pdf_response = requests.get(pdf_url, timeout=30)
@@ -75,6 +80,7 @@ def summarize_from_url(request):
         logger.error(f"Erreur téléchargement PDF: {e}")
         return Response({"error": "PDF invalide.", "detail": str(e)}, status=400)
 
+    # analyse rapide pour priorité
     try:
         total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
         annex_page = detect_annex_start_page(local_pdf_path)
@@ -84,7 +90,6 @@ def summarize_from_url(request):
         logger.warning(f"Erreur lecture préliminaire PDF : {e}")
         estimated_blocks = 10
 
-    # 👉 Construction du job sous forme de dictionnaire pour Celery
     job_data = {
         "priority": estimated_blocks,
         "job_id": job_id,
@@ -96,14 +101,37 @@ def summarize_from_url(request):
 
     logger.info(f"📨 Job {job_id} envoyé à Celery (priorité={estimated_blocks})")
 
-    # 👉 Envoi asynchrone à Celery avec gestion de priorité possible
-    process_job_task.apply_async(args=[job_data], priority=0)  # On mettra la priorité dynamique ici plus tard
+    task = process_job_task.apply_async(args=[job_data])
 
     return Response({
         "job_id": job_id,
-        "status": "processing",
-        "message": "Résumé IA en cours de traitement."
+        "task_id": task.id,  # ✅ C’est ce task_id qu’on doit ensuite utiliser dans get_summary_status
+        "status": "processing"
     })
+
+@api_view(["GET"])
+def get_summarize_status(request, task_id):
+    res = AsyncResult(task_id)
+
+    if res.state == 'PENDING':
+        return Response({"status": "pending"})
+    elif res.state == 'STARTED':
+        return Response({"status": "processing"})
+    elif res.state == 'SUCCESS':
+        result_data = res.result or {}
+        return Response({
+            "status": "completed",
+            "summary": result_data.get("summary", ""),
+            "mode": result_data.get("mode", ""),
+        })
+    elif res.state == 'FAILURE':
+        logger.error(f"Erreur Celery: {res.result}")
+        return Response({
+            "status": "failed",
+            "error": str(res.result)
+        }, status=500)
+    else:
+        return Response({"status": res.state})
 
 @api_view(["POST"])
 def ask_from_url(request):

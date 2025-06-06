@@ -4,15 +4,23 @@ from .job_queue import process_job, Job
 @shared_task(bind=True)
 def process_job_task(self, job_data):
     """
-    Tâche Celery IA principale.
-    - bind=True => pour accès aux retries / logs Celery natifs
+    Tâche Celery IA principale (version prod scalable).
+    - bind=True => accès aux retries, logs, etc.
+    - Retourne directement le résumé final à Celery
     """
     try:
-        # reconstruction de l'objet Job depuis le dictionnaire reçu
+        # Reconstruction de l'objet Job
         job = Job(**job_data)
-        process_job(job)
+
+        # On exécute directement le traitement
+        result = process_job(job)  # 👉 attention, process_job doit renvoyer le résultat final
+
+        return {
+            "job_id": job.job_id,
+            "summary": result.get("summary", "(résumé indisponible)"),
+            "mode": result.get("mode", "unknown")
+        }
 
     except Exception as e:
-        # log d'erreur possible (bonus pour debug production)
-        print(f"❌ Erreur dans process_job_task : {e}")
-        raise self.retry(exc=e, countdown=10, max_retries=3)
+        # log d'erreur + retry automatique
+        self.retry(exc=e, countdown=10, max_retries=3)

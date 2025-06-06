@@ -1,6 +1,6 @@
 import argostranslate.package
 
-model_path = "C:/Users/adrie/Desktop/INFO Program/SERVDjango_IA_FINAL-master/translate-en_fr-1_9.argosmodel"
+model_path = "/Users/imptc03/Desktop/ProjetStageIMPERIATEC-Adrien/SERVDjango_IA_FINAL-Deepseek/translate-en_fr-1_9.argosmodel"
 
 argostranslate.package.install_from_path(model_path)
 
