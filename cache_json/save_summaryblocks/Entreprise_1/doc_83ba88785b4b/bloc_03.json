@@ -1,0 +1,7 @@
+{
+  "bloc": 3,
+  "summary": "Problématique : État des vecteurs d'interruption après l'installation du VIRUS.\n\n   Méthode : Comparaison entre les états avant et après l'installation du virus (Figure 3a et Figure 3b).\n\n   Résultats : Activation du programme VIRUS, qui détermine si il est temps de se déclencher en répondant à la question suivante : est-il le Vendredi 13 ? ou bien est-il installé depuis suffisamment longtemps dans cette machine ?\n\n   Données chiffrées importantes : Pas de données chiffrées fournies.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7889,
+  "translated": false
+}

@@ -1,0 +1,7 @@
+{
+  "bloc": 11,
+  "summary": "Problématique : Détection et protection contre les virus informatiques, en particulier ceux qui se camouflent pour échapper aux détecteurs antivirus.\n\nMéthode : Utilisation de camouflages efficaces tels que la modification de signature et le rétablissement temporaire des données erronées. Décomposition du programme en petites procédures courtes, changement aléatoire de leur ordre d'exécution à chaque reproduction, utilisation d'algorithmes de compactage pour masquer leur présence et modification de l'algorithme à chaque installation.\n\nRésultats : Les virus camouflés sont devenus plus difficiles à détecter, nécessitant des détecteurs antivirus plus performants ou changeant leur méthode de détection. L'avenir n'est pas rose et il faudra en passer par là, surtout dans les milieux scolaires où le nombre d'utilisateurs est important par rapport au nombre de postes et l'utilisation en libre service favorise la circulation des disquettes et l'implantation des virus.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7283,
+  "translated": false
+}

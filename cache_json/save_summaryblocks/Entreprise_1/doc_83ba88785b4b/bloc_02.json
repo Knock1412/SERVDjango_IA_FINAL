@@ -1,0 +1,7 @@
+{
+  "bloc": 2,
+  "summary": "Problématique : Fonctionnement des virus informatiques\n   Méthode : Analyse de la structure et du fonctionnement d'un virus\n   Résultats :\n   - Un \"bon\" virus est structuré en quatre parties (Figure 3a)\n   - Le programme d'installation s'exécute à lancement du programme hôte, laissant une partie de son code résident pour agir pendant toute l'activité de la machine\n   - Ce programme d'installation \"branche\" les trois autres parties sur les interruptions les plus appropriées\n   - Le virus peut détourner le vecteur TIMER vers le sous-programme d'activation pour s'activer régulièrement, et le vecteur \"accès disque\" vers le sous-programme de propagation pour se reproduire sans ralentir la machine visiblement\n   - Les programmes d'activation et de propagation rendent la main aux programmes d'interruption originaux (les opérations détournées doivent se dérouler \"normalement\")\n   - Une fois l'installation terminée, le programme donne la main à son programme hôte, comme un VER (virus électronique) ferait. L'utilisateur n'a rien vu.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7111,
+  "translated": false
+}
