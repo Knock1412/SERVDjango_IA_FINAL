@@ -1,0 +1,7 @@
+{
+  "bloc": 9,
+  "summary": "Problématique : Les virus informatiques et leur contamination des systèmes d'information.\n   Méthode : Prévention efficace par la protection logicielle et détection manuelle ou automatique.\n   Résultats : Les virus se propagent uniquement en exécutant un programme infecté ou en démarrant une machine avec une disquette contaminée. La simple connexion à un serveur, copie de fichiers ou consultation d'un répertoire ne transmettent pas le virus. Existe des logiciels de protection qui empêchent l'écriture sur certaines zones du disque et détectent la présence de virus en utilisant des outils tels que DEBUG ou un utilitaire approprié pour les types de virus BOOT, ainsi qu'en contrôlant la longueur des fichiers programmes.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.705,
+  "translated": false
+}

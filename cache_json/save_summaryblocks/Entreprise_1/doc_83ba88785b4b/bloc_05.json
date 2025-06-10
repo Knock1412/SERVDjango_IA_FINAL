@@ -1,0 +1,7 @@
+{
+  "bloc": 5,
+  "summary": "Problématique : Les virus informatiques peuvent avoir des effets divers et délétères sur les systèmes d'information, allant de la simple apparition de messages comiques à la destruction de données.\n\n Méthode : Les deux formes principales de virus sont les \"virus programme\" qui se transmettent en s'installant dans des fichiers COM ou EXE et le schéma de leur reproduction est choisir un programme à infecter, se recopier à la fin du programme, changer l'adresse de lancement et conserver l'adresse d'origine.\n\n Résultats : Les virus peuvent multiplier eux-mêmes en contaminant plusieurs fois le même programme, ce qui peut entraîner une installation massive de virus à chaque lancement du programme infecté. Un exemple particulier est le virus Jerusalem qui s'installe dans les fichiers exécutables au moment de leur exécution et ne vérifie pas si le programme en question est déjà contaminé, ce qui peut entraîner plusieurs copies du code du virus dans le même programme.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.6409,
+  "translated": false
+}

@@ -1,18 +1,32 @@
 import uuid
 import requests
 import os
-import shutil
 import json
 import time
 import hashlib
+import logging
 from urllib.parse import urlparse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from ia_backend.services.pdf_utils import extract_blocks_from_pdf
+from ia_backend.services.pdf_utils import extract_blocks_from_pdf, detect_annex_start_page
 from ia_backend.services.backup_service import load_global_summary_if_exists
-from ia_backend.job_queue import job_queue, Job, JOB_RESULTS
+from ia_backend.job_queue import Job
+from ia_backend.tasks import process_job_task
+
+from ia_backend.ask_engine import load_all_blocks, find_relevant_blocks, generate_answer
+from celery.result import AsyncResult
+
+# ---------- Logging centralisé ----------
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
 
 CACHE_DIR = "temp_cache"
 
@@ -21,8 +35,7 @@ def extract_filename_from_url(pdf_url):
 
 @api_view(["POST"])
 def summarize_from_url(request):
-    start_total = time.time()  # DÉBUT DU TIMER
-    job_id = str(uuid.uuid4())
+    start_total = time.time()
 
     pdf_url = request.data.get("url", "")
     entreprise = request.data.get("entreprise", "anonyme")
@@ -31,21 +44,29 @@ def summarize_from_url(request):
         return Response({"error": "URL manquante."}, status=400)
 
     folder_name = extract_filename_from_url(pdf_url)
+    local_pdf_filename = f"{folder_name}.pdf"
+    job_id = str(uuid.uuid4())
     job_folder = f"{folder_name}_{job_id[:8]}"
     folder_cache_dir = os.path.join(CACHE_DIR, job_folder)
     os.makedirs(folder_cache_dir, exist_ok=True)
-    local_pdf_path = os.path.join(folder_cache_dir, f"{folder_name}.pdf")
+    local_pdf_path = os.path.join(folder_cache_dir, local_pdf_filename)
 
-    # Vérifie s'il existe déjà un résumé
+    # ✅ Vérif de cache AVANT de relancer Celery
     existing_summary = load_global_summary_if_exists(entreprise, folder_name)
     if existing_summary:
         duration_total = round(time.time() - start_total, 2)
-        print(f"✅ Résumé depuis cache en {duration_total} sec")
-        return Response({"summary": existing_summary, "job_id": job_id, "mode": "cache"})
+        logger.info(f"✅ Résumé chargé depuis le cache en {duration_total}s")
+        return Response({
+            "summary": existing_summary,
+            "job_id": job_id,
+            "mode": "cache",
+            "duration": duration_total
+        })
 
+    # Sinon on continue normalement pour générer
     try:
-        print("📄 Téléchargement du PDF...")
-        pdf_response = requests.get(pdf_url)
+        logger.info(f"📄 Téléchargement du PDF depuis {pdf_url}...")
+        pdf_response = requests.get(pdf_url, timeout=30)
 
         if pdf_response.status_code != 200:
             raise ValueError("Erreur HTTP")
@@ -54,53 +75,92 @@ def summarize_from_url(request):
 
         with open(local_pdf_path, "wb") as f:
             f.write(pdf_response.content)
-        print(f"📥 PDF sauvegardé dans : {local_pdf_path}")
+        logger.info(f"📥 PDF sauvegardé dans {local_pdf_path}")
 
     except Exception as e:
+        logger.error(f"Erreur téléchargement PDF: {e}")
         return Response({"error": "PDF invalide.", "detail": str(e)}, status=400)
 
-    # 📏 Estimation du nombre de blocs pour priorisation
-    total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
-    estimated_blocks = total_pages if total_pages < 10 else total_pages // 3
+    # analyse rapide pour priorité
+    try:
+        total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
+        annex_page = detect_annex_start_page(local_pdf_path)
+        effective_pages = annex_page if annex_page else total_pages
+        estimated_blocks = effective_pages if effective_pages < 10 else effective_pages // 3
+    except Exception as e:
+        logger.warning(f"Erreur lecture préliminaire PDF : {e}")
+        estimated_blocks = 10
 
-    # 📨 Ajout à la file
-    job = Job(
-        priority=estimated_blocks,
-        job_id=job_id,
-        entreprise=entreprise,
-        pdf_path=local_pdf_path,
-        pdf_url=pdf_url,
-        folder_name=folder_name
-    )
-    job_queue.put(job)
-    print(f"📨 Job {job_id} ajouté à la file (priorité = {estimated_blocks})")
-    print(f"⏳ En attente de la fin du job {job_id}...")
+    job_data = {
+        "priority": estimated_blocks,
+        "job_id": job_id,
+        "entreprise": entreprise,
+        "pdf_path": local_pdf_path,
+        "pdf_url": pdf_url,
+        "folder_name": folder_name
+    }
 
-    # 🕓 Attente bloquante
-    while True:
-        result = JOB_RESULTS.get(job_id)
-        if result:
-            duration_total = round(time.time() - start_total, 2)
-            print(f"✅ Traitement total terminé en {duration_total} sec")
-            return Response({
-                "summary": result.get("summary", ""),
-                "job_id": job_id,
-                "mode": result.get("mode", ""),
-                "duration": duration_total
-            })
-        time.sleep(2)
+    logger.info(f"📨 Job {job_id} envoyé à Celery (priorité={estimated_blocks})")
 
+    task = process_job_task.apply_async(args=[job_data])
+
+    return Response({
+        "job_id": job_id,
+        "task_id": task.id,  # ✅ C’est ce task_id qu’on doit ensuite utiliser dans get_summary_status
+        "status": "processing"
+    })
+
+@api_view(["GET"])
+def get_summarize_status(request, task_id):
+    res = AsyncResult(task_id)
+
+    if res.state == 'PENDING':
+        return Response({"status": "pending"})
+    elif res.state == 'STARTED':
+        return Response({"status": "processing"})
+    elif res.state == 'SUCCESS':
+        result_data = res.result or {}
+        return Response({
+            "status": "completed",
+            "summary": result_data.get("summary", ""),
+            "mode": result_data.get("mode", ""),
+        })
+    elif res.state == 'FAILURE':
+        logger.error(f"Erreur Celery: {res.result}")
+        return Response({
+            "status": "failed",
+            "error": str(res.result)
+        }, status=500)
+    else:
+        return Response({"status": res.state})
 
 @api_view(["POST"])
 def ask_from_url(request):
-    from ia_backend.services.qa_engine import answer_question_from_pdf
+    question = request.data.get("question")
+    job_id = request.data.get("job_id")
+    entreprise = request.data.get("entreprise")
 
-    pdf_url = request.data.get("url", "")
-    question = request.data.get("question", "")
-    if not pdf_url or not question:
-        return Response({"error": "URL ou question manquante ou invalide."}, status=400)
+    if not question or not job_id or not entreprise:
+        return Response({"error": "question, job_id et entreprise sont requis."}, status=400)
+
     try:
-        answer = answer_question_from_pdf(requests.get(pdf_url).content, question)
-        return Response({"answer": answer})
+        blocks = load_all_blocks(entreprise, job_id)
+    except FileNotFoundError:
+        return Response({"error": "Blocs non trouvés pour ce job"}, status=404)
     except Exception as e:
-        return Response({"error": str(e)}, status=500)
+        return Response({"error": f"Erreur lors du chargement des blocs : {str(e)}"}, status=500)
+
+    if not blocks:
+        return Response({"error": "Aucun bloc disponible pour ce document."}, status=204)
+
+    selected_blocks = find_relevant_blocks(question, blocks)
+    answer = generate_answer(question, selected_blocks)
+
+    return Response({
+        "question": question,
+        "answer": answer,
+        "context_used": selected_blocks,
+        "nb_blocks": len(selected_blocks),
+        "job_id": job_id,
+        "entreprise": entreprise
+    })

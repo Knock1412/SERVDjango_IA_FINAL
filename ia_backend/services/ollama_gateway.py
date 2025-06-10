@@ -1,54 +1,73 @@
 import threading
 import queue
 import requests
+from typing import List, Optional
+import logging
+import time
 
-# File d’attente pour les requêtes IA
+logger = logging.getLogger(__name__)
+
+OLLAMA_MAX_WORKERS = 2
+DEFAULT_MODELS = ["mistral"]
+
 ollama_queue = queue.Queue()
-OLLAMA_MAX_WORKERS = 2  # Nbre max de requêtes concurrentes
 
 def ollama_worker():
     while True:
-        fn, result_queue = ollama_queue.get()
         try:
-            result = fn()
+            task, result_queue = ollama_queue.get()
+            result = task()
             result_queue.put(result)
+        except requests.exceptions.RequestException as e:
+            print(f"🌐 Erreur réseau Ollama: {str(e)}")
+            result_queue.put("Erreur réseau")
         except Exception as e:
-            print(f"⚠️ Worker exception : {e}")
-            result_queue.put(("Échec de génération IA", None))
+            print(f"⚠️ Erreur worker: {str(e)}")
+            result_queue.put("Erreur interne")
         finally:
             ollama_queue.task_done()
 
-# Démarrage des workers
-for _ in range(OLLAMA_MAX_WORKERS):
-    threading.Thread(target=ollama_worker, daemon=True).start()
-
-def generate_ollama(prompt, num_predict, models=None):
-    models = models or ["mistral"]
+def generate_ollama(
+    prompt: str,
+    num_predict: int = 800,
+    models: Optional[List[str]] = None,
+    temperature: float = 0.7,
+    top_k: int = 40
+) -> str:
+    models = models or DEFAULT_MODELS
 
     for model in models:
-        result_queue = queue.Queue()
-
-        def task():
-            res = requests.post(
+        try:
+            response = requests.post(
                 "http://localhost:11434/api/generate",
                 json={
                     "model": model,
                     "prompt": prompt,
                     "stream": False,
-                    "options": {"num_predict": num_predict}
+                    "options": {
+                        "num_predict": num_predict,
+                        "temperature": temperature,
+                        "top_k": top_k
+                    }
                 },
-               
             )
-            summary = res.json().get("response", "").strip()
-            return (summary, model) if summary else ("", None)
+            response.raise_for_status()
+            json_response = response.json()
+            response_text = json_response.get("response")
 
-        # Enfile la tâche
-        ollama_queue.put((task, result_queue))
-        summary, model_used = result_queue.get()
+            if not response_text or not isinstance(response_text, str):
+                logger.warning(f"Ollama a renvoyé une réponse vide ou invalide : {json_response}")
+                continue
 
-        if summary:
-            return summary, model_used
+            return response_text.strip()
 
-        print(f"⚠️ Erreur modèle {model} : Timeout ou réponse vide")
+        except Exception as e:
+            logger.warning(f"Échec modèle {model}: {str(e)}")
+            continue
 
-    return "Échec de génération IA", None
+    logger.error("Tous les modèles ont échoué")
+    return ""
+
+# Démarrage des workers
+for _ in range(OLLAMA_MAX_WORKERS):
+    threading.Thread(target=ollama_worker, daemon=True).start()

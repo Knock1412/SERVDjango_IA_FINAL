@@ -1,0 +1,7 @@
+{
+  "bloc": 7,
+  "summary": "Problématique : Mise en service d'un disque et implantation de virus informatique.\n\n   Méthode :\n   1. Un programme détecte la présence des fichiers système (IO.SYS et MSDOS.SYS) à l'initialisation du disque, chargés et exécutés si présents.\n   2. Une table d'allocation décrit chaque granule de secteurs indiquant leur état (libre, occupé ou défaut).\n   3. Le directory contient la liste des fichiers, leur date et heure de création, longueur etc.\n   4. Pour implanter un \"boot virus\", le secteur logique 0 d'une disquette (ou d'un disque dur) est l'endroit approprié. Le code complet du virus est écrit dans un endroit non décelable par l'utilisateur, comme un groupe marqué comme défaut ou une piste jamais utilisée.\n   5. Le mode de reproduction du virus suit un algorithme : lire le secteur logique 0 (boot original), écrire le début du code dans le boot, puis la suite du code dans le premier secteur libre, réécrire le secteur boot original, marquer les secteurs utilisés comme défaut.\n\n   Résultats :\n   1. Mise en service d'un disque avec détection de fichiers système et exécution du programme BOOT.\n   2. Implantation d'un \"boot virus\" dans le secteur logique 0, invisible pour l'utilisateur.\n   3. Reproduction du virus selon un algorithme précis.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.7699,
+  "translated": false
+}

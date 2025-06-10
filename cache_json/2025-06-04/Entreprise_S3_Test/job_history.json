@@ -30,5 +30,21 @@
     "model_global": "mistral:instruct",
     "created_at": "2025-06-04T12:46:44.658500",
     "duration": 582.06
+  },
+  {
+    "job_id": "2eb07d1f-3e69-4db4-98b8-c0ffbc61ca85",
+    "pdf_url": "https://edutice.hal.science/edutice-00000413v1/document",
+    "status": "terminé",
+    "model_global": "mistral:instruct",
+    "created_at": "2025-06-04T19:00:10.792961",
+    "duration": 508.17
+  },
+  {
+    "job_id": "136e74af-1af2-4636-8212-6b8aff394bd2",
+    "pdf_url": "https://edutice.hal.science/edutice-00000413v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-04T22:36:01.382065",
+    "duration": 0.01
   }
 ]

@@ -1,0 +1,7 @@
+{
+  "bloc": 12,
+  "summary": "Problématique : Les antivirus sur le marché.\n\nMéthode : Description de différents antivirus disponibles, leurs caractéristiques et leur prix.\n\nRésultats :\n- Flushot+ (Software Concepts Design) : BIOSOFT (100F), contrôle les tentatives d'intrusion et l'intégrité des fichiers définis par l'utilisateur, disponible à Soft & Micro.\n- V-ANALYST : détecte et supprime une centaine de virus courants (Ping-Pong, Jerusalem...), disponible chez Infodidact ou CAMIF.\n- Viruscan (McAfee Associates) : version 75 détecte et supprime plus de 200 virus répertoriés, disponible sur les serveurs, composé de deux programmes SCAN (détection) et CLEAN (éradication), contient également NETSCAN et VSHIELD. Gratuit pour une utilisation personnelle, la disquette contient une licence à renvoyer dans le cas d'une utilisation professionnelle.\n\nSource : Science & Vie Micro n°66 (novembre 1989) - L'affaire des virus ; LE BULLETIN DE L'EPI - Les Virus.\n\nAuteur : Jean-Michel COSTE, Formateur MAFPEN-Créteil.",
+  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
+  "score": 0.8035,
+  "translated": false
+}
