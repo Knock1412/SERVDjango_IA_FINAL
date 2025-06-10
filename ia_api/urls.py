@@ -6,3 +6,4 @@ urlpatterns = [
     path('ask_from_url/', ask_from_url),
     path('get_summarize_status/<str:task_id>/', get_summarize_status),  # ✅ nouveau endpoint async pour Celery
 ]
+ 

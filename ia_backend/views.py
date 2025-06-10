@@ -15,6 +15,7 @@ from ia_backend.services.backup_service import load_global_summary_if_exists
 from ia_backend.job_queue import Job
 from ia_backend.tasks import process_job_task
 
+from ia_backend.ask_engine import load_all_blocks, find_relevant_blocks, generate_answer
 from celery.result import AsyncResult
 
 # ---------- Logging centralisé ----------
@@ -135,16 +136,31 @@ def get_summarize_status(request, task_id):
 
 @api_view(["POST"])
 def ask_from_url(request):
-    from ia_backend.services.qa_engine import answer_question_from_pdf
+    question = request.data.get("question")
+    job_id = request.data.get("job_id")
+    entreprise = request.data.get("entreprise")
 
-    pdf_url = request.data.get("url", "")
-    question = request.data.get("question", "")
-    if not pdf_url or not question:
-        return Response({"error": "URL ou question manquante ou invalide."}, status=400)
+    if not question or not job_id or not entreprise:
+        return Response({"error": "question, job_id et entreprise sont requis."}, status=400)
+
     try:
-        pdf_content = requests.get(pdf_url, timeout=30).content
-        answer = answer_question_from_pdf(pdf_content, question)
-        return Response({"answer": answer})
+        blocks = load_all_blocks(entreprise, job_id)
+    except FileNotFoundError:
+        return Response({"error": "Blocs non trouvés pour ce job"}, status=404)
     except Exception as e:
-        logger.error(f"Erreur QA: {e}")
-        return Response({"error": str(e)}, status=500)
+        return Response({"error": f"Erreur lors du chargement des blocs : {str(e)}"}, status=500)
+
+    if not blocks:
+        return Response({"error": "Aucun bloc disponible pour ce document."}, status=204)
+
+    selected_blocks = find_relevant_blocks(question, blocks)
+    answer = generate_answer(question, selected_blocks)
+
+    return Response({
+        "question": question,
+        "answer": answer,
+        "context_used": selected_blocks,
+        "nb_blocks": len(selected_blocks),
+        "job_id": job_id,
+        "entreprise": entreprise
+    })
