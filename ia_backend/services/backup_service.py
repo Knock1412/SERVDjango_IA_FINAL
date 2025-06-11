@@ -15,25 +15,28 @@ def get_summary_path(entreprise, folder_name):
     filename = f"summary_{folder_name}.json"
     return os.path.join(entreprise_dir, filename)
 
-def save_global_summary(entreprise, folder_name, summary):
+def save_global_summary(entreprise, folder_name, summary, job_id=None):
     """
     Sauvegarde le résumé global dans le bon dossier.
     """
     path = get_summary_path(entreprise, folder_name)
+    payload = {"summary": summary}
+    if job_id:
+        payload["job_id"] = job_id  # ✅ Ajout du job_id dans le fichier
     with open(path, "w", encoding="utf-8") as f:
-        json.dump({"summary": summary}, f, indent=2, ensure_ascii=False)
+        json.dump(payload, f, indent=2, ensure_ascii=False)
     print(f"💾 Résumé global sauvegardé : {path}")
 
 def load_global_summary_if_exists(entreprise, folder_name):
     """
-    Vérifie s'il existe déjà un résumé global.
+    Vérifie s'il existe déjà un résumé global, retourne aussi job_id si présent.
     """
     path = get_summary_path(entreprise, folder_name)
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                return data.get("summary")
+                return data  # ✅ On retourne le dictionnaire entier (summary + job_id éventuel)
         except json.JSONDecodeError:
             return None
     return None

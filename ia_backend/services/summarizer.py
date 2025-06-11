@@ -67,7 +67,7 @@ def summarize_block(text: str) -> str:
         result = generate_ollama(
             prompt=BLOCK_PROMPT.format(text=text),
             num_predict=650,
-            models=["mistral:instruct"],
+            models=["phi3"],
             temperature=0.3
         )
 
@@ -86,7 +86,7 @@ def summarize_block(text: str) -> str:
         return ""
 
 # --------- Fusion globale ---------
-def summarize_global(summary_list: List[str], num_predict: int = 1200, is_final: bool = False) -> str:
+def summarize_global(summary_list: List[str], is_final: bool = False) -> str:
     try:
         if not isinstance(summary_list, (list, tuple)):
             logger.error(f"Type invalide pour summary_list: {type(summary_list)}. Attendu: list")
@@ -102,12 +102,15 @@ def summarize_global(summary_list: List[str], num_predict: int = 1200, is_final:
         prompt_template = FINAL_PROMPT if is_final else INTERMEDIATE_PROMPT
         prompt = prompt_template.format(text=joined)
 
+        model_to_use = "mistral" if is_final else "mistral:instruct"
+        num_predict = 1200 if is_final else 1000
+
         logger.info(f"Fusion de {len(safe_summary_list)} résumés - Longueur totale: {len(prompt)} caractères")
 
         result = generate_ollama(
             prompt=prompt,
-            num_predict=1000,
-            models=["mistral:instruct"],
+            num_predict=num_predict,
+            models=[model_to_use],
             top_k=30
         )
 
@@ -162,8 +165,8 @@ Nouveau résumé amélioré :[/INST]"""
 
     return generate_ollama(
         prompt=prompt,
-        num_predict=800,
-        models=["mistral:instruct"],
+        num_predict=750,
+        models=["phi3"],
         repeat_penalty=1.2
     )
 

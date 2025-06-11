@@ -30,8 +30,8 @@ if not logger.handlers:
     logger.addHandler(handler)
 
 # ---------- Paramètres industriels centralisés ----------
-BLOCK_THRESHOLD_INITIAL = 0.7
-INTERMEDIATE_GROUP_SIZE = 5
+BLOCK_THRESHOLD_INITIAL = 0.68
+INTERMEDIATE_GROUP_SIZE = 5 
 MAX_ATTEMPTS = 4
 
 # ---------- Definition du Job ----------
@@ -62,11 +62,11 @@ def process_job(job: Job):
     full_text_path = f"temp_cache/{job.folder_name}_full_text.txt"
     save_txt(full_text_path, full_pdf_text)
 
-    total_pages = extract_blocks_from_pdf(job.pdf_path, return_pages_only=True)
-    logger.info(f"🧩 Découpage dynamique | Total pages : {total_pages}")
+    blocks = extract_blocks_from_pdf(job.pdf_path)
+    total_pages = sum(len(page) for page in blocks)
+    logger.info(f"🧩 Découpage dynamique | Total pages approx : {total_pages}")
 
     annex_start_page = detect_annex_start_page(job.pdf_path)
-    blocks = extract_blocks_from_pdf(job.pdf_path)
     summaries = []
 
     for idx, block_indexes in enumerate(blocks):
@@ -88,6 +88,7 @@ def process_job(job: Job):
 
         best_score = 0
         best_summary = ""
+        translated = False
 
         for attempt in range(1, MAX_ATTEMPTS + 1):
             summary = summarize_block(text)
@@ -107,7 +108,7 @@ def process_job(job: Job):
 
         logger.info(f"\n✅ Bloc {idx+1} terminé : meilleur score={best_score:.3f}")
 
-        json_dir = f"cache_json/save_summaryblocks/{job.entreprise}/{job.folder_name}"
+        json_dir = f"cache_json/save_summaryblocks/{job.entreprise}/{job.job_id}"
         save_json(json_dir, idx, {
             "bloc": idx + 1,
             "summary": best_summary,
@@ -126,10 +127,10 @@ def process_job(job: Job):
         group = joined[i:i+INTERMEDIATE_GROUP_SIZE]
         logger.info(f"\n🔄 Fusion intermédiaire lot {i//INTERMEDIATE_GROUP_SIZE + 1} ({len(group)} résumés)")
 
-        intermediate_summary = summarize_global(group, num_predict=1000)
+        intermediate_summary = summarize_global(group, is_final=False)
         processed_summary, translated = process_text_block(intermediate_summary)
 
-        inter_json_dir = f"cache_json/save_summaryintermediates/{job.entreprise}/{job.folder_name}"
+        inter_json_dir = f"cache_json/save_summaryintermediates/Entreprise_{job.entreprise}/{job.folder_name}"
         os.makedirs(inter_json_dir, exist_ok=True)
         save_json(inter_json_dir, i//INTERMEDIATE_GROUP_SIZE, {
             "intermediate_block": i//INTERMEDIATE_GROUP_SIZE + 1,
@@ -140,17 +141,17 @@ def process_job(job: Job):
 
     logger.info(f"\n🔍 Fusion finale sur {len(intermediates)} intermédiaires...")
 
-    final_predict_len = 1300 if len(intermediates) <= 10 else 1500
-    final_summary = summarize_global(intermediates, num_predict=final_predict_len, is_final=True)
+    final_summary = summarize_global(intermediates, is_final=True)
     global_score = evaluate_summary_score(full_pdf_text, final_summary, partial_summaries=intermediates)
     logger.info(f"📊 Score global (info only) = {global_score:.3f}")
 
-    save_global_summary(job.entreprise, job.folder_name, final_summary)
+    # ✅ Mise à jour ici avec job_id
+    save_global_summary(job.entreprise, job.folder_name, final_summary, job_id=job.job_id)
+
     log_job_history(job.job_id, job.entreprise, job.pdf_url, "terminé", "mistral", start_total)
 
     logger.info(f"\n✅ Traitement finalisé pour job {job.job_id}")
 
-    # ✅ ON RETOURNE LE RESULTAT FINAL POUR CELERY :
     return {
         "summary": final_summary,
         "mode": "hierarchical_annex_v5"

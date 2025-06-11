@@ -1,5 +1,6 @@
 import os
 import json
+import time  # ⏱️ Pour mesurer le temps
 from sentence_transformers import SentenceTransformer, util
 from ia_backend.services.ollama_gateway import generate_ollama
 
@@ -11,8 +12,9 @@ def load_all_blocks(entreprise: str, job_id: str) -> list[str]:
     """
     Charge tous les blocs de texte d'un document à partir du cache JSON structuré.
     """
-    folder_path = os.path.join("cache_json", "save_summaryblocks", f"Entreprise_{entreprise}", f"doc_{job_id}")
-    
+    folder_path = os.path.join("cache_json", "save_summaryblocks", entreprise, job_id)
+    print(f"📂 Tentative de chargement des blocs depuis : {folder_path}")  # DEBUG
+
     if not os.path.exists(folder_path):
         raise FileNotFoundError(f"Dossier introuvable : {folder_path}")
     
@@ -25,10 +27,12 @@ def load_all_blocks(entreprise: str, job_id: str) -> list[str]:
                     content = json.load(f)
                     if isinstance(content, str):
                         blocks.append(content)
-                    elif isinstance(content, dict) and "text" in content:
-                        blocks.append(content["text"])
+                    elif isinstance(content, dict) and "summary" in content:
+                        blocks.append(content["summary"])
+                    else:
+                        print(f"⚠️ Clé 'summary' manquante dans {filename}")
                 except Exception as e:
-                    print(f"Erreur lecture {filename}: {e}")
+                    print(f"❌ Erreur lecture {filename}: {e}")
     return blocks
 
 
@@ -62,5 +66,9 @@ Voici les extraits pertinents du document :
 {context}
 
 Donne une réponse claire, structurée, et pertinente.[/INST]"""
+    start_time = time.time()
+    result = generate_ollama(prompt=prompt, num_predict=500)
+    duration = round(time.time() - start_time, 2)
+    print(f"🕒 Temps de génération de la réponse : {duration}s")
 
     return generate_ollama(prompt=prompt, num_predict=500)

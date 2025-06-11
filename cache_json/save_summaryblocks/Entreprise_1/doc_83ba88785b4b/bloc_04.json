@@ -1,7 +1,0 @@
-{
-  "bloc": 4,
-  "summary": "Problématique : Activation et propagation de virus informatiques.\n   Méthode : Exécution régulière du programme d'activation, transfert du virus sur un autre support via le programme d'écriture-lecture disque.\n   Résultats : Le virus est activé à chaque clic du TIMER ou interruption clavier et se réproduit indécelablement en utilisant l'automatisation de l'installation d'un ver décrit précédemment.\n\n   D. Propagation\n      - Fonction de reproduction du virus, différenciant le virus du ver.\n      - Activité indécelable, souvent \"branchée\" sur le programme d'écriture-lecture disque.\n      - Utilisateur ne s'aperçoit pas que son ordinateur est infecté lorsqu'il exécute une commande DOS telle que DIR A: par exemple.\n\n   E. Déclenchement\n      - Contient les qualités destructrices des virus.\n      - Le programme d'activation appelle ce sous-programme lorsque nécessaire, provoquant des dégâts à l'utilisateur.",
-  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
-  "score": 0.7545,
-  "translated": false
-}

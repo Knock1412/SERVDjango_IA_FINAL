@@ -15,16 +15,15 @@ response = requests.post(
 
 if response.status_code == 200:
     data = response.json()
+    job_id = data.get("job_id", "-")
+    task_id = data.get("task_id")
 
     if data.get("mode") == "cache":
-        print("✅ Résumé chargé directement depuis le cache :\n")
-        print(data["summary"])
+        print("✅ Résumé chargé depuis le cache :\n")
+        print(data.get("summary", "(pas de résumé trouvé)"))
     else:
-        job_id = data.get("job_id", "-")
-        task_id = data.get("task_id")
-
         print(f"🚀 Tâche Celery lancée : job_id={job_id} | task_id={task_id}")
-        print("⏳ Attente du résultat...\n")
+        print("⏳ Attente du résumé global...\n")
 
         spinner = ["|", "/", "-", "\\"]
         i = 0
@@ -39,12 +38,34 @@ if response.status_code == 200:
                 break
             elif status_data["status"] == "failed":
                 print("\n❌ Erreur durant le traitement :", status_data.get("error"))
-                break
+                sys.exit(1)
             else:
                 sys.stdout.write(f"\r🔄 Statut actuel : {status_data['status']} {spinner[i % len(spinner)]}")
                 sys.stdout.flush()
                 i += 1
                 time.sleep(1.5)
+
+    # 🔁 Mode interactif : poser des questions manuellement après traitement complet
+    print("\n💬 ASK est maintenant disponible. Tape une question à poser sur le PDF :\n(tape 'exit' pour quitter)\n")
+
+    while True:
+        question = input("❓ Ta question : ").strip()
+        if question.lower() in ("exit", "quit", ""):
+            print("👋 Fin du test.")
+            break
+
+        ask_response = requests.post(
+            f"{API_URL}/ask_from_url/",
+            json={"job_id": job_id, "question": question, "entreprise": entreprise}
+        )
+
+        if ask_response.status_code == 200:
+            ask_data = ask_response.json()
+            print(f"\n✅ Réponse :\n{ask_data.get('answer', '(pas de réponse générée)')}\n")
+        else:
+            print(f"\n❌ Erreur : {ask_response.status_code}")
+            print(ask_response.text)
+
 else:
     print(f"❌ Erreur HTTP {response.status_code} :")
     print(response.text)

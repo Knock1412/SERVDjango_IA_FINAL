@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from ia_backend.services.pdf_utils import extract_blocks_from_pdf, detect_annex_start_page
-from ia_backend.services.backup_service import load_global_summary_if_exists
+from ia_backend.services.backup_service import load_global_summary_if_exists, save_global_summary
 from ia_backend.job_queue import Job
 from ia_backend.tasks import process_job_task
 
@@ -45,25 +45,28 @@ def summarize_from_url(request):
 
     folder_name = extract_filename_from_url(pdf_url)
     local_pdf_filename = f"{folder_name}.pdf"
+
+    # ✅ Vérif de cache AVANT génération de job_id
+    summary_data = load_global_summary_if_exists(entreprise, folder_name)
+    if summary_data:
+        summary = summary_data.get("summary")
+        cached_job_id = summary_data.get("job_id", folder_name)  # fallback = dossier
+        duration_total = round(time.time() - start_total, 2)
+        logger.info(f"✅ Résumé chargé depuis le cache en {duration_total}s")
+        return Response({
+            "summary": summary,
+            "job_id": cached_job_id,
+            "mode": "cache",
+            "duration": duration_total
+        })
+
+    # ❌ Pas trouvé en cache => générer job_id
     job_id = str(uuid.uuid4())
     job_folder = f"{folder_name}_{job_id[:8]}"
     folder_cache_dir = os.path.join(CACHE_DIR, job_folder)
     os.makedirs(folder_cache_dir, exist_ok=True)
     local_pdf_path = os.path.join(folder_cache_dir, local_pdf_filename)
 
-    # ✅ Vérif de cache AVANT de relancer Celery
-    existing_summary = load_global_summary_if_exists(entreprise, folder_name)
-    if existing_summary:
-        duration_total = round(time.time() - start_total, 2)
-        logger.info(f"✅ Résumé chargé depuis le cache en {duration_total}s")
-        return Response({
-            "summary": existing_summary,
-            "job_id": job_id,
-            "mode": "cache",
-            "duration": duration_total
-        })
-
-    # Sinon on continue normalement pour générer
     try:
         logger.info(f"📄 Téléchargement du PDF depuis {pdf_url}...")
         pdf_response = requests.get(pdf_url, timeout=30)
@@ -81,7 +84,6 @@ def summarize_from_url(request):
         logger.error(f"Erreur téléchargement PDF: {e}")
         return Response({"error": "PDF invalide.", "detail": str(e)}, status=400)
 
-    # analyse rapide pour priorité
     try:
         total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
         annex_page = detect_annex_start_page(local_pdf_path)
@@ -106,7 +108,7 @@ def summarize_from_url(request):
 
     return Response({
         "job_id": job_id,
-        "task_id": task.id,  # ✅ C’est ce task_id qu’on doit ensuite utiliser dans get_summary_status
+        "task_id": task.id,
         "status": "processing"
     })
 
@@ -154,13 +156,14 @@ def ask_from_url(request):
         return Response({"error": "Aucun bloc disponible pour ce document."}, status=204)
 
     selected_blocks = find_relevant_blocks(question, blocks)
+    start_time = time.time()
     answer = generate_answer(question, selected_blocks)
+    duration = round(time.time() - start_time, 2)
+    logger.info(f"🕒 Temps de génération de la réponse : {duration}s")
 
     return Response({
         "question": question,
         "answer": answer,
-        "context_used": selected_blocks,
-        "nb_blocks": len(selected_blocks),
         "job_id": job_id,
         "entreprise": entreprise
     })

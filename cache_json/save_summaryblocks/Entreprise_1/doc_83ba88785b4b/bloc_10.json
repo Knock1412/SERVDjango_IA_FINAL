@@ -1,7 +1,0 @@
-{
-  "bloc": 10,
-  "summary": "Problématique : Présence de virus informatiques divers et destructeurs dans les systèmes informatiques.\n\n   Méthode : Les antivirus recherchent des signatures spécifiques (suites d'octets) associées aux virus connus, et appliquent une procédure de traitement appropriée lorsque le test est positif. La méthode de traitement consiste à restaurer les paramètres originaux du système en annulant le lancement du programme parasite, ou à effacer le fichier contaminé ou reformater le support.\n\n   Résultats : Il est important d'avoir une disquette DOS \"propre\" pour traiter les virus informatiques. Utiliser un logiciel antivirus de votre disque dur lorsque le virus est actif peut polluer ce programme, et ne vous assure pas que le virus détruit ne se réinstalle pas aussitôt.\n\n   L'avenir : L'éradication d'un virus connu n'est pas un problème technique insurmontable, mais la phase d'identification des nouveaux virus est délicate. Pour produire des antivirus efficaces, il faut détecter les nouveaux virus. Un réseau d'utilisateurs (appuyé principalement sur les utilisateurs de l'EPI) existe pour aider à cette identification.",
-  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
-  "score": 0.7334,
-  "translated": false
-}

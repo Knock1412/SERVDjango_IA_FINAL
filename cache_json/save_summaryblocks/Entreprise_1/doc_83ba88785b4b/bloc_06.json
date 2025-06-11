@@ -1,7 +1,0 @@
-{
-  "bloc": 6,
-  "summary": "Problématique : Les virus informatiques se cachent dans des programmes exécutables pour s'installer en mémoire. Le programme infecté n'est pas toujours exécuté fréquemment, ce qui rend la détection difficile.\n\n   Méthode : L'article propose une méthode pour éliminer un virus en utilisant une disquette DOS saine et recopiant un COMMAND.COM original. Il explique également que le programme BOOT, exécuté à la mise sous tension de tout support magnétique (disque ou disquette), peut être utilisé pour comprendre la structure des supports.\n\n   Résultats : La structure d'une disquette est décrite comme étant constituée de deux faces (0 et 1) avec 40 pistes chacune, chaque piste contenant 9 secteurs de 512 octets. Certains secteurs sont réservés, notamment le secteur BOOT qui contient des informations utiles pour comprendre la structure des supports.",
-  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
-  "score": 0.6965,
-  "translated": false
-}

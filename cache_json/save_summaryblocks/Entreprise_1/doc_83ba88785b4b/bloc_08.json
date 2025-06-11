@@ -1,7 +1,0 @@
-{
-  "bloc": 8,
-  "summary": "Problématique : Infiltration de virus sur les disques durs et menace pour les systèmes d'exploitation.\n   Méthode : Utilisation de programmes tels que DEBUG, PCTOOLS, et NORTON pour visualiser le secteur. Attention à la présence de messages d'erreur inattendus ou remplacés.\n   Résultats : Les virus \"Partition\" peuvent infecter toutes les partitions d'un disque dur, affectant leur structure BOOT, FAT, et DIRECTORY. La table de partition est utilisée pour déterminer la position et le nombre de cylindres utilisés par chaque partition. Le programme MASTER BOOT assure la lecture de ces informations et lance le BOOT de la partition active.\n   Les virus sont également présents dans les zones non décrites par un numéro de secteur logique, ce qui les rend plus difficiles à détecter (exemple : le virus STONE).\n   Protection : Il n'existe pas de protection universelle contre les virus. La meilleure protection est une grande méfiance et une surveillance constante. Les disquettes provenant de l'extérieur doivent être considérées comme suspectes. Il est recommandé d'examiner toutes les machines à l'antivirus avant la formation et de passer régulièrement les machines à l'antivirus.",
-  "source_pdf": "https://edutice.hal.science/edutice-00000852v1/document",
-  "score": 0.7443,
-  "translated": false
-}
