@@ -1,0 +1,4 @@
+{
+  "intermediate_block": 2,
+  "summary": "Le problème concerne la propagation de virus \"boot\" qui s'installent dans le secteur BOOT des disquettes ou des disques durs. Les méthodes utilisées comprenaient l'utilisation du secteur logique 0 pour insérer le code viral et la redirection des données système vers ce secteur, suivie de réécriture du BOOT original marqué comme déficient sans alerter l'utilisateur. Pour contourner cette menace, il est nécessaire d'utiliser un programme antivirus pour surveiller et identifier les anomalies dans la machine et d'appliquer des mises à jour régulières. En cas de détection, le traitement doit être immédiat avec élimination du virus, restauration des données sécurisées et mise en place d'une politique de cybersécurité globale pour prévenir les risques futurs. Les antivirus efficaces doivent reconnaître de nouvelles signatures virales rapidement grâce au partage des informations entre utilisateurs."
+}

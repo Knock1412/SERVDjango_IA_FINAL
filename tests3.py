@@ -1,10 +1,12 @@
 import requests
 import time
 import sys
+import uuid  # ✅ Pour session_id
 
-pdf_url = "https://edutice.hal.science/edutice-00001245v1/document"
+pdf_url = "https://edutice.hal.science/edutice-00000852v1/document"
 entreprise = "Entreprise_S3_Test"
 API_URL = "http://127.0.0.1:8000"
+session_id = str(uuid.uuid4())  # ✅ Session unique pour la conversation
 
 print("📥 Envoi du PDF S3 pour résumé...\n")
 
@@ -45,7 +47,6 @@ if response.status_code == 200:
                 i += 1
                 time.sleep(1.5)
 
-    # 🔁 Mode interactif : poser des questions manuellement après traitement complet
     print("\n💬 ASK est maintenant disponible. Tape une question à poser sur le PDF :\n(tape 'exit' pour quitter)\n")
 
     while True:
@@ -56,7 +57,12 @@ if response.status_code == 200:
 
         ask_response = requests.post(
             f"{API_URL}/ask_from_url/",
-            json={"job_id": job_id, "question": question, "entreprise": entreprise}
+            json={
+                "job_id": job_id,
+                "question": question,
+                "entreprise": entreprise,
+                "session_id": session_id  # ✅ Ajout ici
+            }
         )
 
         if ask_response.status_code == 200:

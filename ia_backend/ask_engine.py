@@ -1,74 +1,150 @@
 import os
 import json
-import time  # ⏱️ Pour mesurer le temps
-from sentence_transformers import SentenceTransformer, util
+import logging
+import uuid
+import torch
+import numpy as np
+from typing import List, Dict, Tuple
+from sentence_transformers import SentenceTransformer, util, CrossEncoder
 from ia_backend.services.ollama_gateway import generate_ollama
+from ia_backend.services.chat_memory import save_interaction  # <-- Import chat memory
 
-# 🧠 Chargement du modèle multilingue rapide
+# Initialisation du logger
+logger = logging.getLogger(__name__)
+
+# Chargement des modèles
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
-
-def load_all_blocks(entreprise: str, job_id: str) -> list[str]:
-    """
-    Charge tous les blocs de texte d'un document à partir du cache JSON structuré.
-    """
+# --- Chargement des blocs de résumé avec embeddings
+def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
     folder_path = os.path.join("cache_json", "save_summaryblocks", entreprise, job_id)
-    print(f"📂 Tentative de chargement des blocs depuis : {folder_path}")  # DEBUG
-
+    logger.debug(f"Chargement des blocs depuis : {folder_path}")
     if not os.path.exists(folder_path):
         raise FileNotFoundError(f"Dossier introuvable : {folder_path}")
-    
-    blocks = []
+
+    blocks: List[Tuple[str, Dict]] = []
     for filename in sorted(os.listdir(folder_path)):
-        if filename.startswith("bloc_") and filename.endswith(".json"):
-            full_path = os.path.join(folder_path, filename)
+        if not filename.startswith("bloc_") or not filename.endswith(".json"):
+            continue
+        full_path = os.path.join(folder_path, filename)
+        try:
             with open(full_path, "r", encoding="utf-8") as f:
-                try:
-                    content = json.load(f)
-                    if isinstance(content, str):
-                        blocks.append(content)
-                    elif isinstance(content, dict) and "summary" in content:
-                        blocks.append(content["summary"])
-                    else:
-                        print(f"⚠️ Clé 'summary' manquante dans {filename}")
-                except Exception as e:
-                    print(f"❌ Erreur lecture {filename}: {e}")
+                data = json.load(f)
+            summary = data.get("summary", "")
+            embedding = data.get("embedding")
+            meta = {
+                "source": filename,
+                "score": data.get("score", 0),
+                "translated": data.get("translated", False),
+                "embedding": embedding
+            }
+            blocks.append((summary, meta))
+        except Exception as e:
+            logger.error(f"Erreur lecture {filename}: {e}")
+            continue
     return blocks
 
+# --- Sélection des blocs pertinents (hybride embedding + rerank)
+def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: int = 3) -> List[Dict]:
+    candidate_blocks = []
+    embeddings = []
+    for summary, meta in blocks:
+        emb = meta.get("embedding")
+        if emb is not None:
+            embeddings.append(emb)
+            candidate_blocks.append((summary, meta))
 
-def find_relevant_blocks(question: str, blocks: list[str], top_k: int = 5) -> list[str]:
-    """
-    Sélectionne les blocs les plus pertinents par similarité sémantique avec la question.
-    """
-    if not blocks:
+    if not embeddings:
         return []
 
-    question_emb = model.encode(question, convert_to_tensor=True)
-    block_embs = model.encode(blocks, convert_to_tensor=True)
+    # --- Convert to float32 tensor and send to CPU
+    block_embs = torch.tensor(np.stack(embeddings), dtype=torch.float32).to("cpu")
+    question_emb = model.encode(question, convert_to_tensor=True).to(torch.float32).to("cpu")
+
+    logger.debug(f"block_embs dtype: {block_embs.dtype}, device: {block_embs.device}")
+    logger.debug(f"question_emb dtype: {question_emb.dtype}, device: {question_emb.device}")
 
     similarities = util.pytorch_cos_sim(question_emb, block_embs)[0]
-    top_indices = similarities.topk(k=min(top_k, len(blocks))).indices
 
-    return [blocks[i] for i in top_indices]
+    scored = []
+    for i, (_, meta) in enumerate(candidate_blocks):
+        sim = similarities[i].item()
+        quality = meta.get("score", 0)
+        combined = 0.7 * sim + 0.3 * quality
+        scored.append((i, combined))
+    scored.sort(key=lambda x: x[1], reverse=True)
+    pre_top = [i for i, _ in scored[:10]]  # Top 10 pour rerank
 
+    # 2) Re-ranking avec CrossEncoder
+    cross_inputs = [(question, candidate_blocks[i][0]) for i in pre_top]
+    rerank_scores = reranker.predict(cross_inputs)
+    reranked = sorted(zip(pre_top, rerank_scores), key=lambda x: x[1], reverse=True)[:top_k]
 
-def generate_answer(question: str, context_blocks: list[str]) -> str:
-    """
-    Construit un prompt structuré avec les blocs et interroge Ollama.
-    """
-    context = "\n---\n".join(context_blocks)
-    prompt = f"""[INST] Tu es un assistant IA spécialisé en réponse précise à partir de documents techniques.
+    result = []
+    for idx, _ in reranked:
+        summary, meta = candidate_blocks[idx]
+        result.append({
+            "text": summary,
+            "source": meta.get("source")
+        })
+    return result
 
-Voici une question :
+# --- Construction du prompt pour Ollama
+def build_prompt(question: str, selected_blocks: List[Dict]) -> str:
+    parts = []
+    for i, b in enumerate(selected_blocks):
+        parts.append(f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}")
+    context = "\n\n".join(parts)
+    return f"""[INST]
+Tu es un assistant IA expert et synthétique. Réponds en une seule phrase claire et précise à la question suivante, en t'appuyant exclusivement sur les extraits fournis.
+
+QUESTION :
 {question}
 
-Voici les extraits pertinents du document :
+EXTRAITS :
 {context}
 
-Donne une réponse claire, structurée, et pertinente.[/INST]"""
-    start_time = time.time()
-    result = generate_ollama(prompt=prompt, num_predict=500)
-    duration = round(time.time() - start_time, 2)
-    print(f"🕒 Temps de génération de la réponse : {duration}s")
+INSTRUCTIONS :
+- Réponds en une à deux phrases maximum, sans introduction, ni structure académique.
+- Si aucun élément pertinent, réponds : "Non mentionné dans le document."
+[/INST]"""
 
-    return generate_ollama(prompt=prompt, num_predict=500)
+# --- Génération de la réponse et enregistrement dans le chat memory
+def generate_answer(
+    question: str,
+    blocks: List[Tuple[str, Dict]],
+    job_id: str = None,
+    session_id: str = None,
+    user_id: str = None
+) -> str:
+    selected = find_relevant_blocks(question, blocks)
+    if not selected:
+        answer = "Aucune information pertinente trouvée dans le document."
+    else:
+        prompt = build_prompt(question, selected)
+        answer = generate_ollama(
+            prompt=prompt,
+            num_predict=400,
+            models=["llama3:instruct"],
+            temperature=0.3,
+            
+        ).strip()
+
+    # --- Enregistrement dans SQLite chat memory
+    if session_id is None:
+        session_id = str(uuid.uuid4())
+    blocks_used = [b["source"] for b in selected] if selected else []
+    try:
+        save_interaction(
+            session_id=session_id,
+            question=question,
+            answer=answer,
+            blocks_used=blocks_used,
+            job_id=job_id,
+            user_id=user_id
+        )
+    except Exception as e:
+        logger.error(f"Erreur lors de la sauvegarde de l'interaction chat : {e}")
+
+    return answer

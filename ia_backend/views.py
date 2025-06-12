@@ -141,6 +141,7 @@ def ask_from_url(request):
     question = request.data.get("question")
     job_id = request.data.get("job_id")
     entreprise = request.data.get("entreprise")
+    session_id = request.data.get("session_id") or str(uuid.uuid4())  # ✅ auto fallback
 
     if not question or not job_id or not entreprise:
         return Response({"error": "question, job_id et entreprise sont requis."}, status=400)
@@ -156,14 +157,26 @@ def ask_from_url(request):
         return Response({"error": "Aucun bloc disponible pour ce document."}, status=204)
 
     selected_blocks = find_relevant_blocks(question, blocks)
-    start_time = time.time()
-    answer = generate_answer(question, selected_blocks)
-    duration = round(time.time() - start_time, 2)
-    logger.info(f"🕒 Temps de génération de la réponse : {duration}s")
+    answer = generate_answer(question, blocks)
+
+    # ✅ Enregistrement de l'interaction en base SQLite
+    try:
+        from ia_backend.services.chat_memory import save_interaction
+        block_sources = [b["source"] for b in selected_blocks]
+        save_interaction(
+            session_id=session_id,
+            question=question,
+            answer=answer,
+            blocks_used=block_sources,
+            job_id=job_id
+        )
+    except Exception as e:
+        logger.warning(f"[chat_memory] Erreur enregistrement session : {e}")
 
     return Response({
         "question": question,
         "answer": answer,
         "job_id": job_id,
-        "entreprise": entreprise
+        "entreprise": entreprise,
+        "session_id": session_id  # ✅ retourné au client pour enchaîner les questions
     })

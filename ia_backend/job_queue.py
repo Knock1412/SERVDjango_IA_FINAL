@@ -1,6 +1,7 @@
 import os
 import time
 import logging
+from sentence_transformers import SentenceTransformer  # ✅ Nouveau
 
 from ia_backend.services.pdf_utils import (
     extract_blocks_from_pdf,
@@ -33,6 +34,9 @@ if not logger.handlers:
 BLOCK_THRESHOLD_INITIAL = 0.68
 INTERMEDIATE_GROUP_SIZE = 5 
 MAX_ATTEMPTS = 4
+
+# ✅ Chargement du modèle d'embedding une seule fois
+embedding_model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
 # ---------- Definition du Job ----------
 class Job:
@@ -108,13 +112,17 @@ def process_job(job: Job):
 
         logger.info(f"\n✅ Bloc {idx+1} terminé : meilleur score={best_score:.3f}")
 
+        # ✅ Pré-indexation embedding
+        embedding = embedding_model.encode(best_summary).tolist()
+
         json_dir = f"cache_json/save_summaryblocks/{job.entreprise}/{job.job_id}"
         save_json(json_dir, idx, {
             "bloc": idx + 1,
             "summary": best_summary,
             "source_pdf": job.pdf_url,
             "score": best_score,
-            "translated": translated
+            "translated": translated,
+            "embedding": embedding  # <-- Embedding sauvegardé
         })
 
         summaries.append((idx + 1, best_summary))
@@ -145,9 +153,7 @@ def process_job(job: Job):
     global_score = evaluate_summary_score(full_pdf_text, final_summary, partial_summaries=intermediates)
     logger.info(f"📊 Score global (info only) = {global_score:.3f}")
 
-    # ✅ Mise à jour ici avec job_id
     save_global_summary(job.entreprise, job.folder_name, final_summary, job_id=job.job_id)
-
     log_job_history(job.job_id, job.entreprise, job.pdf_url, "terminé", "mistral", start_total)
 
     logger.info(f"\n✅ Traitement finalisé pour job {job.job_id}")
