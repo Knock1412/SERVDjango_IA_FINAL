@@ -122,8 +122,7 @@ def summarize_global(summary_list: List[str], is_final: bool = False) -> str:
         prompt = prompt_template.format(text=joined)
 
         model_to_use = "mistral" if is_final else "mistral:instruct"
-        num_predict = 1200 if is_final else 1000
-
+        num_predict = 1500 if is_final else 1200
         logger.info(f"Fusion de {len(safe_summary_list)} résumés - Longueur totale: {len(prompt)} caractères")
 
         result = generate_ollama(

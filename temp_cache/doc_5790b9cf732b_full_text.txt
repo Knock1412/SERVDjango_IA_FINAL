@@ -1,0 +1,2755 @@
+Simulation Maple© d’une machine à induction triphasée
+Laurent Capocchi
+
+To cite this version:
+
+Laurent Capocchi. Simulation Maple© d’une machine à induction triphasée. [Rapport de recherche]
+SPE UMR CNRS 6134. 2006. ￿hal-01083122￿
+
+HAL Id: hal-01083122
+
+https://hal.science/hal-01083122v1
+
+Submitted on 17 Nov 2014
+
+HAL is a multi-disciplinary open access
+archive for the deposit and dissemination of sci-
+entific research documents, whether they are pub-
+lished or not. The documents may come from
+teaching and research institutions in France or
+abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est
+destinée au dépôt et à la diffusion de documents
+scientifiques de niveau recherche, publiés ou non,
+émanant des établissements d’enseignement et de
+recherche français ou étrangers, des laboratoires
+publics ou privés.
+
+Distributed under a Creative Commons Attribution 4.0 International License
+
+Simulation Maple© d’une machine à induction
+triphasée
+Une résolution numérique
+
+Capocchi Laurent
+Laboratoire UMR CNRS 6134
+Université de Corse
+22 Mars 2006
+
+1
+
+Table des matières
+
+1
+
+Introduction
+
+2 Modélisation
+
+2.1 Modèle circuit . . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+2.2 Modèle mathématique
+
+. .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+2.2.1 Modèle du stator
+
+.
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+2.2.2 Modèle du rotor . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+2.2.3 Modèle du couplage magnétique stator/rotor
+
+. .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+2.2.4 Modèle complet
+
+.
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+3 Simulation Maple©
+
+3.0.5 Les systèmes triphasés . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+3.0.6
+
+1er cas : mode transformateur
+
+. .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+3.0.7
+
+2ieme cas : mode moteur et frein .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+3.0.8
+
+3ieme cas : couplage mécanique . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+4 Conclusion
+
+5 Annexes
+
+3
+
+3
+
+3
+
+3
+
+3
+
+4
+
+4
+
+5
+
+5
+
+6
+
+6
+
+8
+
+9
+
+12
+
+13
+
+5.1 Code Maple© pour q r = 0 . . . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+. . . .
+
+. . .
+
+. . . .
+
+. . . .
+
+13
+
+Références
+
+14
+
+2
+
+1
+
+Introduction
+
+Ce papier est consacré à la simulation numérique du modèle mathématique d’une machine à induction triphasée. Ce
+modèle est obtenu par une mise en équation des courants statoriques et rotoriques du modèle orienté circuit proposé dans
+[5]. Il consiste en un système complet de six équations différentielles linéaires du 1er ordre à six inconnues. Les solutions
+numériques de ce système sont obtenues grâce au logiciel Maple© v.10 [4, 3, 2, 1] en utilisant la méthode de Runge-Kutta
+d’ordre 4-5.
+
+Le but principal de ces simulations est d’acquérir une meilleur compréhension du fonctionnement électrique de la machine
+à induction triphasée dans différentes conﬁgurations. L’utilisation du logiciel Maple© nous permet d’obtenir rapidement
+des jeux de tests comportementaux du système d’étude.
+
+2 Modélisation
+
+Cette section décrit de manière simpliﬁé le modèle orienté circuit et le modèle mathématique d’une machine à induction
+triphasée. Pour plus de détaille le lecteur peut se rapporter à [5].
+
+2.1 Modèle circuit
+
+Le modèle orienté circuit simpliﬁé d’une machine à induction triphasée est donné sur la ﬁgure 1. Ce modèle peut être
+séparé en trois parties distinctes : Le stator, le rotor et le couplage magnétique entre ces deux entités.
+
+FIGURE 1: Modèle orienté circuit
+
+Le stator est alimenté par un système triphasé équilibré composé des tensions sinusoïdales vas(t), vbs(t) et vcs(t). Chaque
+phase est caractérisée par une résistance rs et une inductance Ls. Les interactions magnétiques entre chaque phase du
+stator sont fonction d’une inductance mutuelle Lms et des courants statoriques voisins.
+
+De même, le rotor est alimenté par un système triphasé équilibré composé des tensions sinusoïdales var(t), vbr(t) et vcr(t).
+Chaque phase est caractérisée par une résistance rr et une inductance Lr. Les interactions magnétiques entre chaque phase
+du rotor sont fonction d’une inductance mutuelle Lmr et des courants rotoriques voisins.
+
+Les effets du rotor sur le stator (resp. du stator sur le rotor) sont fonction d’une inductance mutuelle Lsr (resp. Lrs), des
+courants rotoriques iar(t), ibr(t) et icr(t) (resp. ias(t), ibs(t) et ics(t)) et de la position électrique du rotor q r(t).
+
+Les entités observées en sortie du système sont les courants (statoriques et rotoriques) ainsi que le couple électromagné-
+tique de la machine Te(t). Voyons à présent comment mettre en équation le système électrique en fonction de ces entités.
+
+2.2 Modèle mathématique
+
+Le but de cette section est de donner les relations en tension de chaque phase du coté du stator et du coté du rotor.
+
+2.2.1 Modèle du stator
+
+Le modèle électrique du stator, représenté sur la ﬁgure 2, fait intervenir à la fois des éléments passifs comme les résistances
+rs et des éléments actifs comme les inductances propres Ls et les inductances mutuelles Lms.
+
+3
+
+D’après la loi des mailles :
+
+vas(t) = P1
+vbs(t) = P1
+vcs(t) = P1
+
+A −
+B −
+C −
+
+P2
+A = rs.ias(t) + Ls
+P2
+B = rs.ibs(t) + Ls
+P2
+C = rs.ics(t) + Ls
+
+d
+dt ias(t)
+d
+dt ibs(t)
+d
+dt ics(t)
+
+Lms
+2
+Lms
+2
+Lms
+2
+
+−
+−
+−
+
+dt ibs(t) + d
+d
+dt ias(t) + d
+d
+dt ias(t) + d
+d
+
+dt ics(t)
+(cid:3)
+dt ics(t)
+(cid:3)
+dt ibs(t)
+(cid:3)
+
+(cid:2)
+(cid:2)
+(cid:2)
+
+
+
+
+
+
+(1)
+
+Le système 1 montre que chaque phase x (x
+termes correspondant :
+– rs.ixs(t) : la chute résistive,
+– Ls. d
+dt ixs(t) : l’effet inductif produit par l’enroulement considéré,
+Lms
+–
+2
+−
+du stator.
+
+dt ix′′s(t)
+(cid:3)
+
+dt ix′s(t) + d
+
+a, b, c
+
+∈ {
+
+}
+
+(cid:2)
+
+d
+
+: l’effet inductif produit par les enroulements voisins
+
+) est composée des trois
+
+Les tensions d’alimentations vas(t), vbs(t) et vcs(t) sont des fonctions sinusoïdales
+du temps.
+
+(a) Modèle orienté circuit du
+stator.
+
+FIGURE 2: Modèle du stator .
+
+2.2.2 Modèle du rotor
+
+Le modèle électrique du rotor, représenté sur la ﬁgure 3, fait intervenir à la fois
+les résistances rr, les inductances propres Lr et les inductances mutuelles Lmr.
+
+D’après la loi des mailles :
+
+var(t) = P1
+vbr(t) = P1
+vcr(t) = P1
+
+a −
+b −
+c −
+
+P2
+a = rr.iar(t) + Lr
+P2
+b = rr.ibr(t) + Lr
+P2
+c = rr.icr(t) + Lr
+
+d
+dt iar(t)
+d
+dt ibr(t)
+d
+dt icr(t)
+
+Lmr
+2
+Lmr
+2
+Lmr
+2
+
+−
+−
+−
+
+dt ibr(t) + d
+d
+dt iar(t) + d
+d
+dt iar(t) + d
+d
+
+dt icr(t)
+(cid:3)
+dt icr(t)
+(cid:3)
+dt ibr(t)
+(cid:3)
+
+(cid:2)
+(cid:2)
+(cid:2)
+
+
+
+
+
+
+(2)
+
+Le système 2 montre que chaque phase x (x
+correspondant :
+– rr.ixr(t) : la chute résistive,
+– Lr
+–
+
+d
+dt ixr(t) : l’effet inductif produit par l’enroulement considéré,
+Lmr
+2
+−
+rotor.
+
+dt ix′′r(t)
+(cid:3)
+
+dt ix′r(t) + d
+
+(cid:2)
+
+d
+
+a, b, c
+
+}
+
+∈ {
+
+) est composée des trois termes
+
+: l’effet inductif produit par les enroulements voisins du
+
+Les tensions d’alimentations sont var(t), vbr(t) et vcr(t) des fonctions sinusoïdales du
+temps.
+
+2.2.3 Modèle du couplage magnétique stator/rotor
+
+Le modèle électrique du couplage magnétique entre le stator et le rotor utilise les induc-
+tances mutuelles Lsr et Lrs, les courants statoriques et rotoriques induits et la position
+électrique du rotor q r.
+
+L’effet du couplage à lieu pour chaque phase du coté stator et du rotor :
+
+(a) Modèle orienté circuit du
+stator.
+
+FIGURE 3: Modèle du rotor .
+
+
+
+
+
+
+
+
+
+
+
+Lsr
+Lsr
+Lsr
+
+d
+dt
+d
+dt
+d
+dt
+
+(cid:2)
+(cid:2)
+(cid:2)
+
+iar. cos(q r) + ibr. cos(q r + 2p
+2p
+3 )
+−
+2p
+3 ) + ibr. cos(q r) + icr. cos(q r + 2p
+iar. cos(q r
+(cid:3)
+3 )
+2p
+iar. cos(q r + 2p
+3 ) + icr. cos(q r)
+3 ) + ibr. cos(q r
+(cid:3)
+−
+(cid:3)
+
+3 ) + icr. cos(q r
+
+−
+
+phase a du stator
+phase b du stator
+phase c du stator
+
+Lrs
+Lrs
+Lrs
+
+d
+dt
+d
+dt
+d
+dt
+
+2p
+3 ) + ics. cos(q r + 2p
+ias. cos(q r) + ibs. cos(q r
+3 )
+−
+2p
+ias. cos(q r + 2p
+3 ) + ibs. cos(q r) + ics. cos(q r
+(cid:3)
+(cid:2)
+3 )
+−
+3 ) + ibs. cos(q r + 2p
+2p
+3 ) + ics. cos(q r)
+ias. cos(q r
+(cid:3)
+(cid:2)
+(cid:2)
+(cid:3)
+
+−
+
+phase a du rotor
+phase b du rotor
+phase c du rotor
+
+4
+
+(3)
+
+(4)
+
+La position électrique q r est déduite de la position mécanique du rotor q rm ou de l’intégration de la vitesse de rotation
+mécanique W
+
+par l’équation :
+
+avec p le nombre de paire de pôles.
+
+q rm = p.q r = p.
+
+(W dt)
+
+Zt
+
+La vitesse de rotation mécanique du rotor W (t) est la solution de l’équation linéaire du premier ordre suivante :
+
+J.
+
+d
+dt
+
+W (t) + f .W (t) = Te(t)
+
+Tl
+
+−
+
+avec :
+– J, f : le coefﬁcient d’inertie et le frottement visqueux,
+– Te, Tl : le couple électromagnétique et le couple de charge.
+Le couple électromagnétique dépend des courants statoriques et rotoriques et de la position mécanique q r :
+
+Te(t) =
+
+−
+
+−
+
+−
+
+ias(t).p.Lsr[iar(t). sin(p.q r) + ibr(t). sin(p.q r +
+
+) + icr(t). sin(p.q r
+
+ibs(t).p.Lsr[iar(t). sin(p.q r
+
+−
+ics(t).p.Lsr[iar(t). sin(p.q r +
+
+2.p
+3
+2.p
+3
+
+−
+) + ibr(t). sin(p.q r) + icr(t). sin(p.q r +
+
+) + ibr(t). sin(p.q r
+
+2.p
+3
+
+−
+
+) + icr(t). sin(p.q r)]
+
+2.p
+3
+2.p
+3
+
+)]
+
+)]
+
+2.p
+3
+
+(5)
+
+(6)
+
+(7)
+
+Nous pouvons à présent donner le modèle mathématique complet d’une machine à induction triphasée en regroupant, pour
+chaque phase dans le cas du stator et du rotor, les équations 1,2,3,4.
+
+2.2.4 Modèle complet
+
+L’association des équations 1,2,3,4,6 et 5 permet de construire le modèle mathématique complet d’une machine à induc-
+tion triphasé :
+
+vas(t)
+vbs(t)
+vcs(t)
+var(t)
+vbr(t)
+vcr(t)
+
+= rs.ias + Ls
+= rs.ibs + Ls
+= rs.ics + Ls
+= rr.iar + Lr
+= rr.ibr + Lr
+= rr.icr + Lr
+
+d
+dt ias
+−
+d
+dt ibs
+−
+d
+dt ics
+−
+d
+dt iar
+−
+d
+dt ibr
+−
+d
+dt icr
+−
+W (t) + f .W (t)
+
+Lms
+2
+Lms
+2
+Lms
+2
+Lmr
+2
+Lmr
+2
+Lmr
+2
+
+Te(t)
+
+−
+W (t)
+
+Tl = J. d
+dt
+q r(t)
+= d
+dt
+
+dt ibs + d
+d
+dt ias + d
+d
+dt ias + d
+d
+dt ibr + d
+d
+dt iar + d
+d
+dt iar + d
+d
+
+dt ics
+(cid:3)
+dt ics
+(cid:3)
+dt ibs
+(cid:3)
+dt icr
+(cid:3)
+dt icr
+(cid:3)
+dt ibr
+(cid:3)
+
+(cid:2)
+(cid:2)
+(cid:2)
+(cid:2)
+(cid:2)
+(cid:2)
+
++ Lsr
++ Lsr
++ Lsr
++ Lrs
++ Lrs
++ Lrs
+
+d
+dt
+d
+dt
+d
+dt
+d
+dt
+d
+dt
+d
+dt
+
+3 ) + icr. cos(q r(t)
+
+iar. cos(q r(t)) + ibr. cos(q r(t) + 2p
+2p
+3 )
+−
+3 ) + ibr. cos(q r(t)) + icr. cos(q r(t) + 2p
+2p
+iar. cos(q r(t)
+(cid:3)
+(cid:2)
+3 )
+−
+iar. cos(q r(t) + 2p
+2p
+3 ) + icr. cos(q r(t))
+3 ) + ibr. cos(q r(t)
+(cid:3)
+(cid:2)
+−
+3 ) + ics. cos(q r(t) + 2p
+2p
+ias. cos(q r(t)) + ibs. cos(q r(t)
+(cid:3)
+(cid:2)
+3 )
+2p
+ias. cos(q r(t) + 2p
+3 ) + ibs. cos(q r(t)) + ics. cos(q r(t)
+(cid:3)
+(cid:2)
+3 )
+−
+3 ) + ibs. cos(q r(t) + 2p
+2p
+3 ) + ics. cos(q r(t))
+ias. cos(q r(t)
+(cid:3)
+(cid:2)
+(cid:2)
+(cid:3)
+
+−
+
+−
+
+(8)
+
+
+
+
+
+
+Nous allons à présent procéder à la résolution de ce système d’équations différentielles complet de huit équations à huit
+inconnues.
+
+3 Simulation Maple©
+
+Cette section présente quelque mode de fonctionnement simple de la machine à induction triphasé 90 Watts. Nous utilisons
+le logiciel Maple© aﬁn de résoudre le système 8. Dans un premier temps nous ne prenons pas en compte les aspects
+mécaniques et nous simulons les modes de fonctionnement suivants :
+– Transformateur (q r = 0 rad/s),
+– Moteur (q r = 157 rad/s),
+
+5
+
+– Génératrice (q r =
+Ensuite nous intégrons les deux équations mécaniques 5 et 6 aﬁn de simuler le système dans son fonctionnement réel.
+
+157 rad/s).
+
+−
+
+Le choix de l’analyse des courants statoriques et rotoriques vient du au fait que leurs observabilités permet le diagnos-
+tique de la machine à induction. La résolution littérale du système 8 demandant un temps important, nous présentons les
+solutions numériques en utilisant le méthode Runge-Kutta d’ordre 4-5.
+
+Les valeurs des paramètres du système 8 choisi pour les besoins de la simulation sont résumées dans le tableau 1 :
+
+Tension composée efﬁcace (Um)
+Fréquence ( f )
+Pôles (p)
+Coefﬁcient d’inertie (J)
+Coefﬁcient d’atténuation ( f )
+Couple de charge nominale (Tln)
+Résistance au stator (rs)
+Résistance au rotor (rr)
+Inductance au stator (Ls)
+Inductance au rotor (Lr)
+Inductance magnétique au stator (Lms)
+Inductance magnétique au stator (Lmr)
+Inductance mutuelle (Lsr = Lrs)
+
+380V
+50Hz
+4
+0.005kg.m²
+0.001Nm.s/rad
+0.6Nm
+79.13W
+3.68W
+2.83H
+0.23H
+2.2H
+0.22H
+0.68H
+
+TABLE 1: Valeurs des paramètres pour la machine 90 Watts.
+
+3.0.5 Les systèmes triphasés
+
+Un système de tension simple et direct est donnée par :
+
+vi(t) = Vm sin(2p
+
+f t
+
+(i
+
+−
+
+−
+
+1)
+
+2p
+3
+
+) i = 1, 2 ou 3
+
+Les tensions composées constituent un système triphasé équilibré en avance de p
+d’amplitude √3 fois plus grande.
+
+6 sur le système de tensions simples est
+
+3.0.6 1er cas : mode transformateur
+
+Le premiers cas considéré est le mode de fonctionnement en mode transformateur avec une vitesse rotorique W
+nulle.
+Dans ce cas les tensions en entrées du rotor sont court-circuitées et les tensions en entrée du stator constituent le système
+suivant :
+
+var(t) = 0
+vbr(t) = 0
+vcr(t) = 0
+vas(t) = Vm sin(2p
+vbs(t) = Vm sin(2p
+vcs(t) = Vm sin(2p
+
+
+
+
+
+
+f t)
+f t
+f t
+
+−
+−
+
+2p
+3 )
+4p
+3 )
+
+avec Vm =
+
+Um.√2
+√3
+
+, Um étant la tension simple non efﬁcace.
+
+(9)
+
+6
+
+320
+
+280
+
+240
+
+200
+
+160
+
+120
+
+80
+
+40
+
+V
+
+0
+
+−40
+
+−80
+
+−120
+
+−160
+
+−200
+
+−240
+
+−280
+
+−320
+
+0
+
+2
+
+4
+
+6
+
+8
+
+10
+
+12
+
+14
+
+16
+
+18
+
+20
+10 −3
+t
+
+22
+
+24
+
+26
+
+28
+
+30
+
+32
+
+34
+
+36
+
+38
+
+40
+
+Vas (T=0.02s)           
+
+Vbs (T=0.02s)           
+
+Vcs (T=0.02s)           
+
+FIGURE 4: Tensions d’entrées statoriques.
+
+La vitesse rotorique W
+
+est égale à zéro et par conséquent, la position électrique du rotor q r est aussi égale à 0 (eq 5).
+
+Considérons le système 8 privé des termes mutuelles et des équations mécaniques avec les valeurs résumées dans le
+tableau 1 et q r(t) = 0 :
+
+Um.√2
+√3
+Um.√2
+√3
+Um.√2
+√3
+
+. sin(2p
+f t
+
+f t
+
+. sin(2p
+. sin(2p
+0
+0
+0
+
+−
+
+−
+
+= rs.ias + Ls
+f t)
+2p
+3 ) = rs.ibs + Ls
+4p
+3 ) = rs.ics + Ls
+= rr.iar + Lr
+= rr.ibr + Lr
+= rr.icr + Lr
+
+d
+dt ias
+d
+dt ibs
+d
+dt ics
+d
+dt iar
+d
+dt ibr
+d
+dt icr
+
+−
+
+−
+
+−
+−
+−
+−
+
+Lms
+2
+Lms
+2
+Lms
+2
+Lmr
+2
+Lmr
+2
+Lmr
+2
+
+(cid:3)
+
+(cid:3)
+
+dt ibs + d
+d
+dt ias + d
+d
+dt ias + d
+d
+dt ibr + d
+d
+dt iar + d
+d
+dt iar + d
+d
+
+dt ics
+dt ics
+dt ibs
+(cid:3)
+dt icr
+(cid:3)
+dt icr
+(cid:3)
+dt ibr
+(cid:3)
+
+(cid:2)
+
+(cid:2)
+
+(cid:2)
+(cid:2)
+(cid:2)
+(cid:2)
+
+
+
+
+
+
+La résolution numérique Maple© est donnée sur la ﬁgure 5 :
+
+stator  currents
+
+A
+
+0.4
+
+0.32
+
+0.24
+
+0.16
+
+0.08
+
+0.0
+
+−0.08
+
+−0.16
+
+−0.24
+
+−0.32
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+i_as                    
+
+i_bs                    
+
+i_cs                    
+
+(a) courants statoriques.
+
+FIGURE 5: Résultats numériques sans effets mutuelles et var = vbr = vcr = 0V .
+
+7
+
+Interprétation : Les courants rotoriques sont nuls du fait de l’absence de termes mutuelles. Les courants statoriques
+possèdent la même période T = 0.02s que les courants d’excitations sur les trois phases et une amplitude de 0.24 A. On
+peut remarquer l’effet transitoire qui se stabilise au bout de 0.14s.
+
+Considérons à présent le système 8 en prenant en compte les termes mutuelles :
+
+Um.√2
+√3
+Um.√2
+√3
+Um.√2
+√3
+
+sin(2p
+
+f t
+
+f t
+
+sin(2p
+sin(2p
+0
+0
+0
+
+−
+
+−
+
+= rs.ias + Ls
+f t)
+2p
+3 ) = rs.ibs + Ls
+4p
+3 ) = rs.ics + Ls
+= rr.iar + Lr
+= rr.ibr + Lr
+= rr.icr + Lr
+
+d
+dt ias
+d
+dt ibs
+d
+dt ics
+d
+dt iar
+d
+dt ibr
+d
+dt icr
+
+−
+
+−
+
+−
+−
+−
+−
+
+Lms
+2
+Lms
+2
+Lms
+2
+Lmr
+2
+Lmr
+2
+Lmr
+2
+
+(cid:3)
+
+(cid:3)
+
+dt ibs + d
+d
+dt ias + d
+d
+dt ias + d
+d
+dt ibr + d
+d
+dt iar + d
+d
+dt iar + d
+d
+
+dt ics
+dt ics
+dt ibs
+(cid:3)
+dt icr
+(cid:3)
+dt icr
+(cid:3)
+dt ibr
+(cid:3)
+
+(cid:2)
+
+(cid:2)
+
+(cid:2)
+(cid:2)
+(cid:2)
+(cid:2)
+
++ Lsr
+
++ Lsr
+
++ Lsr
++ Lrs
++ Lrs
++ Lrs
+
+d
+dt
+d
+dt
+d
+dt
+d
+dt
+d
+dt
+d
+dt
+
+iar + ibr cos( 2p
+2p
+3 ) + icr cos(
+3 )
+−
+(cid:3)
+(cid:2)
+3 ) + ibr + icr cos( 2p
+2p
+iar cos(
+3 )
+−
+(cid:3)
+(cid:2)
+2p
+iar cos( 2p
+3 ) + icr
+3 ) + ibr cos(
+−
+3 ) + ics cos( 2p
+2p
+(cid:3)
+(cid:2)
+ias + ibs cos(
+3 )
+2p
+ias cos( 2p
+(cid:3)
+(cid:2)
+3 )
+−
+(cid:3)
+(cid:2)
+3 ) + ics
+ias cos(
+(cid:3)
+(cid:2)
+
+3 ) + ibs + ics cos(
+3 ) + ibs cos( 2p
+2p
+
+−
+
+−
+
+
+
+
+
+
+stator  currents
+
+rotor  currents
+
+1.4
+
+1.2
+
+1.0
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+−0.2
+
+−0.4
+
+−0.6
+
+−0.8
+
+−1.0
+
+−1.2
+
+A
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+ias(t)                  
+
+ibs(t)                  
+
+ics(t)                  
+
+(a) courants statoriques.
+
+A
+
+3.2
+
+2.4
+
+1.6
+
+0.8
+
+0.0
+
+−0.8
+
+−1.6
+
+−2.4
+
+−3.2
+
+−4.0
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+iar(t)                  
+
+ibr(t)                  
+
+icr(t)                  
+
+(b) courants rotoriques.
+
+FIGURE 6: Résultats numériques avec effets mutuelles et avec W = 0 rad/s et var = vbr = vcr = 0V
+
+Interprétation : Lorsque W = 0 rad/s, cela correspond au blocage du rotor pendant le fonctionnement de la machine
+(fonctionnement en mode transformateur). Coté rotor, les courants induits par la variation du champs magnétique sta-
+torique présentent une amplitude importante mais gardent la même période que les sources de tension T = 0.02s. En effet,
+comme le rotor reste statique il ne peux pas dissiper ces courants induits aﬁn de produire le couple nécessaire pour le
+mettre en mouvement aﬁn de contre-balancer les effets magnetiques du stator. Coté stator, la période reste inchangée mais
+l’amplitude augmente du fait des effets rotorique et statorique. Le stator crée un appel de courant à l’entrée du système
+aﬁn de faire face aux effets magnétiques induits pas le rotor bloqué. Que ce soit du coté du rotor ou du stator, les effets
+transitoires sont dus à l’établissement des conditions de fonctionnement et ils convergent rapidement (une période) pour
+laisser la place au régime permanent équilibré.
+
+3.0.7 2ieme cas : mode moteur et frein
+
+Le deuxième cas considéré est le mode de fonctionnement en moteur normal avec une vitesse mécanique rotorique W
+imposée différente de zéro. Dans ce cas les tensions en entrées du rotor sont toujours court-circuitées et les tensions en
+entrée du stator constituent le même système composé de l’équation 9
+
+La vitesse rotorique W
+
+est égale à +/- 157 rad/s et d’après l’égalité 5 en considérant q r(0) = 0 :
+
+q r(t) =
+
+157
+4
+
+.t
+
+p.
+
+±
+
+Considérons le système 8 avec les valeurs résumées dans le tableau 1.
+
+Les résolutions numériques Maple© sont données sur les ﬁgures 7,8.
+
+8
+
+stator  currents
+
+rotor  currents
+
+1.4
+
+1.2
+
+1.0
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+−0.2
+
+−0.4
+
+−0.6
+
+−0.8
+
+−1.0
+
+A
+
+A
+
+3
+
+2
+
+1
+
+0
+
+−1
+
+−2
+
+−3
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+ias(t)                  
+
+ibs(t)                  
+
+ics(t)                  
+
+(a) courants statoriques.
+
+iar(t)                  
+
+ibr(t)                  
+
+icr(t)                  
+
+(b) courants rotoriques.
+
+FIGURE 7: Résultats numériques avec effets mutuelles et avec W = +157 rad/s et var = vbr = vcr = 0V .
+
+Interprétation : Lorsque la vitesse de rotation imposée au rotor est +157 rad/s, cela correspond à la vitesse de rotation du
+champ magnétique statorique (fonctionnement en mode moteur). Par conséquent, lorsque le régime permanent est atteint
+les effets magnétiques dans l’entrefer sont nuls. Coté rotor, pendant que le champs magnétique rotorique rejoint le champs
+magnétique statorique, les courants rotoriques induits diminuent pour atteindre une valeur nulle. A ce moment précis,
+nous somme en régime permanent et les champs magnétiques rotoriques et statoriques ont les mêmes caractéristiques.
+Coté stator, les effets magnétiques du rotor sont nuls et les courants statoriques sont équivalents au cas de la simulation
+sans les effets mutuelles avec W = 0 rad/s présentée sur la ﬁgure 5.
+
+stator  currents
+
+rotor  currents
+
+A
+
+1.4
+
+1.2
+
+1.0
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0.0
+
+−0.2
+
+−0.4
+
+−0.6
+
+−0.8
+
+−1.0
+
+−1.2
+
+−1.4
+
+4.8
+
+4.0
+
+3.2
+
+2.4
+
+1.6
+
+0.8
+
+A
+
+0.0
+
+−0.8
+
+−1.6
+
+−2.4
+
+−3.2
+
+−4.0
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+0.0
+
+0.02
+
+0.04
+
+0.06
+
+0.08
+
+0.1
+
+t
+
+0.12
+
+0.14
+
+0.16
+
+0.18
+
+0.2
+
+ias(t)                  
+
+ibs(t)                  
+
+ics(t)                  
+
+(a) courants statoriques.
+
+iar(t)                  
+
+ibr(t)                  
+
+icr(t)                  
+
+(b) courants rotoriques.
+
+FIGURE 8: Résultats numériques avec effets mutuelles et avec W =
+
+157 rad/s et var = vbr = vcr = 0V .
+
+−
+
+Interprétation : Lorsque la vitesse de rotation imposée au rotor est -157 rad/s, cela correspond au double de la vitesse de
+rotation du champ magnétique statorique (fonctionnement en mode frein). Par conséquent, lorsque le régime permanent
+est établit les effets magnétiques dans l’entrefer sont double. Coté stator, l’amplitude des signaux augmente mais il n’y
+pas consomation, comme dans le cas précédent, mais génération de courant en entrée. Cela peut se vériﬁer en comparent
+les phases des signaux statoriques (en avance) est des sources de tensions. Coté rotor, les amplitudes sont équivalantes à
+celle que l’on pourrait trouver dans le cas de la ﬁgure 6 mais la période est double. En effet, la vitesse de rotation coté
+rotor est la moitie de celle du champs statorique.
+
+3.0.8 3ieme cas : couplage mécanique
+
+Nous considérons à présent le système 8 avec l’intégration des équations mécaniques. Nous allons simuler ce système
+avec pour consigne le couple de charge Tl :
+– Tl = 0 Nm, aucune charge est connectée à la machine,
+– Tl = Tln = 0.6 Nm, couple de charge nominale.
+Les variables observées sont la vitesse rotorique W (t) ainsi que les courants statoriques et rotoriques.
+
+9
+
+Speed
+
+rad/s
+
+150
+
+140
+
+130
+
+120
+
+110
+
+100
+
+90
+
+80
+
+70
+
+60
+
+50
+
+40
+
+30
+
+20
+
+10
+
+0
+
+300
+
+200
+
+100
+
+775*i[as]
+
+0
+
+−100
+
+−200
+
+−300
+
+0.0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+0.6
+
+0.7
+
+0.8
+
+0.9
+
+1.0
+
+t
+
+1.1
+
+1.2
+
+1.3
+
+1.4
+
+1.5
+
+1.6
+
+1.7
+
+1.8
+
+1.9
+
+2.0
+
+1.6
+
+1.61
+
+1.62
+
+1.63
+
+1.64
+
+1.65
+
+t
+
+1.66
+
+1.67
+
+1.68
+
+1.69
+
+1.7
+
+omega(t) (Tl=0)         
+
+(a) vitesse mécanique
+
+ias(t) (Tl=0)           
+
+Vas(t)                  
+
+(b) dephasage tension/courant
+
+FIGURE 9: Vitesse mécanique W (t) pour Tl = 0
+
+Lorsque Tl = 0, cela correspond à l’absence de charge sur la machine. Lorsque la machine est alimentée, elle passe
+par un régime transitoire durant lequel la vitesse rotorique augmente pour se stabiliser vers 156 rad/s (soit 156.60
+2.p =
+1489.7trs/min) comme on peux le voir sur la ﬁgure 9(a). Le régime transitoire disparaît vers 1.6s et la ﬁgure 9(b) ne
+montre pas celui-ci.
+
+stator  currents
+
+rotor  currents
+
+0.24
+
+0.2
+
+0.16
+
+0.12
+
+0.08
+
+0.04
+
+A
+
+0.0
+
+−0.04
+
+−0.08
+
+−0.12
+
+−0.16
+
+−0.2
+
+−0.24
+
+0.2
+
+0.16
+
+0.12
+
+0.08
+
+0.04
+
+A
+
+0.0
+
+−0.04
+
+−0.08
+
+−0.12
+
+−0.16
+
+−0.2
+
+1.6
+
+1.62
+
+1.64
+
+1.66
+
+1.68
+
+1.7
+
+t
+
+1.72
+
+1.74
+
+1.76
+
+1.78
+
+1.8
+
+ias(t) (Tl=0)           
+
+ibs(t) (Tl=0)           
+
+ics(t) (Tl=0)           
+
+(a) courants statoriques
+
+2.0
+
+2.2
+
+2.4
+
+2.6
+
+2.8
+
+3.0
+
+3.2
+
+3.4
+
+3.6
+
+3.8
+
+4.0
+
+4.2
+
+4.4
+
+4.6
+
+4.8
+
+5.0
+
+t
+
+iar(t) (Tl=0)           
+
+ibr(t) (Tl=0)           
+
+icr(t) (Tl=0)           
+
+(b) courants rotoriques
+
+FIGURE 10: Courants statoriques et rotoriques à vide, Tl = 0
+
+Nous imposons à présent un couple de charge Tl = 0.6 Nm égale au couple de charge nominal après un temps de 1.6s
+correspondant au début du régime permanent comme il est montré sur la ﬁgure 11.
+
+rated  torque
+
+0.6
+
+0.5
+
+0.4
+
+Nm
+
+0.3
+
+0.2
+
+0.1
+
+0.0
+
+0.0
+
+0.5
+
+1.0
+t
+
+1.5
+
+2.0
+
+(a) vitesse mécanique
+
+FIGURE 11: Couple de charge imposé Tl = 0.6 après le régime transitoire (t=1.6s)
+
+10
+
+Speed
+
+rad/s
+
+140
+
+120
+
+100
+
+80
+
+60
+
+40
+
+20
+
+0
+
+0.0
+
+0.5
+
+1.0
+t
+
+(a) vitesse mécanique
+
+300
+
+200
+
+100
+
+775*i[as]
+
+0
+
+−100
+
+−200
+
+−300
+
+1.5
+
+2.0
+
+1.6
+
+1.64
+
+1.68
+
+1.72
+
+1.76
+
+1.8
+
+t
+
+1.84
+
+1.88
+
+1.92
+
+1.96
+
+2.0
+
+ias(t) (Tl=0.6)         
+
+Vas(t)                  
+
+(b) dephasage tension/courant
+
+FIGURE 12: Vitesse mécanique W
+
+(t) et déphasage tension/courant pour Tl = 0.6
+
+L’évolution de la vitesse mécanique présentée sur la ﬁgure 12 (a) montre que le vitesse en régime permanent (148 rad/s)
+et plus faible que celle présentée dans le cas ou la machine est en régime libre (ﬁgure 9 (a)). On peut voir sur la ﬁgure 12
+(a), qu’à partir que t=0.6s, la vitesse diminue brutalement. Ce temps correspond au moment ou l’on impose un couple
+mécanique de 0.6 Nm.
+
+stator  currents
+
+rotor  currents
+
+0.4
+
+0.32
+
+0.24
+
+0.16
+
+0.08
+
+A
+
+0.0
+
+−0.08
+
+−0.16
+
+−0.24
+
+−0.32
+
+−0.4
+
+1.6
+
+1.62
+
+1.64
+
+1.66
+
+1.68
+
+1.7
+
+t
+
+1.0
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+A
+
+0.0
+
+−0.2
+
+−0.4
+
+−0.6
+
+−0.8
+
+−1.0
+
+1.72
+
+1.74
+
+1.76
+
+1.78
+
+1.8
+
+2.0
+
+2.2
+
+2.4
+
+2.6
+
+2.8
+
+3.0
+
+3.2
+
+3.4
+
+3.6
+
+3.8
+
+4.0
+
+4.2
+
+4.4
+
+4.6
+
+4.8
+
+5.0
+
+ias(t) (Tl=0.6)         
+
+ibs(t) (Tl=0.6)         
+
+ics(t) (Tl=0.6)         
+
+(a) courants statoriques
+
+t
+
+iar(t) (Tl=0.6)         
+
+ibr(t) (Tl=0.6)         
+
+icr(t) (Tl=0.6)         
+
+(b) courants rotoriques
+
+FIGURE 13: Courants statoriques et rotoriques avec Tl = 0.6 Nm
+
+Les courants présentés sur la ﬁgure 13 montrent que l’imposition d’un couple de charge Tl = 0.6 Nm positif implique un
+appel de courant au niveau du stator et de ce fait une augmentation de l’amplitude des courants rotoriques.
+
+Bilan des puissances
+
+1 cas : Tl = 0.6 Nm
+
+La puissance active par phase (transformée en travail) est donnée par :
+
+Le déphasage est montré sur la ﬁgure 12 (b), pour un système équilibré triphasé nous avons :
+
+P = Ve f f .Ie f f .cos(q v
+
+q i)
+
+−
+
+(10)
+
+P3 = 3.P = 3.
+
+Vm
+√2
+
+.
+
+Im
+√2
+
+.cos(f ) = 3
+
+217
+
+∗
+
+∗
+
+0.30
+
+∗
+
+cos(0.83) = 131.8W
+
+La puissance mécanique total en régime permanent est donnée par :
+
+11
+
+Pm = Te
+
+∗
+
+(11)
+
+d’après l’équation 6 en régime permanent :
+
+Te = Tl + f .W = 0.6 + 0.001
+
+148 = 0.748 Nm
+
+∗
+
+donc la puissance mécanique est donnée par :
+
+Pm = 0.748
+
+∗
+
+148 = 110.7W
+
+La différence entre la puissance mécanique de sortie et la puissance active d’entrée est du principalement aux pertes
+mécaniques, joules, électromagnétique...
+
+La puissance réactive totale est donnée par :
+
+Q = 3.Ve f f .Ie f f .sin(q v
+
+q i) = 134VAR
+
+−
+
+(12)
+
+La puissance réactive implique des pertes et elle est liée au déphasage montrée sur la ﬁgure 12 (b).
+
+2 cas : Tl = 0 Nm
+
+D’après l’équation 10 :
+
+de plus, d’après l’équation 11 :
+
+P3 = 3.217.0, 17
+
+∗
+
+cos(1.43) = 49.23W
+
+Pm = 156.
+
+∗
+
+0.156 = 24.33W
+
+La différence donne les pertes mécaniques.
+
+Les courants étant moins important, les fuites électromagnétiques sont moins importantes que dans le cas précédant.
+
+Q = 3
+
+217
+
+∗
+
+∗
+
+0.17
+
+∗
+
+sin(1.43) = 109.57VAR
+
+2 cas : Tl =
+
+−
+
+0.75 Nm (mode génératrice)
+
+Nous imposons un couple mécanique positif sur la machine.
+
+D’après l’équation 10 :
+
+P3 = 3.217.0, 25
+
+cos(2.1) =
+
+82.16W
+
+−
+
+∗
+
+La puissance est négative, donc nous sommes en présence de génération de puissance. De plus, d’après l’équation 11 :
+
+La différence donne les pertes mécaniques.
+
+Pm = 162
+
+0.588 =
+
+95.25W
+
+−
+
+∗ −
+
+Q = 3
+
+217
+
+∗
+
+∗
+
+0.25
+
+∗
+
+sin(1.43) = 140.48VAR
+
+4 Conclusion
+
+Le logiciel Maple© nous a permis de simuler le modèle électrique d’une machine à induction dans ses différents modes
+de fonctionnement. Cette première approche nous permet de mieux comprendre le domaine d’étude et d’observer les
+comportements du système.
+
+12
+
+W
+5 Annexes
+
+5.1 Code Maple© pour q r = 0
+
+> with(plots);with(DEtools);
+
+> Rs:=79.13;
+> Rr:=3.68;
+> Ls:=2.83;
+> Lr:=0.23;
+> Lms:=2.2;
+> Lmr:=0.22;
+> Lsr:=0.68;
+> theta_r:=0;
+> Lrs:=0.68;
+> Vm:=(380*sqrt(2))/sqrt(3);
+
+>sys:=Rs*y1(t)+Ls*diff(y1(t),t)-(1/2)*Lms*(diff(y2(t),t)+diff(y3(t),t))+
+Lsr*diff(cos(theta_r*t)*y4(t)+cos(theta_r*t+2*Pi/3)*y5(t)+
+cos(theta_r*t-2*Pi/3)*y6(t),t)=Vm*sin(100*Pi*t-Pi/6) ,
+Rs*y2(t)+Ls*diff(y2(t),t)-(1/2)*Lms*(diff(y1(t),t)+diff(y3(t),t))+
+Lsr*diff(cos(theta_r*t)*y5(t)+cos(theta_r*t+2*Pi/3)*y6(t)+
+cos(theta_r*t-2*Pi/3)*y4(t),t)=Vm*sin(100*Pi*t-5*(Pi/6)) ,
+Rs*y3(t)+Ls*diff(y3(t),t)-(1/2)*Lms*(diff(y2(t),t)+diff(y1(t),t))+
+Lsr*diff(cos(theta_r*t)*y6(t)+cos(theta_r*t+2*Pi/3)*y4(t)+
+cos(theta_r*t-2*Pi/3)*y5(t),t)=Vm*sin(100*Pi*t-3*(Pi/2)) ,
+Rr*y4(t)+Ls*diff(y4(t),t)-(1/2)*Lmr*(diff(y5(t),t)+diff(y6(t),t))+
+Lrs*diff(cos(theta_r*t)*y1(t)+cos(theta_r*t+2*Pi/3)*y3(t)+
+cos(theta_r*t-2*Pi/3)*y2(t),t)=0 ,
+Rr*y5(t)+Lr*diff(y5(t),t)-(1/2)*Lmr*(diff(y6(t),t)+diff(y4(t),t))+
+Lrs*diff(cos(theta_r*t)*y2(t)+cos(theta_r*t+2*Pi/3)*y1(t)+
+cos(theta_r*t-2*Pi/3)*y3(t),t)=0 ,
+Rr*y6(t)+Ls*diff(y6(t),t)-(1/2)*Lms*(diff(y5(t),t)+diff(y4(t),t))+
+Lrs*diff(cos(theta_r*t)*y3(t)+cos(theta_r*t+2*Pi/3)*y2(t)+
+cos(theta_r*t-2*Pi/3)*y1(t),t)=0, y1(0)=0,y2(0)=0,y3(0)=0,y4(0)=0,y5(0)=0,y6(0)=0
+
+> sol:=dsolve(sys, type=numeric, maxfun=-1);
+
+> ias:=odeplot(sol, [t,y1(t)], 0..6, color=green, numpoints=200);
+
+> ibs:=odeplot(sol, [t,y2(t)], 0..6, color=blue, numpoints=200);
+
+> ics:=odeplot(sol, [t,y3(t)], 0..6, numpoints=200);
+
+> iar:=odeplot(sol, [t,y4(t)], 0..6, color=green, numpoints=200);
+
+> ibr:=odeplot(sol, [t,y5(t)], 0..6, color=blue, numpoints=100);
+
+> icr:=odeplot(sol, [t,y6(t)], 0..6, numpoints=100);
+
+> display(ias, ibs, ics, labels=[t,A], title="stator currents");
+
+> display(iar, ibr, icr, labels=[t,A], title="rotor currents");
+
+13
+
+Références
+
+[1] Jonathan Borwein and Michael Monagan. Differential equations in Maple : A short tutorial. j-MAPLE-TECH-NEWS,
+
+4(1) :55–58, Winter 1997.
+
+[2] Greg Fee. Numerical solution of a differential equation presented in the problem section of the American Mathemat-
+
+ical Monthly. j-MAPLE-TECH-NEWS, 0(5), Winter 1991.
+
+[3] James V. Herod. Tutorial : Solving differential equations using Maple. j-MAPLE-TECH-NEWS,.
+
+[4] G. Labahn. Solving linear differential equations in Maple. 2(1), Spring 1995.
+
+[5] A. Yazidi, H. Henao, G.A. Capolino, D. Casadei, and F. Filippetti. Double-fed three-phase induction machine abc
+model for simulation and control purposes. In Proceedings of IEEE Industrial Electronics Conference (IECON’05),
+volume 4, pages 2560–2565, November 2005.
+
+Webographie
+
+1. http://lumimath.univ-mrs.fr/~jlm/cours/maple/
+
+2. http://maple.solinfo.ca/introduction/commandes/dsolve.html
+
+3. http://www.math.rutgers.edu/~sontag/336/maple-systems.html
+
+4. http://www.gel.usherbrooke.ca/leroux/projet/data/Moteur/chap09.htm
+
+5. http://fr.wikipedia.org/wiki/Moteur_Electrique
+
+14

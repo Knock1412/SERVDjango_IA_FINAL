@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
+# --- Chargement des blocs
 def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
     folder_path = os.path.join("cache_json", "save_summaryblocks", entreprise, job_id)
     logger.debug(f"Chargement des blocs depuis : {folder_path}")
@@ -33,7 +34,7 @@ def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
                 data = json.load(f)
             summary = data.get("summary", "")
             embedding = data.get("embedding")
-            # sécurité : si pas d'embedding, on skippe ce bloc
+            # sécurité : si pas d'embedding, on skippe ce bloc
             if embedding is None:
                 logger.warning(f"Pas d'embedding pour {filename}, bloc ignoré.")
                 continue
@@ -50,7 +51,12 @@ def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
     return blocks
 
 # --- Sélection des blocs pertinents (hybride embedding + rerank)
-def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: int = 3) -> List[Dict]:
+def find_relevant_blocks(
+    question: str,
+    blocks: List[Tuple[str, Dict]],
+    top_k: int = 5,
+    relevance_threshold: float = 0.4
+) -> List[Dict]:
     candidate_blocks = []
     embeddings = []
     scores_debug = []  # Pour logs détaillés
@@ -64,10 +70,8 @@ def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: i
     if not embeddings:
         return []
 
-    # Embeddings des blocs et question sur le CPU, et tous en float32
     block_embs = torch.tensor(np.stack(embeddings), dtype=torch.float32).to("cpu")
     question_emb = model.encode(question, convert_to_tensor=True).to(torch.float32).to("cpu")
-
     similarities = util.pytorch_cos_sim(question_emb, block_embs)[0]
 
     scored = []
@@ -75,19 +79,30 @@ def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: i
         sim = similarities[i].item()
         quality = meta.get("score", 0)
         combined = 0.7 * sim + 0.3 * quality
-        scored.append((i, combined))
-        # Ajout pour debug
         scores_debug.append({
             "filename": meta["source"],
             "sim_score": round(sim, 4),
             "quality": round(quality, 4),
             "combined": round(combined, 4)
         })
+        # Seuil de pertinence appliqué ici
+        if combined >= relevance_threshold:
+            scored.append((i, combined))
 
-    scored.sort(key=lambda x: x[1], reverse=True)
-    pre_top = [i for i, _ in scored[:10]]  # Top 10 pour rerank
+    # --- Fallback si rien ne passe le seuil, on prend quand même les top_k meilleurs
+    if not scored:
+        scored = sorted(
+            [(i, 0.7 * similarities[i].item() + 0.3 * meta.get("score", 0))
+                for i, (_, meta) in enumerate(candidate_blocks)],
+            key=lambda x: x[1], reverse=True
+        )[:top_k]
+    else:
+        scored.sort(key=lambda x: x[1], reverse=True)
+        scored = scored[:top_k]
 
-    # Re-ranking avec CrossEncoder
+    pre_top = [i for i, _ in scored]  # Les indices pour rerank
+
+    # --- Re-ranking avec CrossEncoder
     cross_inputs = [(question, candidate_blocks[i][0]) for i in pre_top]
     rerank_scores = reranker.predict(cross_inputs)
     reranked = sorted(zip(pre_top, rerank_scores), key=lambda x: x[1], reverse=True)[:top_k]
@@ -147,7 +162,7 @@ def generate_answer(
         gen_start = time.time()
         answer = generate_ollama(
             prompt=prompt,
-            num_predict=400,
+            num_predict=550,
             models=["llama3:instruct"],
             temperature=0.3,
         ).strip()

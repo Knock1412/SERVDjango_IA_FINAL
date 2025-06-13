@@ -3,7 +3,7 @@ import time
 import sys
 import uuid  # ✅ Pour session_id
 
-pdf_url = "https://edutice.hal.science/edutice-00000862v1/document"
+pdf_url = "https://hal.science/hal-01083122v1/document"
 entreprise = "Entreprise_S3_Test"
 API_URL = "http://127.0.0.1:8000"
 session_id = str(uuid.uuid4())  # ✅ Session unique pour la conversation

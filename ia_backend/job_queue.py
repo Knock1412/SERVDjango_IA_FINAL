@@ -98,28 +98,26 @@ def process_job(job: Job):
         for attempt in range(1, MAX_ATTEMPTS + 1):
             summary = summarize_block(text)
             processed_summary, translated = process_text_block(summary)
+            score = evaluate_summary_score(text, processed_summary)
 
-            if is_summary_valid(processed_summary):
-                logger.info(f"✅ Résumé structuré trouvé à l'essai {attempt}")
-                score = evaluate_summary_score(text, processed_summary)
-                if score > best_score:
-                    best_score = score
-                    best_summary = processed_summary
-                break  # On sort de la boucle, format trouvé !
+            # 👇 On n'accepte que structuré ET score >= threshold
+            if is_summary_valid(processed_summary) and score >= BLOCK_THRESHOLD_INITIAL:
+                logger.info(f"✅ Résumé structuré et au-dessus du seuil trouvé à l'essai {attempt} (score={score:.3f})")
+                best_score = score
+                best_summary = processed_summary
+                break  # satisfait, on arrête la boucle
             else:
-                # On prend quand même le meilleur score, même si pas parfait
-                score = evaluate_summary_score(text, processed_summary)
                 if score > best_score:
                     best_score = score
                     best_summary = processed_summary
-                logger.warning(f"Résumé rejeté (non structuré) essai {attempt}")
+                logger.warning(f"Résumé rejeté (non structuré ou score trop bas) essai {attempt} (score={score:.3f})")
 
         if not best_summary.strip():
             logger.error(f"Bloc {idx+1} ignoré : aucun résumé généré.")
             continue
 
-        if not is_summary_valid(best_summary):
-            logger.warning(f"Bloc {idx+1}: Pas de résumé structuré, mais on garde le meilleur (score={best_score:.3f})")
+        if not (is_summary_valid(best_summary) and best_score >= BLOCK_THRESHOLD_INITIAL):
+            logger.warning(f"Bloc {idx+1}: Pas de résumé structuré et/ou au-dessus du seuil, mais on garde le meilleur essai (score={best_score:.3f})")
 
         logger.info(f"\n✅ Bloc {idx+1} retenu : score={best_score:.3f}")
 
@@ -136,7 +134,6 @@ def process_job(job: Job):
         })
 
         summaries.append((idx + 1, best_summary))
-
 
     summaries.sort()
     joined = [s for _, s in summaries]
