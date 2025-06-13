@@ -132,3 +132,31 @@ CELERY_TASK_SERIALIZER = 'json'
 # On ajoute aussi django_celery_results dans les apps
 INSTALLED_APPS += ['django_celery_results']
     
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",  # Change "DEBUG" en "INFO" si tu veux moins de détails
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        # Tout ce qui vient de ton code custom
+        "ia_backend": {
+            "handlers": ["console"],
+            "level": "DEBUG",  # ou "INFO"
+            "propagate": False,
+        },
+        # Optionnel : les logs du core Django
+        "django": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+    },
+}

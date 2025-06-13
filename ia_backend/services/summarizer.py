@@ -21,10 +21,14 @@ MIN_TEXT_LENGTH = 50
 
 # --------- Prompt Templates ---------
 BLOCK_PROMPT = """[INST] Tu es un expert en synthèse de documents techniques. Rédige un résumé concis en français qui :
-1. Extrait strictement les concepts clés
-2. Ignore les exemples redondants
-3. Structure en : Problématique || Méthode || Résultats
-4. Conserve les données chiffrées importantes
+
+Problématique : ...
+Méthode : ...
+Résultats : ...
+
+Contraintes rédactionnelles strictes :
+- Extrait strictement les concepts clés
+- Conserve les données chiffrées importantes
 
 Texte à résumer :
 {text}
@@ -67,7 +71,7 @@ def summarize_block(text: str) -> str:
         result = generate_ollama(
             prompt=BLOCK_PROMPT.format(text=text),
             num_predict=650,
-            models=["phi3"],
+            models=["mistral:instruct"],
             temperature=0.3
         )
 
@@ -84,6 +88,21 @@ def summarize_block(text: str) -> str:
     except Exception as e:
         logger.error("Échec summarize_block", exc_info=True)
         return ""
+    # --------- Validation structure bloc ---------
+def is_summary_valid(summary: str) -> bool:
+    """
+    Valide qu'un résumé de bloc respecte bien la structure attendue :
+    - Présence des trois sections
+    - Longueur minimale
+    """
+    if not summary or len(summary.split()) < 40:
+        return False
+    checks = [
+        "Problématique" in summary,
+        "Méthode" in summary,
+        "Résultats" in summary
+    ]
+    return all(checks)
 
 # --------- Fusion globale ---------
 def summarize_global(summary_list: List[str], is_final: bool = False) -> str:
@@ -166,8 +185,8 @@ Nouveau résumé amélioré :[/INST]"""
     return generate_ollama(
         prompt=prompt,
         num_predict=750,
-        models=["phi3"],
-        repeat_penalty=1.2
+        models=["mistral:instruct"],
+        
     )
 
 # --------- Vérification de couverture de mots-clés ---------

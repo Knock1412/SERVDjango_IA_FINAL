@@ -4,6 +4,7 @@ import logging
 import uuid
 import torch
 import numpy as np
+import time
 from typing import List, Dict, Tuple
 from sentence_transformers import SentenceTransformer, util, CrossEncoder
 from ia_backend.services.ollama_gateway import generate_ollama
@@ -16,7 +17,6 @@ logger = logging.getLogger(__name__)
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
-# --- Chargement des blocs de résumé avec embeddings
 def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
     folder_path = os.path.join("cache_json", "save_summaryblocks", entreprise, job_id)
     logger.debug(f"Chargement des blocs depuis : {folder_path}")
@@ -33,6 +33,10 @@ def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
                 data = json.load(f)
             summary = data.get("summary", "")
             embedding = data.get("embedding")
+            # sécurité : si pas d'embedding, on skippe ce bloc
+            if embedding is None:
+                logger.warning(f"Pas d'embedding pour {filename}, bloc ignoré.")
+                continue
             meta = {
                 "source": filename,
                 "score": data.get("score", 0),
@@ -49,6 +53,8 @@ def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
 def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: int = 3) -> List[Dict]:
     candidate_blocks = []
     embeddings = []
+    scores_debug = []  # Pour logs détaillés
+
     for summary, meta in blocks:
         emb = meta.get("embedding")
         if emb is not None:
@@ -58,12 +64,9 @@ def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: i
     if not embeddings:
         return []
 
-    # --- Convert to float32 tensor and send to CPU
+    # Embeddings des blocs et question sur le CPU, et tous en float32
     block_embs = torch.tensor(np.stack(embeddings), dtype=torch.float32).to("cpu")
     question_emb = model.encode(question, convert_to_tensor=True).to(torch.float32).to("cpu")
-
-    logger.debug(f"block_embs dtype: {block_embs.dtype}, device: {block_embs.device}")
-    logger.debug(f"question_emb dtype: {question_emb.dtype}, device: {question_emb.device}")
 
     similarities = util.pytorch_cos_sim(question_emb, block_embs)[0]
 
@@ -73,20 +76,34 @@ def find_relevant_blocks(question: str, blocks: List[Tuple[str, Dict]], top_k: i
         quality = meta.get("score", 0)
         combined = 0.7 * sim + 0.3 * quality
         scored.append((i, combined))
+        # Ajout pour debug
+        scores_debug.append({
+            "filename": meta["source"],
+            "sim_score": round(sim, 4),
+            "quality": round(quality, 4),
+            "combined": round(combined, 4)
+        })
+
     scored.sort(key=lambda x: x[1], reverse=True)
     pre_top = [i for i, _ in scored[:10]]  # Top 10 pour rerank
 
-    # 2) Re-ranking avec CrossEncoder
+    # Re-ranking avec CrossEncoder
     cross_inputs = [(question, candidate_blocks[i][0]) for i in pre_top]
     rerank_scores = reranker.predict(cross_inputs)
     reranked = sorted(zip(pre_top, rerank_scores), key=lambda x: x[1], reverse=True)[:top_k]
 
     result = []
-    for idx, _ in reranked:
+    for rank, (idx, rerank_score) in enumerate(reranked, 1):
         summary, meta = candidate_blocks[idx]
+        block_score_debug = scores_debug[idx]
+        logger.info(
+            f"ASK Bloc sélectionné (RANK {rank}) : {meta['source']} | sim={block_score_debug['sim_score']}, "
+            f"quality={block_score_debug['quality']}, combined={block_score_debug['combined']} | rerank_score={round(float(rerank_score),4)}"
+        )
         result.append({
             "text": summary,
-            "source": meta.get("source")
+            "source": meta.get("source"),
+            "debug_scores": block_score_debug
         })
     return result
 
@@ -118,20 +135,26 @@ def generate_answer(
     session_id: str = None,
     user_id: str = None
 ) -> str:
+    start_time = time.time()
     selected = find_relevant_blocks(question, blocks)
+    elapsed = time.time() - start_time
+    logger.info(f"ASK ⏱️ Temps total de sélection (retrieval+rérank+prompt) : {elapsed:.2f}s")
+
     if not selected:
         answer = "Aucune information pertinente trouvée dans le document."
     else:
         prompt = build_prompt(question, selected)
+        gen_start = time.time()
         answer = generate_ollama(
             prompt=prompt,
             num_predict=400,
             models=["llama3:instruct"],
             temperature=0.3,
-            
         ).strip()
+        gen_elapsed = time.time() - gen_start
+        logger.info(f"ASK ⏱️ Temps génération LLM : {gen_elapsed:.2f}s")
 
-    # --- Enregistrement dans SQLite chat memory
+    # Enregistrement dans SQLite chat memory
     if session_id is None:
         session_id = str(uuid.uuid4())
     blocks_used = [b["source"] for b in selected] if selected else []

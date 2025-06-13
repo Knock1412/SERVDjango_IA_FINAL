@@ -1,7 +1,7 @@
 import os
 import time
 import logging
-from sentence_transformers import SentenceTransformer  # ✅ Nouveau
+from sentence_transformers import SentenceTransformer  # ✅ Pour embeddings
 
 from ia_backend.services.pdf_utils import (
     extract_blocks_from_pdf,
@@ -14,6 +14,7 @@ from ia_backend.services.summarizer import (
     summarize_block,
     summarize_global,
     evaluate_summary_score,
+    is_summary_valid  # <-- AJOUT IMPORT
 )
 from ia_backend.services.cache_manager import save_json
 from ia_backend.services.backup_service import save_global_summary
@@ -86,9 +87,9 @@ def process_job(job: Job):
             logger.info(f"🚩 Bloc {idx+1} détecté comme ANNEXE. Ignoré.")
             continue
 
-        if len(text) > 7000:
-            logger.info(f"✂️ Bloc {idx+1} pré-tronqué à 7000 avant IA")
-            text = text[:7000]
+        if len(text) > 8000:
+            logger.info(f"✂️ Bloc {idx+1} pré-tronqué à 8000 avant IA")
+            text = text[:8000]
 
         best_score = 0
         best_summary = ""
@@ -98,21 +99,30 @@ def process_job(job: Job):
             summary = summarize_block(text)
             processed_summary, translated = process_text_block(summary)
 
-            lang_info = "Traduit EN->FR" if translated else "Déjà en FR"
-            score = evaluate_summary_score(text, processed_summary)
-            logger.info(f"⚙️ Bloc #{idx+1} Essai {attempt} - Score={score:.3f} - Best={best_score:.3f} - {lang_info}")
+            if is_summary_valid(processed_summary):
+                logger.info(f"✅ Résumé structuré trouvé à l'essai {attempt}")
+                score = evaluate_summary_score(text, processed_summary)
+                if score > best_score:
+                    best_score = score
+                    best_summary = processed_summary
+                break  # On sort de la boucle, format trouvé !
+            else:
+                # On prend quand même le meilleur score, même si pas parfait
+                score = evaluate_summary_score(text, processed_summary)
+                if score > best_score:
+                    best_score = score
+                    best_summary = processed_summary
+                logger.warning(f"Résumé rejeté (non structuré) essai {attempt}")
 
-            if score > best_score:
-                best_score = score
-                best_summary = processed_summary
+        if not best_summary.strip():
+            logger.error(f"Bloc {idx+1} ignoré : aucun résumé généré.")
+            continue
 
-            if score >= BLOCK_THRESHOLD_INITIAL:
-                logger.info(f"✅ Bloc {idx+1} validé dès essai {attempt} (score={score:.3f})")
-                break
+        if not is_summary_valid(best_summary):
+            logger.warning(f"Bloc {idx+1}: Pas de résumé structuré, mais on garde le meilleur (score={best_score:.3f})")
 
-        logger.info(f"\n✅ Bloc {idx+1} terminé : meilleur score={best_score:.3f}")
+        logger.info(f"\n✅ Bloc {idx+1} retenu : score={best_score:.3f}")
 
-        # ✅ Pré-indexation embedding
         embedding = embedding_model.encode(best_summary).tolist()
 
         json_dir = f"cache_json/save_summaryblocks/{job.entreprise}/{job.job_id}"
@@ -122,10 +132,11 @@ def process_job(job: Job):
             "source_pdf": job.pdf_url,
             "score": best_score,
             "translated": translated,
-            "embedding": embedding  # <-- Embedding sauvegardé
+            "embedding": embedding
         })
 
         summaries.append((idx + 1, best_summary))
+
 
     summaries.sort()
     joined = [s for _, s in summaries]
