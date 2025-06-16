@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from ia_backend.services.pdf_utils import extract_blocks_from_pdf, detect_annex_start_page
+from ia_backend.services.pdf_utils import extract_blocks_from_pdf
 from ia_backend.services.backup_service import load_global_summary_if_exists, save_global_summary
 from ia_backend.job_queue import Job
 from ia_backend.tasks import process_job_task
@@ -86,9 +86,8 @@ def summarize_from_url(request):
 
     try:
         total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
-        annex_page = detect_annex_start_page(local_pdf_path)
-        effective_pages = annex_page if annex_page else total_pages
-        estimated_blocks = effective_pages if effective_pages < 10 else effective_pages // 3
+        # 👇 Suppression de la logique d'annexes
+        estimated_blocks = total_pages if total_pages < 10 else total_pages // 3
     except Exception as e:
         logger.warning(f"Erreur lecture préliminaire PDF : {e}")
         estimated_blocks = 10

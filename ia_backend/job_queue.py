@@ -6,9 +6,7 @@ from sentence_transformers import SentenceTransformer  # ✅ Pour embeddings
 from ia_backend.services.pdf_utils import (
     extract_blocks_from_pdf,
     extract_text_from_block,
-    extract_full_text,
-    detect_annex_start_page,
-    is_likely_annex
+    extract_full_text
 )
 from ia_backend.services.summarizer import (
     summarize_block,
@@ -71,7 +69,6 @@ def process_job(job: Job):
     total_pages = sum(len(page) for page in blocks)
     logger.info(f"🧩 Découpage dynamique | Total pages approx : {total_pages}")
 
-    annex_start_page = detect_annex_start_page(job.pdf_path)
     summaries = []
 
     for idx, block_indexes in enumerate(blocks):
@@ -82,10 +79,6 @@ def process_job(job: Job):
             text = "(Bloc vide ou inexploitable.)"
 
         logger.info(f"📊 Bloc {idx+1} — Longueur brute : {len(text.strip())} caractères")
-
-        if is_likely_annex(block_indexes, total_pages, annex_start_page):
-            logger.info(f"🚩 Bloc {idx+1} détecté comme ANNEXE. Ignoré.")
-            continue
 
         if len(text) > 8000:
             logger.info(f"✂️ Bloc {idx+1} pré-tronqué à 8000 avant IA")
@@ -168,5 +161,5 @@ def process_job(job: Job):
 
     return {
         "summary": final_summary,
-        "mode": "hierarchical_annex_v5"
+        "mode": "hierarchical_v5"
     }

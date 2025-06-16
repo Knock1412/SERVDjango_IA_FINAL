@@ -1,0 +1,26 @@
+[
+  {
+    "job_id": "2c4a8231-acd1-4ac0-bc13-408170a728a2",
+    "pdf_url": "https://inria.hal.science/hal-04854745v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-16T10:06:30.461000",
+    "duration": 435.55
+  },
+  {
+    "job_id": "d6b9c28e-e1b8-42f3-81f8-d47b76229f86",
+    "pdf_url": "https://inria.hal.science/hal-04854745v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-16T11:13:51.182382",
+    "duration": 429.4
+  },
+  {
+    "job_id": "8af702c1-f357-428b-84c2-826b32c15128",
+    "pdf_url": "https://inria.hal.science/hal-04854745v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-16T11:33:51.810978",
+    "duration": 869.65
+  }
+]
