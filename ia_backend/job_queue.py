@@ -150,9 +150,16 @@ def process_job(job: Job):
 
     logger.info(f"\n🔍 Fusion finale sur {len(intermediates)} intermédiaires...")
 
-    final_summary = summarize_global(intermediates, is_final=True)
+    final_summary_raw = summarize_global(intermediates, is_final=True)
+
+    # ✅ Traduction automatique vers FR si besoin
+    final_summary, translated = process_text_block(final_summary_raw)
+    if translated:
+        logger.info("🌐 Résumé final traduit automatiquement en français.")
+
     global_score = evaluate_summary_score(full_pdf_text, final_summary, partial_summaries=intermediates)
     logger.info(f"📊 Score global (info only) = {global_score:.3f}")
+
 
     save_global_summary(job.entreprise, job.folder_name, final_summary, job_id=job.job_id)
     log_job_history(job.job_id, job.entreprise, job.pdf_url, "terminé", "mistral", start_total)

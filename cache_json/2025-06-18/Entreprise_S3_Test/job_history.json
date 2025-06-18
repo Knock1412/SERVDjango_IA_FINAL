@@ -1,0 +1,18 @@
+[
+  {
+    "job_id": "9212ab6f-4114-4493-a2fa-00dea84e0529",
+    "pdf_url": "https://s3.gra.perf.cloud.ovh.net/desk-prod/media/Arrete_n_2011-03_C1aIWZt.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=182f03e107de4fa697cb2f747c8c2f12%2F20250617%2Fgra%2Fs3%2Faws4_request&X-Amz-Date=20250617T085812Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=f24735af0c1139db967f21a81a704ed52d554f7937bdff98899551855751e7a6",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-18T08:18:40.609523",
+    "duration": 106.07
+  },
+  {
+    "job_id": "94cddb21-d3b7-4223-b676-742017e90b43",
+    "pdf_url": "https://edutice.hal.science/edutice-00000862v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-18T09:51:05.569648",
+    "duration": 165.83
+  }
+]

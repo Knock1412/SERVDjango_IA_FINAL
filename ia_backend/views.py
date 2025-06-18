@@ -30,8 +30,10 @@ if not logger.handlers:
 
 CACHE_DIR = "temp_cache"
 
+
 def extract_filename_from_url(pdf_url):
     return f"doc_{hashlib.md5(pdf_url.encode()).hexdigest()[:12]}"
+
 
 @api_view(["POST"])
 def summarize_from_url(request):
@@ -46,11 +48,10 @@ def summarize_from_url(request):
     folder_name = extract_filename_from_url(pdf_url)
     local_pdf_filename = f"{folder_name}.pdf"
 
-    # ✅ Vérif de cache AVANT génération de job_id
     summary_data = load_global_summary_if_exists(entreprise, folder_name)
     if summary_data:
         summary = summary_data.get("summary")
-        cached_job_id = summary_data.get("job_id", folder_name)  # fallback = dossier
+        cached_job_id = summary_data.get("job_id", folder_name)
         duration_total = round(time.time() - start_total, 2)
         logger.info(f"✅ Résumé chargé depuis le cache en {duration_total}s")
         return Response({
@@ -60,7 +61,6 @@ def summarize_from_url(request):
             "duration": duration_total
         })
 
-    # ❌ Pas trouvé en cache => générer job_id
     job_id = str(uuid.uuid4())
     job_folder = f"{folder_name}_{job_id[:8]}"
     folder_cache_dir = os.path.join(CACHE_DIR, job_folder)
@@ -86,7 +86,6 @@ def summarize_from_url(request):
 
     try:
         total_pages = extract_blocks_from_pdf(local_pdf_path, return_pages_only=True)
-        # 👇 Suppression de la logique d'annexes
         estimated_blocks = total_pages if total_pages < 10 else total_pages // 3
     except Exception as e:
         logger.warning(f"Erreur lecture préliminaire PDF : {e}")
@@ -110,6 +109,7 @@ def summarize_from_url(request):
         "task_id": task.id,
         "status": "processing"
     })
+
 
 @api_view(["GET"])
 def get_summarize_status(request, task_id):
@@ -135,12 +135,13 @@ def get_summarize_status(request, task_id):
     else:
         return Response({"status": res.state})
 
+
 @api_view(["POST"])
 def ask_from_url(request):
     question = request.data.get("question")
     job_id = request.data.get("job_id")
     entreprise = request.data.get("entreprise")
-    session_id = request.data.get("session_id") or str(uuid.uuid4())  # ✅ auto fallback
+    session_id = request.data.get("session_id") or str(uuid.uuid4())
 
     if not question or not job_id or not entreprise:
         return Response({"error": "question, job_id et entreprise sont requis."}, status=400)
@@ -158,7 +159,6 @@ def ask_from_url(request):
     selected_blocks = find_relevant_blocks(question, blocks)
     answer = generate_answer(question, blocks)
 
-    # ✅ Enregistrement de l'interaction en base SQLite
     try:
         from ia_backend.services.chat_memory import save_interaction
         block_sources = [b["source"] for b in selected_blocks]
@@ -177,5 +177,25 @@ def ask_from_url(request):
         "answer": answer,
         "job_id": job_id,
         "entreprise": entreprise,
-        "session_id": session_id  # ✅ retourné au client pour enchaîner les questions
+        "session_id": session_id
+    })
+
+
+@api_view(["GET"])
+def latest_job(request, entreprise):
+    base_path = os.path.join("cache_json", "save_summaryblocks", entreprise)
+    if not os.path.exists(base_path):
+        return Response({"error": "Entreprise inconnue."}, status=404)
+
+    job_dirs = [d for d in os.listdir(base_path) if os.path.isdir(os.path.join(base_path, d))]
+    if not job_dirs:
+        return Response({"error": "Aucun job_id trouvé."}, status=404)
+
+    job_dirs.sort(key=lambda d: os.path.getmtime(os.path.join(base_path, d)), reverse=True)
+    latest_job_id = job_dirs[0]
+    timestamp = time.ctime(os.path.getmtime(os.path.join(base_path, latest_job_id)))
+
+    return Response({
+        "job_id": latest_job_id,
+        "timestamp": timestamp
     })
