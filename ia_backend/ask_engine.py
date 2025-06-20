@@ -5,10 +5,11 @@ import uuid
 import torch
 import numpy as np
 import time
+from datetime import datetime
 from typing import List, Dict, Tuple
 from sentence_transformers import SentenceTransformer, util, CrossEncoder
 from ia_backend.services.ollama_gateway import generate_ollama
-from ia_backend.services.chat_memory import save_interaction  # <-- Import chat memory
+from ia_backend.services.chat_memory import save_interaction
 
 # Initialisation du logger
 logger = logging.getLogger(__name__)
@@ -34,7 +35,6 @@ def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
                 data = json.load(f)
             summary = data.get("summary", "")
             embedding = data.get("embedding")
-            # sécurité : si pas d'embedding, on skippe ce bloc
             if embedding is None:
                 logger.warning(f"Pas d'embedding pour {filename}, bloc ignoré.")
                 continue
@@ -59,7 +59,7 @@ def find_relevant_blocks(
 ) -> List[Dict]:
     candidate_blocks = []
     embeddings = []
-    scores_debug = []  # Pour logs détaillés
+    scores_debug = []
 
     for summary, meta in blocks:
         emb = meta.get("embedding")
@@ -85,11 +85,9 @@ def find_relevant_blocks(
             "quality": round(quality, 4),
             "combined": round(combined, 4)
         })
-        # Seuil de pertinence appliqué ici
         if combined >= relevance_threshold:
             scored.append((i, combined))
 
-    # --- Fallback si rien ne passe le seuil, on prend quand même les top_k meilleurs
     if not scored:
         scored = sorted(
             [(i, 0.7 * similarities[i].item() + 0.3 * meta.get("score", 0))
@@ -100,9 +98,8 @@ def find_relevant_blocks(
         scored.sort(key=lambda x: x[1], reverse=True)
         scored = scored[:top_k]
 
-    pre_top = [i for i, _ in scored]  # Les indices pour rerank
+    pre_top = [i for i, _ in scored]
 
-    # --- Re-ranking avec CrossEncoder
     cross_inputs = [(question, candidate_blocks[i][0]) for i in pre_top]
     rerank_scores = reranker.predict(cross_inputs)
     reranked = sorted(zip(pre_top, rerank_scores), key=lambda x: x[1], reverse=True)[:top_k]
@@ -122,14 +119,14 @@ def find_relevant_blocks(
         })
     return result
 
-# --- Construction du prompt pour Ollama
+# --- PROMPTS : métier & reformulation
 def build_prompt(question: str, selected_blocks: List[Dict]) -> str:
     parts = []
     for i, b in enumerate(selected_blocks):
         parts.append(f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}")
     context = "\n\n".join(parts)
     return f"""[INST]
-Tu es un assistant IA expert et synthétique. Réponds en une seule phrase claire et précise à la question suivante, en t'appuyant exclusivement sur les extraits fournis.
+Tu es un assistant IA expert, précis et synthétique, réponds strictement et uniquement à la question suivante, en t’appuyant exclusivement sur les extraits fournis.
 
 QUESTION :
 {question}
@@ -138,17 +135,58 @@ EXTRAITS :
 {context}
 
 INSTRUCTIONS :
-- Réponds en une à deux phrases maximum, sans introduction, ni structure académique.
-- Si aucun élément pertinent, réponds : "Non mentionné dans le document."
+- Ta réponse doit tenir en 1 à 3 phrases claires
+- Ne copie pas textuellement les extraits : reformule avec clarté.
+- Si l’information n’est pas présente, dis-le poliment (“Non mentionné dans le document.”).
+- Corrige les éventuelles fautes dans la question.
 [/INST]"""
 
-# --- Génération de la réponse et enregistrement dans le chat memory
+def build_reformulation_prompt(question: str, selected_blocks: List[Dict]) -> str:
+    parts = []
+    for i, b in enumerate(selected_blocks):
+        parts.append(f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}")
+    context = "\n\n".join(parts)
+    return f"""[INST]
+Tu es un assistant IA expert et synthétique. L’utilisateur demande une reformulation de ta réponse précédente à la même question.
+Rédige une réponse différente, uniquement à partir des extraits fournis, sans te répéter.
+
+QUESTION :
+{question}
+
+EXTRAITS :
+{context}
+
+RÈGLES :
+- 1 à 3 phrases claires, sans préambule.
+- Ne redis pas la même chose.
+- Si l’information n’est pas présente, dis-le poliment (“Non mentionné dans le document.”).
+[/INST]"""
+
+# --- Prompt généraliste (fallback)
+def build_general_prompt(question: str) -> str:
+    now = datetime.now().strftime("%H:%M")
+    return f"""[INST]
+Tu es un assistant IA généraliste, clair et utile. L'heure actuelle est {now}.
+
+Réponds de manière précise et concise à la question suivante, même si elle concerne la culture générale, l’heure, la météo, ou toute autre demande.
+
+QUESTION :
+{question}
+
+INSTRUCTIONS :
+- Si la question porte sur l’heure, utilise {now} comme référence.
+- Si c’est une question générale, réponds normalement.
+- Si la question est absurde ou vide, dis-le poliment.
+[/INST]"""
+
+# --- Génération de la réponse (RAG ou fallback) + log + sauvegarde
 def generate_answer(
     question: str,
     blocks: List[Tuple[str, Dict]],
     job_id: str = None,
     session_id: str = None,
-    user_id: str = None
+    user_id: str = None,
+    reformule: bool = False
 ) -> str:
     start_time = time.time()
     selected = find_relevant_blocks(question, blocks)
@@ -156,9 +194,23 @@ def generate_answer(
     logger.info(f"ASK ⏱️ Temps total de sélection (retrieval+rérank+prompt) : {elapsed:.2f}s")
 
     if not selected:
-        answer = "Aucune information pertinente trouvée dans le document."
+        logger.info("ASK ➡️ Aucun bloc pertinent : bascule en mode assistant général.")
+        prompt = build_general_prompt(question)
+        gen_start = time.time()
+        answer = generate_ollama(
+            prompt=prompt,
+            num_predict=350,
+            models=["llama3:instruct"],
+            temperature=0.7,
+        ).strip()
+        gen_elapsed = time.time() - gen_start
+        logger.info(f"ASK ⏱️ Temps génération fallback LLM : {gen_elapsed:.2f}s")
+        blocks_used = []
     else:
-        prompt = build_prompt(question, selected)
+        if reformule:
+            prompt = build_reformulation_prompt(question, selected)
+        else:
+            prompt = build_prompt(question, selected)
         gen_start = time.time()
         answer = generate_ollama(
             prompt=prompt,
@@ -168,11 +220,10 @@ def generate_answer(
         ).strip()
         gen_elapsed = time.time() - gen_start
         logger.info(f"ASK ⏱️ Temps génération LLM : {gen_elapsed:.2f}s")
+        blocks_used = [b["source"] for b in selected]
 
-    # Enregistrement dans SQLite chat memory
     if session_id is None:
         session_id = str(uuid.uuid4())
-    blocks_used = [b["source"] for b in selected] if selected else []
     try:
         save_interaction(
             session_id=session_id,

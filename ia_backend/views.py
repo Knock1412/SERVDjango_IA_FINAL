@@ -142,6 +142,7 @@ def ask_from_url(request):
     job_id = request.data.get("job_id")
     entreprise = request.data.get("entreprise")
     session_id = request.data.get("session_id") or str(uuid.uuid4())
+    reformule = request.data.get("reformule", False)  # <--- PATCH: récupère le flag reformule
 
     if not question or not job_id or not entreprise:
         return Response({"error": "question, job_id et entreprise sont requis."}, status=400)
@@ -157,7 +158,7 @@ def ask_from_url(request):
         return Response({"error": "Aucun bloc disponible pour ce document."}, status=204)
 
     selected_blocks = find_relevant_blocks(question, blocks)
-    answer = generate_answer(question, blocks)
+    answer = generate_answer(question, blocks, reformule=reformule)  # <--- PATCH: passe le flag
 
     try:
         from ia_backend.services.chat_memory import save_interaction
@@ -179,6 +180,7 @@ def ask_from_url(request):
         "entreprise": entreprise,
         "session_id": session_id
     })
+
 
 
 @api_view(["GET"])
