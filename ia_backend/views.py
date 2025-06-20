@@ -142,7 +142,8 @@ def ask_from_url(request):
     job_id = request.data.get("job_id")
     entreprise = request.data.get("entreprise")
     session_id = request.data.get("session_id") or str(uuid.uuid4())
-    reformule = request.data.get("reformule", False)  # <--- PATCH: récupère le flag reformule
+    reformule = request.data.get("reformule", False)
+    general = request.data.get("general", False)
 
     if not question or not job_id or not entreprise:
         return Response({"error": "question, job_id et entreprise sont requis."}, status=400)
@@ -150,28 +151,23 @@ def ask_from_url(request):
     try:
         blocks = load_all_blocks(entreprise, job_id)
     except FileNotFoundError:
-        return Response({"error": "Blocs non trouvés pour ce job"}, status=404)
+        blocks = []
     except Exception as e:
         return Response({"error": f"Erreur lors du chargement des blocs : {str(e)}"}, status=500)
 
-    if not blocks:
-        return Response({"error": "Aucun bloc disponible pour ce document."}, status=204)
-
-    selected_blocks = find_relevant_blocks(question, blocks)
-    answer = generate_answer(question, blocks, reformule=reformule)  # <--- PATCH: passe le flag
-
     try:
-        from ia_backend.services.chat_memory import save_interaction
-        block_sources = [b["source"] for b in selected_blocks]
-        save_interaction(
-            session_id=session_id,
+        answer = generate_answer(
             question=question,
-            answer=answer,
-            blocks_used=block_sources,
-            job_id=job_id
+            blocks=blocks,
+            job_id=job_id,
+            session_id=session_id,
+            user_id=None,
+            reformule=reformule,
+            general=general
         )
     except Exception as e:
-        logger.warning(f"[chat_memory] Erreur enregistrement session : {e}")
+        logger.error(f"Erreur generate_answer : {e}")
+        return Response({"error": f"Erreur IA : {str(e)}"}, status=500)
 
     return Response({
         "question": question,

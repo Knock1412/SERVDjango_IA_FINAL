@@ -5,20 +5,52 @@ import uuid
 import torch
 import numpy as np
 import time
-from datetime import datetime
 from typing import List, Dict, Tuple
 from sentence_transformers import SentenceTransformer, util, CrossEncoder
+from duckduckgo_search import DDGS
 from ia_backend.services.ollama_gateway import generate_ollama
 from ia_backend.services.chat_memory import save_interaction
 
-# Initialisation du logger
 logger = logging.getLogger(__name__)
 
-# Chargement des modèles
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
-# --- Chargement des blocs
+def is_general_question(question: str) -> bool:
+    import re
+    patterns = [
+        r"\b(quelle est|quand|combien|où|qui|pourquoi|comment|définir|définition de|loi|date)\b",
+        r"\b(c’est quoi|peux[- ]tu m’expliquer|explique moi|histoire de)\b",
+        r"\b(météo|heure|jour|capital[e]?|président|actualités?)\b",
+    ]
+    question = question.lower()
+    return any(re.search(p, question) for p in patterns)
+
+def search_web_duckduckgo(query: str, num_results: int = 5) -> List[str]:
+    results = []
+    with DDGS() as ddgs:
+        for r in ddgs.text(query, max_results=num_results):
+            if "body" in r:
+                results.append(f"{r['title']}: {r['body']}")
+    return results
+
+def build_web_summary_prompt(question: str, results: List[str]) -> str:
+    sources = "\n\n".join(f"- {res}" for res in results)
+    return f"""[INST]
+Tu es un assistant IA généraliste. Réponds en deux à trois phrases claire et précise à la question suivante, en t'appuyant exclusivement sur le résultat web.
+
+Question : {question}
+
+Résultats trouvés :
+{sources}
+
+Consignes :
+- Réponds en deux à trois phrases maximum, sans introduction, ni structure académique.
+- Synthétise uniquement les infos pertinentes
+- Ne spécule pas. Si pas d'info claire, dis-le.
+- Corrige les éventuelles fautes dans la question.
+[/INST]"""
+
 def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
     folder_path = os.path.join("cache_json", "save_summaryblocks", entreprise, job_id)
     logger.debug(f"Chargement des blocs depuis : {folder_path}")
@@ -50,7 +82,6 @@ def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
             continue
     return blocks
 
-# --- Sélection des blocs pertinents (hybride embedding + rerank)
 def find_relevant_blocks(
     question: str,
     blocks: List[Tuple[str, Dict]],
@@ -91,7 +122,7 @@ def find_relevant_blocks(
     if not scored:
         scored = sorted(
             [(i, 0.7 * similarities[i].item() + 0.3 * meta.get("score", 0))
-                for i, (_, meta) in enumerate(candidate_blocks)],
+             for i, (_, meta) in enumerate(candidate_blocks)],
             key=lambda x: x[1], reverse=True
         )[:top_k]
     else:
@@ -99,7 +130,6 @@ def find_relevant_blocks(
         scored = scored[:top_k]
 
     pre_top = [i for i, _ in scored]
-
     cross_inputs = [(question, candidate_blocks[i][0]) for i in pre_top]
     rerank_scores = reranker.predict(cross_inputs)
     reranked = sorted(zip(pre_top, rerank_scores), key=lambda x: x[1], reverse=True)[:top_k]
@@ -119,14 +149,11 @@ def find_relevant_blocks(
         })
     return result
 
-# --- PROMPTS : métier & reformulation
 def build_prompt(question: str, selected_blocks: List[Dict]) -> str:
-    parts = []
-    for i, b in enumerate(selected_blocks):
-        parts.append(f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}")
+    parts = [f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}" for i, b in enumerate(selected_blocks)]
     context = "\n\n".join(parts)
     return f"""[INST]
-Tu es un assistant IA expert, précis et synthétique, réponds strictement et uniquement à la question suivante, en t’appuyant exclusivement sur les extraits fournis.
+Tu es un assistant IA expert et synthétique. Réponds en deux à trois phrases claire et précise à la question suivante, en t'appuyant exclusivement sur les extraits fournis.
 
 QUESTION :
 {question}
@@ -135,16 +162,13 @@ EXTRAITS :
 {context}
 
 INSTRUCTIONS :
-- Ta réponse doit tenir en 1 à 3 phrases claires
-- Ne copie pas textuellement les extraits : reformule avec clarté.
+- Réponds en deux à trois phrases maximum, sans introduction, ni structure académique.
 - Si l’information n’est pas présente, dis-le poliment (“Non mentionné dans le document.”).
 - Corrige les éventuelles fautes dans la question.
 [/INST]"""
 
 def build_reformulation_prompt(question: str, selected_blocks: List[Dict]) -> str:
-    parts = []
-    for i, b in enumerate(selected_blocks):
-        parts.append(f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}")
+    parts = [f"--- Bloc {i+1} ({b['source']}) ---\n{b['text']}" for i, b in enumerate(selected_blocks)]
     context = "\n\n".join(parts)
     return f"""[INST]
 Tu es un assistant IA expert et synthétique. L’utilisateur demande une reformulation de ta réponse précédente à la même question.
@@ -162,65 +186,60 @@ RÈGLES :
 - Si l’information n’est pas présente, dis-le poliment (“Non mentionné dans le document.”).
 [/INST]"""
 
-# --- Prompt généraliste (fallback)
-def build_general_prompt(question: str) -> str:
-    now = datetime.now().strftime("%H:%M")
-    return f"""[INST]
-Tu es un assistant IA généraliste, clair et utile. L'heure actuelle est {now}.
-
-Réponds de manière précise et concise à la question suivante, même si elle concerne la culture générale, l’heure, la météo, ou toute autre demande.
-
-QUESTION :
-{question}
-
-INSTRUCTIONS :
-- Si la question porte sur l’heure, utilise {now} comme référence.
-- Si c’est une question générale, réponds normalement.
-- Si la question est absurde ou vide, dis-le poliment.
-[/INST]"""
-
-# --- Génération de la réponse (RAG ou fallback) + log + sauvegarde
 def generate_answer(
     question: str,
     blocks: List[Tuple[str, Dict]],
     job_id: str = None,
     session_id: str = None,
     user_id: str = None,
-    reformule: bool = False
+    reformule: bool = False,
+    general: bool = False
 ) -> str:
-    start_time = time.time()
-    selected = find_relevant_blocks(question, blocks)
-    elapsed = time.time() - start_time
-    logger.info(f"ASK ⏱️ Temps total de sélection (retrieval+rérank+prompt) : {elapsed:.2f}s")
+    total_start = time.time()
 
-    if not selected:
-        logger.info("ASK ➡️ Aucun bloc pertinent : bascule en mode assistant général.")
-        prompt = build_general_prompt(question)
+    # 1. D'abord, détecte si c'est une question générale
+    if general or is_general_question(question):
+        logger.info("🧠 Prompt déclenché : 🌐 Web (DuckDuckGo)")
+        web_results = search_web_duckduckgo(question)
+        if not web_results:
+            return "Désolé, je n'ai rien trouvé sur le web."
+        prompt = build_web_summary_prompt(question, web_results)
         gen_start = time.time()
         answer = generate_ollama(
             prompt=prompt,
-            num_predict=350,
+            num_predict=400,
             models=["llama3:instruct"],
-            temperature=0.7,
+            temperature=0.4
         ).strip()
-        gen_elapsed = time.time() - gen_start
-        logger.info(f"ASK ⏱️ Temps génération fallback LLM : {gen_elapsed:.2f}s")
+        gen_time = time.time() - gen_start
+        logger.info(f"⏱️ Temps génération (web) : {gen_time:.2f}s")
         blocks_used = []
+
     else:
-        if reformule:
-            prompt = build_reformulation_prompt(question, selected)
-        else:
-            prompt = build_prompt(question, selected)
+        # 2. Sinon, logique classique PDF
+        selected = find_relevant_blocks(question, blocks)
+        retrieval_time = time.time() - total_start
+        logger.info(f"ASK ⏱️ Temps sélection blocs (retrieval+rérank) : {retrieval_time:.2f}s")
+
+        if not selected:
+            logger.info("🧠 Aucun bloc pertinent — pas d'information.")
+            return "Je n’ai pas trouvé cette information dans les documents analysés."
+
+        logger.info(f"🧠 Prompt déclenché : 📄 PDF ({'reformulation' if reformule else 'standard'})")
+        prompt = build_reformulation_prompt(question, selected) if reformule else build_prompt(question, selected)
         gen_start = time.time()
         answer = generate_ollama(
             prompt=prompt,
             num_predict=550,
             models=["llama3:instruct"],
-            temperature=0.3,
+            temperature=0.3
         ).strip()
-        gen_elapsed = time.time() - gen_start
-        logger.info(f"ASK ⏱️ Temps génération LLM : {gen_elapsed:.2f}s")
+        gen_time = time.time() - gen_start
+        logger.info(f"⏱️ Temps génération (pdf) : {gen_time:.2f}s")
         blocks_used = [b["source"] for b in selected]
+
+    total_time = time.time() - total_start
+    logger.info(f"✅ Réponse générée en {total_time:.2f}s (total)")
 
     if session_id is None:
         session_id = str(uuid.uuid4())
