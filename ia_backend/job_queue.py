@@ -1,6 +1,7 @@
 import os
 import time
 import logging
+import json
 from sentence_transformers import SentenceTransformer  # ✅ Pour embeddings
 
 from ia_backend.services.pdf_utils import (
@@ -18,6 +19,9 @@ from ia_backend.services.cache_manager import save_json
 from ia_backend.services.backup_service import save_global_summary
 from ia_backend.services.job_logger import log_job_history
 from ia_backend.services.language_detection_and_translation import process_text_block
+from ia_backend.services.metadata_db import insert_metadata
+from ia_backend.services.ollama_gateway import call_llm
+from datetime import datetime
 
 # ---------- Logging centralisé optimisé ----------
 logger = logging.getLogger(__name__)
@@ -165,6 +169,42 @@ def process_job(job: Job):
     log_job_history(job.job_id, job.entreprise, job.pdf_url, "terminé", "mistral", start_total)
 
     logger.info(f"\n✅ Traitement finalisé pour job {job.job_id}")
+
+    # Génération de l'embedding du résumé global
+    summary_embedding = embedding_model.encode(final_summary).tolist()
+
+    # Génération automatique des mots-clés et thèmes via LLM
+    try:
+        mots_cles_raw = call_llm(f"Donne 5 mots-clés importants pour ce document:\n{final_summary}")
+        themes_raw = call_llm(f"Quels sont les grands thèmes abordés dans ce document ?\n{final_summary}")
+
+        mots_cles = [w.strip() for w in mots_cles_raw.split(",")]
+        themes = [t.strip() for t in themes_raw.split(",")]
+    except Exception as e:
+        logger.warning(f"⚠️ Erreur extraction mots-clés/themes : {e}")
+        mots_cles = []
+        themes = []
+
+    # Construction des métadonnées à insérer
+    metadata = {
+        "entreprise": job.entreprise,
+        "job_id": job.job_id,
+        "filename": os.path.basename(job.pdf_path),
+        "nb_pages": total_pages,
+        "nb_blocs": len(summaries),
+        "resume": final_summary,
+        "mots_cles": mots_cles,
+        "themes": themes,
+        "date_analyse": datetime.now().isoformat(),
+        "embedding": summary_embedding
+    }
+
+    # Insertion dans la base SQLite
+    try:
+        insert_metadata(metadata)
+        logger.info(f"✅ Métadonnées enregistrées dans la base pour {metadata['filename']}")
+    except Exception as e:
+        logger.error(f"❌ Erreur lors de l'insertion des métadonnées : {e}")
 
     return {
         "summary": final_summary,

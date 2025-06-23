@@ -68,6 +68,12 @@ def generate_ollama(
     logger.error("Tous les modèles ont échoué")
     return ""
 
+def call_llm(prompt: str, model: Optional[str] = "mistral") -> str:
+    """
+    Wrapper simple pour générer une réponse avec un seul modèle.
+    """
+    return generate_ollama(prompt=prompt, models=[model])
+
 # Démarrage des workers
 for _ in range(OLLAMA_MAX_WORKERS):
     threading.Thread(target=ollama_worker, daemon=True).start()
