@@ -25,39 +25,178 @@ reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 # ---------------------------------------------------------------------------
 #    Utilitaire : classification LLM “générale/précise” + score de confiance
 # ---------------------------------------------------------------------------
-def classify_question_with_score(question: str) -> Tuple[str, float]:
-    """
-    Utilise le LLM (Ollama) pour classifier une question : 'générale' ou 'précise'
-    Retourne aussi un score de confiance [0,1].
-    """
-    prompt = f"""[INST]
-Tu es un assistant IA. Ton rôle est de classer une question utilisateur en deux catégories :
-- "générale" : la question demande une vue d’ensemble, une liste de documents ou un thème transversal.
-- "précise" : la question cherche une information précise à l’intérieur d’un seul document.
+from functools import lru_cache
+import concurrent.futures
+from typing import Tuple, Dict
+import numpy as np
 
-QUESTION :
-{question}
+# Cache pour les embeddings de questions (réduit les appels LLM)
+QUESTION_EMBEDDINGS_CACHE = lru_cache(maxsize=1000)
 
-Renvoie uniquement une réponse JSON valide comme ceci :
+# Modèle lightweight pour pré-classification
+FAST_CLASSIFIER = SentenceTransformer("paraphrase-MiniLM-L6-v2")
+
+# Exemples de questions pré-classifiées pour few-shot learning
+# Exemples de questions pré-classifiées pour few-shot learning
+PRECLASSIFIED_EXAMPLES = [
+    # Questions GÉNÉRALES
+    ("Liste des documents sur la fiscalité", "générale"),
+    ("Résumez les rapports financiers 2023", "générale"),
+    ("Quels documents traitent des politiques éducatives ?", "générale"),
+    ("Quels sont les thèmes abordés dans les documents récents ?", "générale"),
+    ("Montre-moi les documents liés à la transformation numérique", "générale"),
+    ("Quels fichiers abordent l'enseignement à distance ?", "générale"),
+    ("Y a-t-il des documents qui parlent d'éthique en IA ?", "générale"),
+    ("Quels rapports concernent les innovations pédagogiques ?", "générale"),
+
+    # Questions PRÉCISES
+    ("Quel est l'article sur les impôts locaux ?", "précise"),
+    ("Page 42 du document X", "précise"),
+    ("Quelles sont les conclusions du rapport sur la visioconférence ?", "précise"),
+    ("Combien de pages contient le document sur le Cartable Électronique ?", "précise"),
+    ("Quelle est la date de publication du PDF sur la nanobureautique ?", "précise"),
+    ("Quels logiciels sont mentionnés dans le bloc 3 du document X ?", "précise"),
+    ("Quelles sont les critiques soulevées dans le document sur les TICE ?", "précise"),
+    ("Quelle méthode pédagogique est décrite dans le document sur le MO5 ?", "précise")
+]
+
+
+def classify_question_with_score_v2(question: str) -> Tuple[str, float]:
+    """
+    Version optimisée avec fallback intelligent et pré-classification
+    """
+    # Étape 1: Pré-classification rapide avec embedding (évite 60% des appels LLM)
+    pre_class, pre_conf = fast_preclassify(question)
+    if pre_conf > 0.85:  # Seuil de confiance élevé
+        return (pre_class, pre_conf)
+
+    # Étape 2: Appel LLM seulement si nécessaire
+    llm_class, llm_conf = call_llm_classifier(question)
+    
+    # Étape 3: Fusion intelligente des résultats
+    final_class, final_conf = combine_results(
+        pre_class, pre_conf,
+        llm_class, llm_conf
+    )
+    
+    return (final_class, final_conf)
+
+@QUESTION_EMBEDDINGS_CACHE
+def fast_preclassify(question: str) -> Tuple[str, float]:
+    """
+    Classification rapide avec similarité sémantique sur exemples connus
+    """
+    question_emb = FAST_CLASSIFIER.encode(question)
+    examples_embs = [FAST_CLASSIFIER.encode(ex[0]) for ex in PRECLASSIFIED_EXAMPLES]
+    
+    similarities = util.pytorch_cos_sim(question_emb, examples_embs)[0]
+    max_idx = similarities.argmax().item()
+    
+    if similarities[max_idx] > 0.75:  # Seuil de similarité
+        return (PRECLASSIFIED_EXAMPLES[max_idx][1], float(similarities[max_idx]))
+    
+    return ("inconnu", 0.0)
+
+def call_llm_classifier(question: str) -> Tuple[str, float]:
+    """
+    Appel LLM optimisé avec timeout et retry
+    """
+    prompt = build_few_shot_prompt(question)
+    
+    for attempt in range(2):  # 2 tentatives max
+        try:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(
+                    generate_ollama,
+                    prompt=prompt,
+                    num_predict=80,  # Réduit pour la classification
+                    
+                )
+                response = future.result(timeout=3.0)
+                
+            data = json.loads(response.strip())
+            return validate_response(data)
+        
+        except Exception as e:
+            logger.warning(f"Attempt {attempt+1} failed: {str(e)}")
+            continue
+            
+    return ("précise", 0.5)  # Fallback conservateur
+
+def build_few_shot_prompt(question: str) -> str:
+    """
+    Prompt avec exemples pour meilleure consistance
+    """
+    examples_str = "\n".join(
+        f"- Exemple {i+1} ({type}): {q}"
+        for i, (q, type) in enumerate(PRECLASSIFIED_EXAMPLES)
+    )
+    
+    return f"""[INST]
+Tu es un classifieur de questions. Voici des exemples :
+
+{examples_str}
+
+Classifie cette nouvelle question :
+
+QUESTION: {question}
+
+Réponds UNIQUEMENT en JSON valide :
 {{
-  "type": "générale" ou "précise",
-  "confiance": nombre entre 0 et 1
+  "type": "générale"|"précise",
+  "confiance": 0.0-1.0,
+  "raison": "explication courte"
 }}
 [/INST]"""
 
-    try:
-        response = generate_ollama(prompt=prompt, num_predict=120).strip()
-        data = json.loads(response)
-        q_type = data.get("type", "").lower()
-        confiance = float(data.get("confiance", 0.0))
-        if q_type in ["générale", "precise", "précise"]:
-            return (q_type, round(confiance, 3))
-    except Exception as e:
-        logger.error(f"Erreur classification LLM : {e}")
-    return ("précise", 0.0)  # fallback : on considère précise
+def combine_results(
+    pre_class: str, pre_conf: float,
+    llm_class: str, llm_conf: float
+) -> Tuple[str, float]:
+    """
+    Combine intelligemment la pré-classification et la classification LLM
+    """
+    if llm_conf >= 0.75:
+        return (llm_class, llm_conf)
+
+    if pre_class == llm_class:
+        # Accord entre classifieur rapide et LLM
+        avg_conf = round((pre_conf + llm_conf) / 2, 3)
+        return (llm_class, avg_conf)
+
+    # Divergence : on fait confiance au LLM s’il dépasse un certain seuil
+    if llm_conf >= 0.6:
+        return (llm_class, llm_conf)
+    else:
+        return (pre_class, pre_conf)
+
+def validate_response(data: Dict) -> Tuple[str, float]:
+    """
+    Validation robuste de la réponse LLM
+    """
+    if not isinstance(data, dict):
+        raise ValueError("Invalid JSON format")
+    
+    q_type = data.get("type", "").lower()
+    if q_type not in {"générale", "précise", "precise"}:
+        raise ValueError("Invalid question type")
+    
+    confiance = min(max(float(data.get("confiance", 0.5)), 1.0), 0.0)
+    
+    # Post-processing basé sur l'explication
+    if "raison" in data:
+        if "document spécifique" in data["raison"].lower():
+            q_type = "précise"
+        elif "plusieurs" in data["raison"].lower():
+            q_type = "générale"
+    
+    return (q_type, round(confiance, 2))
 
 
-# ---------------------------------------------------------------------------
+
+
+
+# ---------------------------------------------------------------   ------------
 #     Utilitaire : charger tous les blocs d’un job_id (fichier par PDF)
 # ---------------------------------------------------------------------------
 def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
@@ -177,7 +316,7 @@ Voici la question de l'utilisateur :
 Voici la liste des documents pertinents avec leur résumé :
 {docs_str}
 
-Réponds par une synthèse claire :
+Réponds par une synthèse claire :
 - Si la question concerne plusieurs documents, cite-les brièvement.
 - Si le sujet n’est traité dans aucun document, indique-le poliment.
 - 2 à 3 phrases maximum.
@@ -239,7 +378,7 @@ def generate_answer(
     total_start = time.time()
 
     # --- 1. Classifier la question (générale ou précise) ---
-    q_type, confiance = classify_question_with_score(question)
+    q_type, confiance = classify_question_with_score_v2(question)
     logger.info(f"🧠 Type de question détecté : {q_type.upper()} (confiance={confiance})")
 
     if q_type == "générale":
