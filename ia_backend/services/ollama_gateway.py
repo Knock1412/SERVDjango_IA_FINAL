@@ -39,7 +39,7 @@ def generate_ollama(
     for model in models:
         try:
             response = requests.post(
-                "http://localhost:11434/api/generate",
+                "http://ollama:11434/api/generate",
                 json={
                     "model": model,
                     "prompt": prompt,

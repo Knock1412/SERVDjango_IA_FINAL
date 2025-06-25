@@ -11,9 +11,12 @@ from sentence_transformers import SentenceTransformer, util, CrossEncoder
 # --- Imports spécifiques backend IA ---
 from ia_backend.services.ollama_gateway import generate_ollama
 from ia_backend.services.metadata_db import (
-    find_nearest_pdf_by_embedding,
-    find_documents_by_keyword
+    find_nearest_pdf_by_embedding,      # FAISS
+    find_documents_by_keyword,          # FTS5 (gardé si besoin)
+    find_documents_by_keyword_semantic
 )
+
+
 from ia_backend.services.chat_memory import save_interaction
 
 # --- Initialisation logging et modèles ---
@@ -382,8 +385,10 @@ def generate_answer(
     logger.info(f"🧠 Type de question détecté : {q_type.upper()} (confiance={confiance})")
 
     if q_type == "générale":
-        logger.info("🟡 Branche GÉNÉRALE — recherche via métadonnées uniquement")
-        results = find_documents_by_keyword(question, entreprise, job_id)
+        logger.info("🟡 Branche GÉNÉRALE — recherche hybride (FTS+embeddings) sur mots_cles/themes")
+        results = find_documents_by_keyword_semantic(
+            question, entreprise, job_id, encode_text_fn=model.encode
+        )
         if not results:
             return "Aucun document ne correspond à cette thématique."
 
@@ -402,13 +407,15 @@ def generate_answer(
     else:
         logger.info("🔵 Branche PRÉCISE — recherche vectorielle du PDF cible")
         question_emb = model.encode(question).tolist()
-        pdf_filename = find_nearest_pdf_by_embedding(question_emb, entreprise, job_id)
+        pdf_matches = find_nearest_pdf_by_embedding(question_emb, entreprise, job_id)
 
-        if not pdf_filename:
+        if not pdf_matches:
             logger.warning("Aucun document pertinent trouvé via embeddings.")
             return "Je n’ai pas trouvé de document correspondant à votre question."
 
-        logger.info(f"📂 Document sélectionné via métadonnées : {pdf_filename}")
+        # On prend uniquement le fichier avec le meilleur score
+        pdf_filename, score = pdf_matches[0]
+        logger.info(f"📂 Document sélectionné via FAISS : {pdf_filename} (score={score:.4f})")
 
         # Charger uniquement les blocs liés à ce PDF
         all_blocks = load_all_blocks(entreprise, job_id)

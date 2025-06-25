@@ -1,19 +1,10 @@
 import requests
 import time
 import sys
-import uuid
-import json
 
-API_URL = "http://192.168.10.121:8000"
+API_URL = "http://192.168.10.121:8000"  # ⚠️ Assure-toi que cette IP est correcte
 ENTREPRISE = "Entreprise_S3_Test"
-
-PDF_URLS = [
-    "https://edutice.hal.science/edutice-00000852v1/document",
-    "https://edutice.hal.science/edutice-00000413v1/document",
-    "https://edutice.hal.science/edutice-00000862v1/document",
-    "https://edutice.hal.science/edutice-00001410v1/document",
-    "https://edutice.hal.science/edutice-00001245v1/document"
-]
+PDF_URL = "https://edutice.hal.science/edutice-00000852v1/document"
 
 def wait_for_summary(task_id: str):
     spinner = ["|", "/", "-", "\\"]
@@ -24,22 +15,23 @@ def wait_for_summary(task_id: str):
             status_data = status_response.json()
 
             if status_data["status"] == "completed":
-                print("\n✅ Résumé généré.")
+                print(f"\n✅ Résumé généré pour task_id {task_id}.")
                 print("📄 Résumé :\n")
                 print(status_data.get("summary", "(Résumé vide)"))
                 return True
 
             elif status_data["status"] == "failed":
-                print("\n❌ Échec du traitement :", status_data.get("error"))
+                print(f"\n❌ Échec du traitement pour task_id {task_id} :", status_data.get("error"))
                 return False
 
             else:
-                sys.stdout.write(f"\r⏳ En attente... statut = {status_data['status']} {spinner[i % len(spinner)]}")
+                sys.stdout.write(f"\r⏳ [task {task_id}] statut = {status_data['status']} {spinner[i % len(spinner)]}")
                 sys.stdout.flush()
                 i += 1
                 time.sleep(1.5)
+
         except Exception as e:
-            print(f"\n❌ Erreur réseau : {e}")
+            print(f"\n❌ Erreur réseau pour task_id {task_id} : {e}")
             return False
 
 def process_pdf(url: str):
@@ -50,6 +42,8 @@ def process_pdf(url: str):
             json={"url": url, "entreprise": ENTREPRISE}
         )
 
+        print("↩️ Réponse brute :", response.text)
+
         if response.status_code != 200:
             print(f"❌ Erreur HTTP {response.status_code} : {response.text}")
             return
@@ -57,26 +51,24 @@ def process_pdf(url: str):
         data = response.json()
         job_id = data.get("job_id", "-")
         task_id = data.get("task_id")
+
         print(f"🔗 Job ID : {job_id}")
 
         if data.get("mode") == "cache":
             print("♻️ Résumé chargé depuis le cache.")
             print("📄 Résumé :\n", data.get("summary", "(Résumé manquant)"))
         else:
-            print("🚀 Tâche Celery lancée, attente du résumé...")
+            print(f"🚀 Tâche Celery lancée pour job_id {job_id} / task_id {task_id}")
             success = wait_for_summary(task_id)
             if not success:
-                print("⛔ Résumé non obtenu, passage au PDF suivant.")
+                print(f"⛔ Résumé non obtenu pour {url}")
                 return
 
-        print(f"✅ Document traité. Tu peux poser des questions sur ce job_id : {job_id}")
+        print(f"\n✅ Document traité. Tu peux poser des questions sur ce job_id : {job_id}")
 
     except Exception as e:
-        print(f"❌ Erreur inattendue : {e}")
+        print(f"❌ Erreur inattendue pour {url} : {e}")
 
-# ----------------------------------------
-# ▶️ Lancement pour tous les PDF
-# ----------------------------------------
-for url in PDF_URLS:
-    process_pdf(url)
-    print("\n" + "=" * 60 + "\n")
+# ▶️ Lancement
+if __name__ == "__main__":
+    process_pdf(PDF_URL)

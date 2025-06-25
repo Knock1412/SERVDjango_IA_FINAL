@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - ollama
+
+  worker:
+    build: .
+    command: celery -A ia_backend worker --loglevel=info --concurrency=5 --pool=threads
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - ollama
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama  # volume nommé Docker, persisté proprement
+    restart: always
+
+volumes:
+  ollama_data:

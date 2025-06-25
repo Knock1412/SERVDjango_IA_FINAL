@@ -1,0 +1,66 @@
+[
+  {
+    "job_id": "60a63dbf-b362-4223-8053-e0267637b935",
+    "pdf_url": "https://edutice.hal.science/edutice-00000862v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:13:04.004128",
+    "duration": 3.34
+  },
+  {
+    "job_id": "87c0f2a2-5521-49e6-b894-5b89e9efddbc",
+    "pdf_url": "https://edutice.hal.science/edutice-00000413v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:13:06.470140",
+    "duration": 5.83
+  },
+  {
+    "job_id": "e44aceba-a371-4e3f-b652-09dea4b9c7f5",
+    "pdf_url": "https://edutice.hal.science/edutice-00001245v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:13:06.985690",
+    "duration": 6.16
+  },
+  {
+    "job_id": "50a29106-0157-4bb9-9599-d4682311bb35",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:13:07.213678",
+    "duration": 6.53
+  },
+  {
+    "job_id": "b638b8cc-97c4-4cc2-8ed9-47eded5c8a77",
+    "pdf_url": "https://edutice.hal.science/edutice-00001410v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:13:08.320905",
+    "duration": 7.59
+  },
+  {
+    "job_id": "c6e2a229-2488-4a27-b7e9-c83a62f97617",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:24:04.620869",
+    "duration": 0.78
+  },
+  {
+    "job_id": "c8c1df9c-b6b2-445b-bdcb-fd6c5b06af02",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T12:48:47.030545",
+    "duration": 1.47
+  },
+  {
+    "job_id": "57bbe840-4033-45b8-afc1-68f3a8f58e15",
+    "pdf_url": "https://edutice.hal.science/edutice-00000852v1/document",
+    "status": "terminé",
+    "model_global": "mistral",
+    "created_at": "2025-06-25T13:24:51.073435",
+    "duration": 1.48
+  }
+]
