@@ -132,31 +132,39 @@ CELERY_TASK_SERIALIZER = 'json'
 # On ajoute aussi django_celery_results dans les apps
 INSTALLED_APPS += ['django_celery_results']
     
+# ... tout le reste de ton fichier inchangé ...
+
+# Logging configuration
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": False,  # Laisse les loggers de Django actifs
     "handlers": {
         "console": {
-            "class": "logging.StreamHandler",
-            "level": "DEBUG",  # Change "DEBUG" en "INFO" si tu veux moins de détails
+            "class": "logging.StreamHandler",  # Affiche les logs dans la console
+            "level": "DEBUG",  # Niveau minimum de log affiché
         },
     },
     "root": {
         "handlers": ["console"],
-        "level": "INFO",
+        "level": "INFO",  # Niveau par défaut pour tous les logs sans logger spécifique
     },
     "loggers": {
-        # Tout ce qui vient de ton code custom
+        # Logger spécifique à ton application "ia_backend"
         "ia_backend": {
             "handlers": ["console"],
-            "level": "DEBUG",  # ou "INFO"
+            "level": "DEBUG",  # Log tout ce qui est DEBUG et plus
             "propagate": False,
         },
-        # Optionnel : les logs du core Django
+        # Logger Django de base (peut réduire le bruit dans la console)
         "django": {
             "handlers": ["console"],
             "level": "WARNING",
             "propagate": False,
+        },
+        # Logger générique pour capter les logs de modules comme metadata-db.py
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",  # Important pour voir les logs de tous les modules
         },
     },
 }

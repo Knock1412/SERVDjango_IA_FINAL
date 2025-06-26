@@ -4,7 +4,7 @@ import sys
 
 API_URL = "http://192.168.10.121:8000"  # ⚠️ Assure-toi que cette IP est correcte
 ENTREPRISE = "Entreprise_S3_Test"
-PDF_URL = "https://edutice.hal.science/edutice-00000852v1/document"
+PDF_URL = "https://edutice.hal.science/edutice-00000862v1/document"
 
 def wait_for_summary(task_id: str):
     spinner = ["|", "/", "-", "\\"]

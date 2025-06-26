@@ -203,35 +203,84 @@ def validate_response(data: Dict) -> Tuple[str, float]:
 #     Utilitaire : charger tous les blocs d’un job_id (fichier par PDF)
 # ---------------------------------------------------------------------------
 def load_all_blocks(entreprise: str, job_id: str) -> List[Tuple[str, Dict]]:
+    """
+    Charge tous les blocs de résumé depuis le cache JSON pour une entreprise et un job donnés.
+    
+    Args:
+        entreprise: Nom de l'entreprise
+        job_id: Identifiant du job
+        
+    Returns:
+        Liste de tuples (résumé, métadonnées) pour chaque bloc valide
+        
+    Raises:
+        FileNotFoundError: Si le dossier spécifié n'existe pas
+    """
     folder_path = os.path.join("cache_json", "save_summaryblocks", entreprise, job_id)
-    logger.debug(f"Chargement des blocs depuis : {folder_path}")
+    logger.info(f"Chargement des blocs depuis le dossier: {folder_path}")
+    
     if not os.path.exists(folder_path):
+        logger.error(f"Dossier introuvable: {folder_path}")
         raise FileNotFoundError(f"Dossier introuvable : {folder_path}")
 
     blocks: List[Tuple[str, Dict]] = []
+    valid_files = 0
+    skipped_files = 0
+    
     for filename in sorted(os.listdir(folder_path)):
+        # Filtrage des fichiers JSON de blocs
         if not filename.startswith("bloc_") or not filename.endswith(".json"):
+            skipped_files += 1
             continue
+            
         full_path = os.path.join(folder_path, filename)
         try:
             with open(full_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            summary = data.get("summary", "")
-            embedding = data.get("embedding")
-            if embedding is None:
-                logger.warning(f"Pas d'embedding pour {filename}, bloc ignoré.")
+                
+            if "embedding" not in data:
+                logger.warning(f"Fichier {filename} ignoré - embedding manquant")
+                skipped_files += 1
                 continue
+
+            # Vérifie que l'embedding est bien une liste de 384 floats
+            emb = data["embedding"]
+            if isinstance(emb, str):
+                try:
+                    emb = json.loads(emb)
+                except Exception as e:
+                    logger.warning(f"{filename} - embedding JSON mal formé: {e}")
+                    skipped_files += 1
+                    continue
+
+            if not isinstance(emb, list) or len(emb) != 384:
+                logger.warning(f"{filename} - embedding invalide (type: {type(emb)}, taille: {len(emb) if isinstance(emb, list) else 'N/A'})")
+                skipped_files += 1
+                continue
+
+            # Construction des métadonnées
             meta = {
                 "source": filename,
                 "score": data.get("score", 0),
                 "translated": data.get("translated", False),
-                "embedding": embedding
+                "embedding": emb
             }
-            blocks.append((summary, meta))
+            blocks.append((data.get("summary", ""), meta))
+            valid_files += 1
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"Erreur de décodage JSON dans {filename}: {str(e)}")
+            skipped_files += 1
         except Exception as e:
-            logger.error(f"Erreur lecture {filename}: {e}")
-            continue
+            logger.error(f"Erreur inattendue lors du traitement de {filename}: {str(e)}")
+            skipped_files += 1
+
+    logger.info(
+        f"Chargement terminé - {valid_files} blocs valides, "
+        f"{skipped_files} fichiers ignorés/erronés"
+    )
     return blocks
+
 
 
 # ---------------------------------------------------------------------------
@@ -243,66 +292,115 @@ def find_relevant_blocks(
     top_k: int = 5,
     relevance_threshold: float = 0.4
 ) -> List[Dict]:
+    """
+    Trouve les blocs les plus pertinents pour une question donnée en combinant:
+    - Similarité sémantique (70%)
+    - Score de qualité du bloc (30%)
+    - Re-ranking croisé
+    
+    Args:
+        question: Question à laquelle répondre
+        blocks: Liste des blocs à analyser
+        top_k: Nombre maximum de résultats à retourner
+        relevance_threshold: Seuil minimal de pertinence
+        
+    Returns:
+        Liste des blocs pertinents avec leurs métadonnées
+    """
+    # Phase 1: Préparation des embeddings
     candidate_blocks = []
     embeddings = []
-    scores_debug = []
-
+    logger.info(f"Début de recherche sur {len(blocks)} blocs - top_k={top_k}")
+    
     for summary, meta in blocks:
-        emb = meta.get("embedding")
-        if emb is not None:
-            embeddings.append(emb)
+        if "embedding" in meta:
+            embeddings.append(meta["embedding"])
             candidate_blocks.append((summary, meta))
-
+    
     if not embeddings:
+        logger.warning("Aucun embedding valide trouvé - recherche annulée")
         return []
 
+    # Phase 2: Calcul des similarités
+    logger.debug("Conversion des embeddings en tenseurs...")
     block_embs = torch.tensor(np.stack(embeddings), dtype=torch.float32).to("cpu")
     question_emb = model.encode(question, convert_to_tensor=True).to(torch.float32).to("cpu")
+    
+    logger.info("Calcul des scores de similarité...")
     similarities = util.pytorch_cos_sim(question_emb, block_embs)[0]
-
-    scored = []
+    
+    # Phase 3: Combinaison des scores
+    scored_blocks = []
+    debug_scores = []
+    
     for i, (_, meta) in enumerate(candidate_blocks):
-        sim = similarities[i].item()
-        quality = meta.get("score", 0)
-        combined = 0.7 * sim + 0.3 * quality
-        scores_debug.append({
-            "filename": meta["source"],
-                        "sim_score": round(sim, 4),
-            "quality": round(quality, 4),
-            "combined": round(combined, 4)
+        sim_score = similarities[i].item()
+        quality_score = meta.get("score", 0)
+        combined_score = 0.7 * sim_score + 0.3 * quality_score
+        
+        debug_scores.append({
+            "source": meta["source"],
+            "sim_score": round(sim_score, 4),
+            "quality_score": round(quality_score, 4),
+            "combined_score": round(combined_score, 4)
         })
-        if combined >= relevance_threshold:
-            scored.append((i, combined))
-
-    if not scored:
-        scored = sorted(
-            [(i, 0.7 * similarities[i].item() + 0.3 * candidate_blocks[i][1].get("score", 0))
-             for i in range(len(candidate_blocks))],
-            key=lambda x: x[1], reverse=True
-        )[:top_k]
-    else:
-        scored.sort(key=lambda x: x[1], reverse=True)
-        scored = scored[:top_k]
-
-    pre_top = [i for i, _ in scored]
-    cross_inputs = [(question, candidate_blocks[i][0]) for i in pre_top]
-    rerank_scores = reranker.predict(cross_inputs)
-    reranked = sorted(zip(pre_top, rerank_scores), key=lambda x: x[1], reverse=True)[:top_k]
-
-    result = []
-    for rank, (idx, rerank_score) in enumerate(reranked, 1):
-        summary, meta = candidate_blocks[idx]
-        block_score_debug = scores_debug[idx]
-        logger.info(
-            f"ASK Bloc sélectionné (RANK {rank}) : {meta['source']} | sim={block_score_debug['sim_score']}, "
-            f"quality={block_score_debug['quality']}, combined={block_score_debug['combined']} | rerank_score={round(float(rerank_score),4)}"
+        
+        logger.debug(
+            f"Bloc {meta['source']} - "
+            f"Similarité: {sim_score:.4f}, "
+            f"Qualité: {quality_score:.4f}, "
+            f"Combined: {combined_score:.4f}"
         )
-        result.append({
+        
+        if combined_score >= relevance_threshold:
+            scored_blocks.append((i, combined_score))
+
+    logger.info(
+        f"{len(scored_blocks)} blocs dépassent le seuil de {relevance_threshold} "
+        f"sur {len(candidate_blocks)} analysés"
+    )
+
+    # Phase 4: Sélection initiale
+    if not scored_blocks:
+        logger.warning("Aucun bloc ne dépasse le seuil - utilisation des meilleurs scores")
+        scored_blocks = [
+            (i, 0.7 * similarities[i].item() + 0.3 * candidate_blocks[i][1].get("score", 0))
+            for i in range(len(candidate_blocks))
+        ]
+    
+    # Tri et sélection des top_k
+    scored_blocks.sort(key=lambda x: x[1], reverse=True)
+    top_indices = [i for i, _ in scored_blocks[:top_k]]
+    
+    # Phase 5: Re-ranking croisé
+    logger.info("Application du re-ranking croisé...")
+    cross_inputs = [(question, candidate_blocks[i][0]) for i in top_indices]
+    rerank_scores = reranker.predict(cross_inputs)
+    
+    # Construction des résultats finaux
+    results = []
+    for rank, (idx, rerank_score) in enumerate(
+        sorted(zip(top_indices, rerank_scores), key=lambda x: x[1], reverse=True),
+        1
+    ):
+        summary, meta = candidate_blocks[idx]
+        scores = debug_scores[idx]
+        
+        logger.info(
+            f"Bloc sélectionné (#{rank}): {meta['source']}\n"
+            f"  - Similarité: {scores['sim_score']:.4f}\n"
+            f"  - Qualité: {scores['quality_score']:.4f}\n"
+            f"  - Score combiné: {scores['combined_score']:.4f}\n"
+            f"  - Re-rank score: {float(rerank_score):.4f}"
+        )
+        
+        results.append({
             "text": summary,
-            "source": meta.get("source"),
-            "debug_scores": block_score_debug
+            "source": meta["source"],
+            "debug_scores": scores
         })
-    return result
+
+    return results[:top_k]
 
 # ---------------------------------------------------------------------------
 #    Utilitaire : prompt pour synthèse multi-documents (mode générale)
@@ -420,8 +518,9 @@ def generate_answer(
         # Charger uniquement les blocs liés à ce PDF
         all_blocks = load_all_blocks(entreprise, job_id)
         filtered_blocks = [
-            b for b in all_blocks if pdf_filename in b[1].get("source", "")
+            b for b in all_blocks if b[1].get("pdf_filename") == pdf_filename
         ]
+
 
         selected = find_relevant_blocks(question, filtered_blocks)
         retrieval_time = time.time() - total_start

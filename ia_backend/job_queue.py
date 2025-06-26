@@ -125,6 +125,7 @@ def process_job(job: Job):
             "bloc": idx + 1,
             "summary": best_summary,
             "source_pdf": job.pdf_url,
+            "pdf_filename": os.path.basename(job.pdf_path),
             "score": best_score,
             "translated": translated,
             "embedding": embedding
